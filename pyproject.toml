@@ -14,7 +14,8 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.10"
+typing-extensions = "^4.11.0"
 
 
 [tool.poetry.group.dev.dependencies]
