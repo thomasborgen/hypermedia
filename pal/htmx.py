@@ -16,17 +16,23 @@ ReturnType = TypeVar("ReturnType")
 
 
 class RequestWithHeaders(Protocol):
+    """Protocol for FastAPI's Request class."""
+
     headers: Mapping[str, str]
 
 
 class RequestPartialAndFull(Protocol):
-    def __call__(
+    """Requires, `request`, `partial` and `full` args on decorated function."""
+
+    def __call__(  # noqa: D102
         self, request: RequestWithHeaders, partial: Element, full: Element
     ) -> Coroutine[Any, Any, None]: ...
 
 
 class RequestAndPartial(Protocol):
-    def __call__(
+    """Requires, `request` and `partial` args on decorated function."""
+
+    def __call__(  # noqa: D102
         self, request: RequestWithHeaders, partial: Element
     ) -> Coroutine[Any, Any, None]: ...
 

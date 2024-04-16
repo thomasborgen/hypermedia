@@ -1,5 +1,6 @@
 from abc import ABCMeta, abstractmethod
-from typing import Self
+
+from typing_extensions import Self
 
 
 def get_child_slots(
