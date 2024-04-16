@@ -51,8 +51,10 @@ jobs:
     - name: Run pytest
       run: |
         poetry run pytest .
-    - name: Upload coverage to Codecov
-      if: matrix.python-version == 3.8
-      uses: codecov/codecov-action@v1
+    - name: Upload coverage reports to Codecov
+      if: matrix.python-version == 3.12
+      uses: codecov/codecov-action@v4.0.1
       with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        slug: thomasborgen/pal
         file: ./coverage.xml
