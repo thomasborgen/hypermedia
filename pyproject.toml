@@ -1,10 +1,12 @@
 [tool.poetry]
-name = "pal"
-version = "0.1.0"
+name = "hypermedia"
+version = "1.0.0"
 description = "An opinionated way to work with html in pure python with htmx support."
 authors = ["Thomas Borgen <thomasborgen91@gmail.com>"]
 readme = "README.md"
 license = "MIT"
+homepage = "https://github.com/thomasborgen/hypermedia"
+repository = "https://github.com/thomasborgen/hypermedia"
 keywords = ["HTML", "HTMX", "Extendable", "Partial HTML", "HTML Templating", "FastAPI"]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -125,7 +127,7 @@ testpaths = [
 ]
 addopts = [
   "--doctest-modules",
-  "--cov=pal",
+  "--cov=hypermedia",
   "--cov-report=term",
   "--cov-report=html",
   "--cov-report=xml",

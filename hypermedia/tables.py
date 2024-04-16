@@ -1,4 +1,4 @@
-from pal.base_models import BaseElement, VoidElement
+from hypermedia.base_models import BaseElement, VoidElement
 
 
 class Table(BaseElement):

@@ -1,4 +1,4 @@
-from pal.base_models import BaseElement, Element, VoidElement
+from hypermedia.base_models import BaseElement, Element, VoidElement
 
 """
 All basic html tags as defined by W3Schools.

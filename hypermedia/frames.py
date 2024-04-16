@@ -1,4 +1,4 @@
-from pal.base_models import BaseElement
+from hypermedia.base_models import BaseElement
 
 
 class IFrame(BaseElement):

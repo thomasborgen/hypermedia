@@ -1,6 +1,6 @@
 import pytest
 
-from pal.base_models import Element
+from hypermedia.base_models import Element
 
 
 class WithDump(Element):

@@ -1,5 +1,5 @@
-from pal.audio_and_video import Audio, Source, Track, Video
-from pal.basic import (
+from hypermedia.audio_and_video import Audio, Source, Track, Video
+from hypermedia.basic import (
     H1,
     H2,
     H3,
@@ -24,7 +24,7 @@ from pal.basic import (
     Title,
     hr,
 )
-from pal.formatting import (
+from hypermedia.formatting import (
     Abbr,
     Abbreviation,
     Address,
@@ -78,7 +78,7 @@ from pal.formatting import (
     WordBreakOpportunity,
     ruby,
 )
-from pal.forms_and_input import (
+from hypermedia.forms_and_input import (
     Button,
     DataList,
     Fieldset,
@@ -93,9 +93,9 @@ from pal.forms_and_input import (
     Select,
     TextArea,
 )
-from pal.frames import IFrame
-from pal.htmx import full, htmx
-from pal.images import (
+from hypermedia.frames import IFrame
+from hypermedia.htmx import full, htmx
+from hypermedia.images import (
     Area,
     Canvas,
     FigCaption,
@@ -107,13 +107,13 @@ from pal.images import (
     Picture,
     Svg,
 )
-from pal.links import (
+from hypermedia.links import (
     A,
     Anchor,
     Link,
     Nav,
 )
-from pal.lists import (
+from hypermedia.lists import (
     Dd,
     DescriptionList,
     DescriptionListTerm,
@@ -128,9 +128,9 @@ from pal.lists import (
     Ul,
     UnorderedList,
 )
-from pal.meta_info import Base, Meta
-from pal.programming import Embed, NoScript, Object, Script
-from pal.styles_and_semantics import (
+from hypermedia.meta_info import Base, Meta
+from hypermedia.programming import Embed, NoScript, Object, Script
+from hypermedia.styles_and_semantics import (
     Article,
     Aside,
     Data,
@@ -148,7 +148,7 @@ from pal.styles_and_semantics import (
     Style,
     Summary,
 )
-from pal.tables import (
+from hypermedia.tables import (
     Caption,
     Col,
     ColGroup,

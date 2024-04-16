@@ -1,10 +1,8 @@
-Hi
+# Hypermedia
 
-This is Pal.
+hypermedia is a pure python library for working with html. hypermedias killer feature is that it is html code is composable through `slot` concept. Because of that, it works great with HTMX partials and full page reloads.
 
-Pal is a pure python library for working with html. Pals killer feature is that elements can have a `slot` that can be filled in later. This is great for composability. Because of that it works great with HTMX partials and full page reloads.
-
-Pal is made to work with FastAPI and HTMX. but can be used by any web server.
+Hypermedia is made to work with FastAPI and HTMX. but can be used by any web server.
 
 
 Here are some basics:
@@ -12,13 +10,13 @@ Here are some basics:
 All html tags can be imported directly like:
 
 ```python
-from pal import Html, Body, Div, A
+from hypermedia import Html, Body, Div, A
 ```
 
 Tags are nested by adding children in the constructor:
 
 ```python
-from pal import Html, Body, Div
+from hypermedia import Html, Body, Div
 
 Html(Body(Div(), Div()))
 ```
@@ -26,7 +24,7 @@ Html(Body(Div(), Div()))
 Add text to your tag:
 
 ```python
-from pal import Html, Body, Div
+from hypermedia import Html, Body, Div
 
 Html(text="Hello world!")
 ```
@@ -35,7 +33,7 @@ use `.dump()` to dump your code to html.
 
 
 ```python
-from pal import Html, Body, Div
+from hypermedia import Html, Body, Div
 
 Html(text="Hello world!").dump()
 
@@ -46,7 +44,7 @@ Html(text="Hello world!").dump()
 ## Composability with slots
 
 ```python
-from pal import Html, Body, Div, Menu, Header, Div, Ul, Li
+from hypermedia import Html, Body, Div, Menu, Header, Div, Ul, Li
 
 base = Html(
     Body(

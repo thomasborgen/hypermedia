@@ -9,7 +9,7 @@ from typing import (
     TypeVar,
 )
 
-from pal.base_models import Element
+from hypermedia.base_models import Element
 
 Param = ParamSpec("Param")
 ReturnType = TypeVar("ReturnType")
