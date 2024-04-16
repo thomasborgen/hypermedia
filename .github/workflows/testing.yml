@@ -45,12 +45,12 @@ jobs:
       run: |
         poetry check
         poetry run pip check
-        poetry run flake8 .
+        poetry run ruff check .
         poetry run mypy .
         poetry run safety check --full-report 
     - name: Run pytest
       run: |
-        poetry run pytest .
+        poetry run pytest
     - name: Upload coverage reports to Codecov
       if: matrix.python-version == 3.12
       uses: codecov/codecov-action@v4.0.1

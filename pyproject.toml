@@ -91,14 +91,14 @@ max-complexity = 6
 [tool.ruff.lint.pylint]
 max-public-methods = 8
 
-[tool.ruff.format]
-quote-style = "double"
-
-[tool.ruff.flake8-tidy-imports]
+[tool.ruff.lint.flake8-tidy-imports]
 ban-relative-imports = "parents"
 
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 combine-as-imports = true
+
+[tool.ruff.format]
+quote-style = "double"
 
 [tool.mypy]
 plugins = [
