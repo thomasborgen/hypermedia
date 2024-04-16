@@ -1,0 +1,123 @@
+[tool.poetry]
+name = "pal"
+version = "0.1.0"
+description = "An opinionated way to work with html in pure python with htmx support."
+authors = ["Thomas Borgen <thomasborgen91@gmail.com>"]
+readme = "README.md"
+license = "MIT"
+keywords = ["HTML", "HTMX", "Extendable", "Partial HTML", "HTML Templating", "FastAPI"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python",
+    "Framework :: FastAPI",
+    "Topic :: Text Processing :: Markup :: HTML",
+]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.3.5"
+mypy = "^1.9.0"
+pytest = "^8.1.1"
+safety = "^3.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 79
+indent-width = 4
+target-version = "py311"
+
+[tool.ruff.lint]
+exclude = [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "alembic/*",
+]
+select = [
+    # Regular flake8 rules
+    "C", "E", "F", "W", "S",
+    # flake8-bugbear rules
+    "B",
+    # extra flake rules
+    "YTT",
+    # Import sorting rules (isort replacement)
+    "I",
+    # Pylint rules
+    "PLC", "PLE", "PLR", "PLW",
+    # ruff rules
+    "RUF",
+    # Docstyle
+    "D",
+    # Max camplexity
+    "C90",
+]
+
+ignore = [
+    "D100", # Docstring in modules
+    "D203", # Incompatible with D211
+    "D212", # Incompatible with D213
+    # FastApi uses a lot of dependency injection and performs calls/object inits
+    # in argument defaults.
+    "B008",
+]
+
+fixable = ["ALL"]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["D104"]
+"**/{tests}/*" = [
+    "D103", # Allow missing docstring in functions
+    "S101", # Allow asserts
+    "S106", # Allow hardcorded passwords in tests
+]
+"**/conftest.py" = [
+    "F811", # Allow redefinition (imported fixtures)
+]
+"tests/**" = [
+    "D101", # Allow missing docstring in class
+    "D102", # Allow missing docstring in method
+]
+
+[tool.ruff.lint.mccabe]
+# Flag errors (`C901`) whenever the complexity level exceeds 6.
+max-complexity = 6
+
+[tool.ruff.lint.pylint]
+max-public-methods = 8
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.ruff.flake8-tidy-imports]
+ban-relative-imports = "parents"
+
+[tool.ruff.isort]
+combine-as-imports = true
+
+[tool.mypy]
+plugins = [
+  "pydantic.mypy",
+]
+
+# follow_imports = "silent"
+warn_redundant_casts = true
+warn_unused_ignores = true
+disallow_any_generics = true
+check_untyped_defs = true
+no_implicit_reexport = true
+
+# for strict mypy: (this is the tricky one :-))
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+# py.test options:
+norecursedirs = ["*.egg", ".eggs", "dist", "build", "docs", ".tox", ".git", "__pycache__"]
+testpaths = [
+    "tests",
+]
