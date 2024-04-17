@@ -18,11 +18,12 @@ from hypermedia.basic import (
     Header4,
     Header5,
     Header6,
+    HorizontalRule,
+    Hr,
     Html,
     P,
     Paragraph,
     Title,
-    hr,
 )
 from hypermedia.formatting import (
     Abbr,
@@ -200,7 +201,8 @@ __all__ = [
     "Paragraph",
     "Br",
     "Break",
-    "hr",
+    "Hr",
+    "HorizontalRule",
     "Comment",
     # formatting
     "Abbr",

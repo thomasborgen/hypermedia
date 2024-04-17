@@ -114,13 +114,17 @@ class Br(VoidElement):
 
 
 class Break(Br):
-    """Alias for br tag.."""
+    """Alias for br tag."""
 
 
-class hr(VoidElement):
+class Hr(VoidElement):
     """Defines a thematic change in the content."""
 
     tag: str = "hr"
+
+
+class HorizontalRule(Hr):
+    """Alias for hr tag."""
 
 
 class Comment(BaseElement):
