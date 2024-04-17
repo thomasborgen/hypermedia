@@ -10,6 +10,8 @@
 ## Latest Changes
 
 
+## Version 2.0.0 - Single quotes!
+
 ### Breaking
 
 * rename base_models.py -> models.py
@@ -24,7 +26,7 @@
 
 * Rename `hr`->`Hr`, add alias `HorizontalRule` and export both in `__init__.py`
 
-## Version 1.0.0 Hypermedia released
+## Version 1.0.0 - Hypermedia released
 
 Hypermedia is an opinionated way to work with HTML in python and FastAPI. Hypermedia is designed to work with htmx.
 
