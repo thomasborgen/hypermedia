@@ -9,6 +9,16 @@
 
 ## Latest Changes
 
+
+### Breaking
+
+* rename base_models.py -> models.py
+* Use single quotes for attribute values.
+
+### Feature
+
+* Using single quotes for attributes lets us support `hx-vals`, since it expects a doubled quoted json string.
+
 ## Version 1.0.0 Hypermedia released
 
 Hypermedia is an opinionated way to work with HTML in python and FastAPI. Hypermedia is designed to work with htmx.
