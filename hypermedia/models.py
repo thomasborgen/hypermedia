@@ -13,7 +13,6 @@ def get_child_slots(
         if duplicate_keys := [
             key for key in child.slots.keys() if key in slot_keys
         ]:
-            print("Extended child contains duplicate key", duplicate_keys)
             raise ValueError(
                 f"All slot names must be unique: {duplicate_keys}"
             )
@@ -98,7 +97,7 @@ class Element(metaclass=ABCMeta):
             if value is True:
                 result.append(key)
                 continue
-            result.append(f'{key}="{value}"')
+            result.append(f"{key}='{value}'")
         if result:
             return " " + " ".join(result)
         return ""

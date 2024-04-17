@@ -1,4 +1,4 @@
-from hypermedia.base_models import VoidElement
+from hypermedia.models import VoidElement
 
 
 class Meta(VoidElement):
