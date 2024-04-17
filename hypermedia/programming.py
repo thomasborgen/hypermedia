@@ -1,4 +1,4 @@
-from hypermedia.base_models import BaseElement, VoidElement
+from hypermedia.models import BaseElement, VoidElement
 
 
 class Script(BaseElement):

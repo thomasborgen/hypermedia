@@ -1,4 +1,4 @@
-from hypermedia.base_models import BaseElement
+from hypermedia.models import BaseElement
 
 
 class IFrame(BaseElement):
