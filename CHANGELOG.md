@@ -10,6 +10,13 @@
 ## Latest Changes
 
 
+## Version 2.0.1
+
+### Fix
+
+* Now return partial render if full is not available. Consider if we should raise an exception instead.
+* Protocol Typing for the FastAPI Request did not work as expected. Fall back to Any for now.
+
 ## Version 2.0.0 - Single quotes!
 
 ### Breaking

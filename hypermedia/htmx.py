@@ -3,7 +3,6 @@ from typing import (
     Any,
     Callable,
     Coroutine,
-    Mapping,
     ParamSpec,
     Protocol,
     TypeVar,
@@ -15,17 +14,11 @@ Param = ParamSpec("Param")
 ReturnType = TypeVar("ReturnType")
 
 
-class RequestWithHeaders(Protocol):
-    """Protocol for FastAPI's Request class."""
-
-    headers: Mapping[str, str]
-
-
 class RequestPartialAndFull(Protocol):
     """Requires, `request`, `partial` and `full` args on decorated function."""
 
     def __call__(  # noqa: D102
-        self, request: RequestWithHeaders, partial: Element, full: Element
+        self, request: Any, partial: Element, full: Element
     ) -> Coroutine[Any, Any, None]: ...
 
 
@@ -33,7 +26,7 @@ class RequestAndPartial(Protocol):
     """Requires, `request` and `partial` args on decorated function."""
 
     def __call__(  # noqa: D102
-        self, request: RequestWithHeaders, partial: Element
+        self, request: Any, partial: Element
     ) -> Coroutine[Any, Any, None]: ...
 
 
@@ -58,7 +51,7 @@ def htmx(
     @wraps(func)
     async def wrapper(
         *,
-        request: RequestWithHeaders,
+        request: Any,
         partial: Element,
         full: None | Callable[..., Element] = None,
     ) -> str:
@@ -67,9 +60,11 @@ def htmx(
         if hx_request:
             return partial.dump()
 
-        # should probably return some http error if user tries to get a
-        # full page load when its not expected.
-        return full().dump() if full else ""
+        # Return partial if full render is not available.
+        if full is None:
+            return partial.dump()
+
+        return full().dump()
 
     return wrapper  # type: ignore
 
