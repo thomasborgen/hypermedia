@@ -42,12 +42,13 @@ jobs:
         poetry run python -m pip install -U pip
 
     - name: Run code quality checks
+      # Safety: Ignore CVE-2019-8341, jinja2 is safety dependency: https://github.com/pyupio/safety/issues/527
       run: |
         poetry check
         poetry run pip check
         poetry run ruff check .
         poetry run mypy .
-        poetry run safety check --full-report 
+        poetry run safety check --full-report --ignore 70612
     - name: Run pytest
       run: |
         poetry run pytest
