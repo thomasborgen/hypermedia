@@ -55,3 +55,52 @@ class Svg(BaseElement):
     """Defines a container for SVG graphics."""
 
     tag: str = "svg"
+
+
+# Basic SVG elements. These should hopefully cover most use cases.
+# If they don't, feel free to add them.
+# Alternatively, consider using Image with a `src="my.svg` or css.
+class Path(VoidElement):
+    """Element used to define paths for SVG graphics."""
+
+    tag: str = "path"
+
+
+class Rect(VoidElement):
+    """Element used to define rectangles for SVG graphics."""
+
+    tag: str = "rect"
+
+
+class Rectangle(Rect):
+    """Alias for `Rect`."""
+
+
+class Circle(VoidElement):
+    """Element used to define circles for SVG graphics."""
+
+    tag: str = "circle"
+
+
+class Ellipse(VoidElement):
+    """Element used to define ellipses for SVG graphics."""
+
+    tag: str = "ellipse"
+
+
+class Line(VoidElement):
+    """Element used to define lines for SVG graphics."""
+
+    tag: str = "line"
+
+
+class Polyline(VoidElement):
+    """Element used to define polylines for SVG graphics."""
+
+    tag: str = "polyline"
+
+
+class Polygon(VoidElement):
+    """Element used to define polygons for SVG graphics."""
+
+    tag: str = "polygon"
