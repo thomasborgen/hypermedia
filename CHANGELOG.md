@@ -10,6 +10,12 @@
 ## Latest Changes
 
 
+## Version 2.1.0
+
+### Features
+
+* Added Path, Rect, Rectangle, Circle, Ellipse, Line, Polyline and Polygon Elements for when constructing and manipulating an SVG.
+
 ## Version 2.0.1
 
 ### Fix
