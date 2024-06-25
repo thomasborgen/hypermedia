@@ -1,4 +1,4 @@
-from hypermedia.models import Element, BaseElement, VoidElement
+from hypermedia.models import BaseElement, Element, VoidElement
 
 
 class TestElement(Element):
