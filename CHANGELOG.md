@@ -12,9 +12,9 @@
 
 ## Version 2.1.2
 
-* Expose models directly in `__init__` file.
+* Expose models directly in `__init__` file for typing/extension purposes.
 * #11 Ignore `None` valued attributes. This makes for easier programming.
-* Properly Type attributes `str | bool | None`
+* Properly Type attributes (an elements kwargs) `str | bool | None`
 
 
 ## Version 2.1.1

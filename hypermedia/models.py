@@ -1,6 +1,9 @@
 from abc import ABCMeta, abstractmethod
+from typing import TypeAlias
 
 from typing_extensions import Self
+
+Attribute: TypeAlias = str | bool | None
 
 
 def get_child_slots(
@@ -50,13 +53,13 @@ class Element(metaclass=ABCMeta):
     children: list["Element"]
     slot: str | None = None
     slots: dict[str, "Element"]
-    attributes: dict[str, str | bool | None]
+    attributes: dict[str, Attribute]
 
     def __init__(
         self,
         *children: "Element",
         slot: str | None = None,
-        **attributes: str | bool,
+        **attributes: Attribute,
     ) -> None:
         """Initialize Root with children."""
         self.children = list(children)
@@ -80,8 +83,8 @@ class Element(metaclass=ABCMeta):
         return self
 
     def _parse_attributes(
-        self, attributes: dict[str, str | bool | None]
-    ) -> dict[str, str | bool | None]:
+        self, attributes: dict[str, Attribute]
+    ) -> dict[str, Attribute]:
         hx_keys = [key for key in attributes.keys() if key.startswith("hx_")]
         for key in hx_keys:
             new_key = key.replace("_", "-")
@@ -176,17 +179,17 @@ class VoidElement(Element):
     tag: str
     id: str | None
     classes: list[str]
-    attributes: dict[str, str | bool | None]
+    attributes: dict[str, Attribute]
 
     def __init__(
         self,
         *,
         id: str | None = None,
         classes: list[str] | None = None,
-        **attributes: str | bool | None,
+        **attributes: Attribute,
     ) -> None:
         """Initialize class."""
-        super().__init__(**attributes)
+        super().__init__(**attributes)  # type: ignore
         self.id = id
         self.classes = classes or []
 
