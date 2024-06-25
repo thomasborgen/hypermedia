@@ -50,7 +50,7 @@ class Element(metaclass=ABCMeta):
     children: list["Element"]
     slot: str | None = None
     slots: dict[str, "Element"]
-    attributes: dict[str, str | bool]
+    attributes: dict[str, str | bool | None]
 
     def __init__(
         self,
@@ -80,8 +80,8 @@ class Element(metaclass=ABCMeta):
         return self
 
     def _parse_attributes(
-        self, attributes: dict[str, str | bool]
-    ) -> dict[str, str | bool]:
+        self, attributes: dict[str, str | bool | None]
+    ) -> dict[str, str | bool | None]:
         hx_keys = [key for key in attributes.keys() if key.startswith("hx_")]
         for key in hx_keys:
             new_key = key.replace("_", "-")
@@ -91,9 +91,14 @@ class Element(metaclass=ABCMeta):
     def _render_attributes(self) -> str:
         result = []
         for key, value in self.attributes.items():
-            # Skip false booleans attributes
+            # Skip None values, use `True` for key only values or empty string
+            # if you need an empty string attribute.
+            if value is None:
+                continue
+            # Skip false boolean attributes
             if value is False:
                 continue
+            # Add true boolean attributes as key only.
             if value is True:
                 result.append(key)
                 continue
@@ -171,17 +176,17 @@ class VoidElement(Element):
     tag: str
     id: str | None
     classes: list[str]
-    kwargs: dict[str, str]
+    attributes: dict[str, str | bool | None]
 
     def __init__(
         self,
         *,
         id: str | None = None,
         classes: list[str] | None = None,
-        **kwargs: str,
+        **attributes: str | bool | None,
     ) -> None:
         """Initialize class."""
-        super().__init__(**kwargs)
+        super().__init__(**attributes)
         self.id = id
         self.classes = classes or []
 
