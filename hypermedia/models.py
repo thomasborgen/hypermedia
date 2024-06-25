@@ -25,11 +25,11 @@ def get_child_slots(
 
 
 def get_slots(
-    children: list["Element"],
+    elements: list["Element"],
 ) -> dict[str, "Element"]:
     """Calculate slots."""
     slots: dict[str, "Element"] = {}
-    for child in children:
+    for child in elements:
         if child.slot:
             if child.slot in slots:
                 raise ValueError(
@@ -150,7 +150,7 @@ class BaseElement(Element):
         return (
             "<{tag}{id}{classes}{attributes}>{text}{children}</{tag}>".format(
                 tag=self.tag,
-                id=f" id={self.id}" if self.id else "",
+                id=f" id='{self.id}'" if self.id else "",
                 classes=self._render_classes(),
                 attributes=self._render_attributes(),
                 text=self.text or "",
@@ -161,7 +161,7 @@ class BaseElement(Element):
     def _render_classes(self) -> str:
         if not self.classes:
             return ""
-        return f' class="{" ".join(self.classes)}"'
+        return f" class='{' '.join(self.classes)}'"
 
     def __str__(self) -> str:
         """Return tag."""
@@ -197,7 +197,7 @@ class VoidElement(Element):
         """Dump to html."""
         return """<{tag}{id}{classes}{attributes}>""".format(
             tag=self.tag,
-            id=f" id={self.id}" if self.id else "",
+            id=f" id='{self.id}'" if self.id else "",
             classes=self._render_classes(),
             attributes=self._render_attributes(),
         )
@@ -205,7 +205,7 @@ class VoidElement(Element):
     def _render_classes(self) -> str:
         if not self.classes:
             return ""
-        return f' class="{" ".join(self.classes)}"'
+        return f" class='{' '.join(self.classes)}'"
 
     def __str__(self) -> str:
         """Return tag."""

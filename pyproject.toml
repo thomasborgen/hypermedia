@@ -134,3 +134,12 @@ addopts = [
   "--cov-branch",
   "--cov-fail-under=80",
 ]
+
+[tool.coverage.run]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = [
+    # Skip any pass lines such as may be used for @abstractmethod
+    "pass",
+]

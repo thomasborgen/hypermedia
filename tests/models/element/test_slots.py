@@ -1,5 +1,6 @@
 import pytest
 
+from hypermedia.models import ElementList
 from tests.utils import TestElement
 
 
@@ -16,6 +17,28 @@ def test_raises_when_wrong_slot_name() -> None:
         element.extend("wrong_slot_name", TestElement())
 
     assert "wrong_slot_name" in str(excinfo.value)
+
+
+def test_raises_when_duplicate_slot_names_element_list() -> None:
+    with pytest.raises(ValueError) as excinfo:
+        ElementList(
+            TestElement(slot="my_slot"),
+            TestElement(slot="my_slot"),
+        )
+        # element.extend("wrong_slot_name", TestElement())
+
+    assert str(excinfo.value) == "All slot names must be unique: ['my_slot']"
+
+
+def test_raises_when_duplicate_slot_names_in_extended_tree() -> None:
+    with pytest.raises(ValueError) as excinfo:
+        TestElement(slot="my_slot").extend(
+            "my_slot", TestElement(slot="my_slot")
+        )
+
+        # element.extend("wrong_slot_name", TestElement())
+
+    assert str(excinfo.value) == "All slot names must be unique: ['my_slot']"
 
 
 def test_slots_return_own_slot() -> None:
