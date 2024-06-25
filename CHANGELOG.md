@@ -10,12 +10,19 @@
 ## Latest Changes
 
 
+## Version 2.1.2
+
+* Expose models directly in `__init__` file for typing/extension purposes.
+* #11 Ignore `None` valued attributes. This makes for easier programming.
+* Properly Type attributes (an elements kwargs) `str | bool | None`.
+* Improve test coverage.
+
+
 ## Version 2.1.1
 
 ### Fix
 
-* Expose Path, Rect, Rectangle, Circle, Ellipse, Line, Polyline and Polygon Elements directly in __init__ file.
-
+* Expose Path, Rect, Rectangle, Circle, Ellipse, Line, Polyline and Polygon Elements directly in `__init__` file.
 
 ## Version 2.1.0
 

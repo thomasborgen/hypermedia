@@ -25,6 +25,12 @@ def test_false_value_is_skipped() -> None:
     assert element._render_attributes() == ""
 
 
+def test_none_value_is_skipped() -> None:
+    element = TestElement(test=None)
+
+    assert element._render_attributes() == ""
+
+
 def test_true_value_is_added_as_key_only() -> None:
     element = TestElement(test=True)
 

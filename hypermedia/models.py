@@ -1,6 +1,9 @@
 from abc import ABCMeta, abstractmethod
+from typing import TypeAlias
 
 from typing_extensions import Self
+
+Attribute: TypeAlias = str | bool | None
 
 
 def get_child_slots(
@@ -22,11 +25,11 @@ def get_child_slots(
 
 
 def get_slots(
-    children: list["Element"],
+    elements: list["Element"],
 ) -> dict[str, "Element"]:
     """Calculate slots."""
     slots: dict[str, "Element"] = {}
-    for child in children:
+    for child in elements:
         if child.slot:
             if child.slot in slots:
                 raise ValueError(
@@ -50,13 +53,13 @@ class Element(metaclass=ABCMeta):
     children: list["Element"]
     slot: str | None = None
     slots: dict[str, "Element"]
-    attributes: dict[str, str | bool]
+    attributes: dict[str, Attribute]
 
     def __init__(
         self,
         *children: "Element",
         slot: str | None = None,
-        **attributes: str | bool,
+        **attributes: Attribute,
     ) -> None:
         """Initialize Root with children."""
         self.children = list(children)
@@ -80,8 +83,8 @@ class Element(metaclass=ABCMeta):
         return self
 
     def _parse_attributes(
-        self, attributes: dict[str, str | bool]
-    ) -> dict[str, str | bool]:
+        self, attributes: dict[str, Attribute]
+    ) -> dict[str, Attribute]:
         hx_keys = [key for key in attributes.keys() if key.startswith("hx_")]
         for key in hx_keys:
             new_key = key.replace("_", "-")
@@ -91,9 +94,14 @@ class Element(metaclass=ABCMeta):
     def _render_attributes(self) -> str:
         result = []
         for key, value in self.attributes.items():
-            # Skip false booleans attributes
+            # Skip None values, use `True` for key only values or empty string
+            # if you need an empty string attribute.
+            if value is None:
+                continue
+            # Skip false boolean attributes
             if value is False:
                 continue
+            # Add true boolean attributes as key only.
             if value is True:
                 result.append(key)
                 continue
@@ -142,7 +150,7 @@ class BaseElement(Element):
         return (
             "<{tag}{id}{classes}{attributes}>{text}{children}</{tag}>".format(
                 tag=self.tag,
-                id=f" id={self.id}" if self.id else "",
+                id=f" id='{self.id}'" if self.id else "",
                 classes=self._render_classes(),
                 attributes=self._render_attributes(),
                 text=self.text or "",
@@ -153,7 +161,7 @@ class BaseElement(Element):
     def _render_classes(self) -> str:
         if not self.classes:
             return ""
-        return f' class="{" ".join(self.classes)}"'
+        return f" class='{' '.join(self.classes)}'"
 
     def __str__(self) -> str:
         """Return tag."""
@@ -171,17 +179,17 @@ class VoidElement(Element):
     tag: str
     id: str | None
     classes: list[str]
-    kwargs: dict[str, str]
+    attributes: dict[str, Attribute]
 
     def __init__(
         self,
         *,
         id: str | None = None,
         classes: list[str] | None = None,
-        **kwargs: str,
+        **attributes: Attribute,
     ) -> None:
         """Initialize class."""
-        super().__init__(**kwargs)
+        super().__init__(**attributes)  # type: ignore
         self.id = id
         self.classes = classes or []
 
@@ -189,7 +197,7 @@ class VoidElement(Element):
         """Dump to html."""
         return """<{tag}{id}{classes}{attributes}>""".format(
             tag=self.tag,
-            id=f" id={self.id}" if self.id else "",
+            id=f" id='{self.id}'" if self.id else "",
             classes=self._render_classes(),
             attributes=self._render_attributes(),
         )
@@ -197,7 +205,7 @@ class VoidElement(Element):
     def _render_classes(self) -> str:
         if not self.classes:
             return ""
-        return f' class="{" ".join(self.classes)}"'
+        return f" class='{' '.join(self.classes)}'"
 
     def __str__(self) -> str:
         """Return tag."""
