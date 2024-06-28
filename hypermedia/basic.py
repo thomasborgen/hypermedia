@@ -1,4 +1,5 @@
 from html import escape
+
 from hypermedia.models import BaseElement, Element, VoidElement
 
 """

@@ -132,7 +132,7 @@ class BaseElement(Element):
     text: str | None
     composed_text: list[str | Element] | None
 
-    def __init__(
+    def __init__(  # noqa: PLR0913
         self,
         *children: "Element",
         id: str | None = None,
