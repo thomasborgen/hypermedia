@@ -9,6 +9,10 @@
 
 ## Latest Changes
 
+### Housekeeping
+
+* Readme file: Add features section, improve examples
+
 ## Version 2.2.0
 
 ### Features

@@ -4,6 +4,13 @@ Hypermedia is a pure python library for working with HTML. Hypermedia's killer f
 
 Hypermedia is made to work with FastAPI and HTMX, but can be used by anything to create HTML.
 
+## Features
+
+* Build _HTML_ with python classes
+* _Composable_ templates through a _slot_ system
+* Seamless integration with _</> htmx_
+* Opinionated simple decorator for _FastAPI_
+* Unlike other template engines like Jinja2 we have full typing since we never leave python land.
 
 ## The Basics
 
@@ -93,14 +100,20 @@ The `full` argument is a function that needs to return the whole HTML, for examp
 > Note: The following code is in FastAPI, but could have been anything. As long as you check for HX-Request and return partial/full depending on if it exists or not.
 
 ```python
-def render_base(...):
+def render_base():
     """Return base HTML, used by all full renderers."""
+    return ElementList(Doctype(), Body(slot="body"))
 
-def render_fruits_partial(...):
+
+def render_fruits_partial():
     """Return partial HTML."""
+    return Div(Ul(Li(text="Apple"), Li(text="Banana"), Button(text="reload", hx_get="/fruits")))
 
-def render_fruits(...):
+
+def render_fruits():
     """Return base HTML extended with `render_fruits_partial`."""
+    return render_base().extend("body", render_fruits_partial())
+
 
 @router.get("/fruits", response_class=HTMLResponse)
 @htmx
@@ -113,7 +126,7 @@ async def fruits(
     pass
 ```
 
-That's it. Now we have separated the rendering from the endpoint definition and handled returning partials and full pages when needed.
+That's it. Now we have separated the rendering from the endpoint definition and handled returning partials and full pages when needed. Doing a full refresh will render the whole page. Clicking the button will make a htmx request and only return the partial.
 
 What is so cool about this is that it works so well with FastAPI's dependency injection.
 
@@ -149,7 +162,7 @@ async def fruit(
     pass
 ```
 
-Here we do basically the same as the previous example, except that we make use of FastAPI's great dependency injection system. Notice the path of our endpoint has fruit_id. This is not used in the definition. However, if we look at our partial renderer, it depends on fruit, which is a function that uses FastAPI's Path resolver. The DI then resolves (basically calls) the fruit function, passes the result into our partial function, and we can use it as a value.
+Here we do basically the same as the previous example, except that we make use of FastAPI's great dependency injection system. Notice the path of our endpoint has `fruit_id`. This is not used in the definition. However, if we look at our partial renderer, it depends on `get_fruit`, which is a function that uses FastAPI's `Path resolver`. The DI then resolves (basically calls) the fruit function, passes the result into our partial function, and we can use it as a value!
 
 _This pattern with DI, Partials, and full renderers is what makes using FastAPI with HTMX worth it._
 
@@ -167,4 +180,4 @@ async def fruit(
     return fruit
 ```
 
-Notice we added `/api/` and just used DI to resolve the fruit and just returned it. Cool!
+Notice we added `/api/` and just used DI to resolve the fruit and just returned it. Nice!
