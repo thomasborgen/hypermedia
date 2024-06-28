@@ -1,3 +1,4 @@
+import pytest
 from tests.utils import TestBaseElement
 
 
@@ -29,6 +30,22 @@ def test_text_rendering() -> None:
     assert TestBaseElement(text="test").dump() == "<test>test</test>"
 
 
+@pytest.mark.parametrize(
+    "test_input,expected",
+    [
+        ("&", "&amp;"),
+        ("<", "&lt;"),
+        (">", "&gt;"),
+        ('"', "&quot;"),
+        ("'", "&#x27;"),
+    ],
+)
+def test_text_escaping_rendering(test_input: str, expected: str) -> None:
+    assert (
+        TestBaseElement(text=test_input).dump() == f"<test>{expected}</test>"
+    )
+
+
 def test_children_rendering() -> None:
     child = TestBaseElement()
     element = TestBaseElement(child)
@@ -49,9 +66,9 @@ def test_child_renders_after_text() -> None:
     assert element.dump() == "<test>test<test></test></test>"
 
 
-def test_child_in_middle_of_text() -> None:
+def test_composed_text_rendering() -> None:
     """Note, useful for inline tags like <a>, <br> etc."""
-    element = TestBaseElement(text=f"te{TestBaseElement().dump()}st")
+    element = TestBaseElement(composed_text=["te", TestBaseElement(), "st"])
 
     assert element.dump() == "<test>te<test></test>st</test>"
 

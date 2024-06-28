@@ -130,6 +130,7 @@ class BaseElement(Element):
     id: str | None
     classes: list[str]
     text: str | None
+    composed_text: list[str | Element] | None
 
     def __init__(
         self,
@@ -137,6 +138,7 @@ class BaseElement(Element):
         id: str | None = None,
         classes: list[str] | None = None,
         text: str | None = None,
+        composed_text: list[str | Element] | None = None,
         slot: str | None = None,
         **properties: str | bool,
     ) -> None:
@@ -145,18 +147,25 @@ class BaseElement(Element):
         self.id = id
         self.classes = classes or []
         self.text = text
+        self.composed_text = composed_text
 
     def dump(self) -> str:
-        """Dump to html."""
-        return (
-            "<{tag}{id}{classes}{attributes}>{text}{children}</{tag}>".format(
-                tag=self.tag,
-                id=f" id='{self.id}'" if self.id else "",
-                classes=self._render_classes(),
-                attributes=self._render_attributes(),
-                text=escape(self.text or ""),
-                children=self._render_children(),
-            )
+        """Dump to html, while escaping text data."""
+        composed = []
+        if self.composed_text:
+            composed = [
+                escape(item) if isinstance(item, str) else item.dump()
+                for item in self.composed_text
+            ]
+
+        return "<{tag}{id}{classes}{attributes}>{text}{composed}{children}</{tag}>".format(  # noqa: E501
+            tag=self.tag,
+            id=f" id='{self.id}'" if self.id else "",
+            classes=self._render_classes(),
+            attributes=self._render_attributes(),
+            text=escape(self.text or ""),
+            composed="".join(composed) if composed else "",
+            children=self._render_children(),
         )
 
     def _render_classes(self) -> str:
