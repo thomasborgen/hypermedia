@@ -9,6 +9,17 @@
 
 ## Latest Changes
 
+## Version 2.2.0
+
+### Features
+
+* Escape all text by default.
+* Add `composed_text` property that takes a list of strings or Elements and dumps that. This can be used to render strings with inline elements like `<br>`, `<i>` or `<b>`. used like: `composed_text=["regular", Italic(text="italic"), Bold(text="bold"), "regular"]`
+
+### Internal
+
+* Test elements with custom dump override like `Docstring` and `Comment` for string escaping.
+* Add tests to composed_text.
 
 ## Version 2.1.2
 

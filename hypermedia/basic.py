@@ -1,3 +1,5 @@
+from html import escape
+
 from hypermedia.models import BaseElement, Element, VoidElement
 
 """
@@ -132,7 +134,7 @@ class Comment(BaseElement):
 
     def dump(self) -> str:
         """Dump to html."""
-        return "<!-- {text} -->".format(text=self.text or "")
+        return "<!-- {text} -->".format(text=escape(self.text or ""))
 
 
 # william <- my son writing his name.
