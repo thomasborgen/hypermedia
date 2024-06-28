@@ -1,4 +1,5 @@
 from abc import ABCMeta, abstractmethod
+from html import escape
 from typing import TypeAlias
 
 from typing_extensions import Self
@@ -153,7 +154,7 @@ class BaseElement(Element):
                 id=f" id='{self.id}'" if self.id else "",
                 classes=self._render_classes(),
                 attributes=self._render_attributes(),
-                text=self.text or "",
+                text=escape(self.text or ""),
                 children=self._render_children(),
             )
         )

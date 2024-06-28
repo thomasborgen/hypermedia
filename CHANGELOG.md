@@ -9,6 +9,9 @@
 
 ## Latest Changes
 
+## Version 2.2.0
+
+* Escape all text by default.
 
 ## Version 2.1.2
 
