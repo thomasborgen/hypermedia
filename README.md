@@ -1,15 +1,15 @@
 # Hypermedia
 
-Hypermedia is a pure python library for working with HTML. Hypermedia's killer feature is that it is composable through a `slot` concept. Because of that, it works great with `HTMX` where you need to respond with both _partials_ and _full page_ reloads.
+Hypermedia is a pure python library for working with `HTML`. Hypermedia's killer feature is that it is composable through a `slot` concept. Because of that, it works great with `</> htmx` where you need to respond with both __partials__ and __full page__ reloads.
 
-Hypermedia is made to work with FastAPI and HTMX, but can be used by anything to create HTML.
+Hypermedia is made to work with `FastAPI` and `</> htmx`, but can be used by anything to create HTML.
 
 ## Features
 
-* Build _HTML_ with python classes
-* _Composable_ templates through a _slot_ system
-* Seamless integration with _</> htmx_
-* Opinionated simple decorator for _FastAPI_
+* Build __HTML__ with python classes
+* __Composable__ templates through a __slot__ system
+* Seamless integration with __</> htmx__
+* Opinionated simple decorator for __FastAPI__
 * Unlike other template engines like Jinja2 we have full typing since we never leave python land.
 
 ## The Basics
@@ -164,7 +164,7 @@ async def fruit(
 
 Here we do basically the same as the previous example, except that we make use of FastAPI's great dependency injection system. Notice the path of our endpoint has `fruit_id`. This is not used in the definition. However, if we look at our partial renderer, it depends on `get_fruit`, which is a function that uses FastAPI's `Path resolver`. The DI then resolves (basically calls) the fruit function, passes the result into our partial function, and we can use it as a value!
 
-_This pattern with DI, Partials, and full renderers is what makes using FastAPI with HTMX worth it._
+__This pattern with DI, Partials, and full renderers is what makes using FastAPI with HTMX worth it.__
 
 In addition to this, one thing many are concerned about with HTMX is that since we serve HTML, there will be no way for another app/consumer to get a fruit in JSON. But the solution is simple:
 
