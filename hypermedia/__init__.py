@@ -95,7 +95,6 @@ from hypermedia.forms_and_input import (
     TextArea,
 )
 from hypermedia.frames import IFrame
-from hypermedia.htmx import full, htmx
 from hypermedia.images import (
     Area,
     Canvas,
@@ -183,9 +182,6 @@ __all__ = [
     # Models
     "Element",
     "ElementList",
-    # HTMX
-    "htmx",
-    "full",
     # audio and video
     "Audio",
     "Source",

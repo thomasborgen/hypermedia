@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hypermedia"
-version = "2.2.0"
+version = "3.0.0"
 description = "An opinionated way to work with html in pure python with htmx support."
 authors = ["Thomas Borgen <thomasborgen91@gmail.com>"]
 readme = "README.md"
@@ -25,7 +25,7 @@ ruff = "^0.3.5"
 mypy = "^1.9.0"
 pytest = "^8.1.1"
 pytest-cov = "^5.0.0"
-safety = "^3.2.3"
+safety = "^3.2.4"
 
 [build-system]
 requires = ["poetry-core"]

@@ -9,6 +9,13 @@
 
 ## Latest Changes
 
+## Version 3.0.0
+
+### Breaking
+
+* Rename `htmx.py` to `fastapi.py`. The decorators were only for fastAPI. If we support django or flask, then they should get their own versions. This change facilitates for that so we don't have to have a breaking change further down the line.
+* Don't expose `@htmx` and `@full` decorators directly from `hypermedia`, but require them to be imported from `hypermedia.fastapi`. 
+
 ### Housekeeping
 
 * Readme file: Add features section, improve examples
