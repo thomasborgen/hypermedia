@@ -92,6 +92,10 @@ HTMX provides an `HX-Request` header that is always true. We can check for this 
 
 We've chosen to implement that check in a `@htmx` decorator. The decorator expects `partial` and optionally `full` arguments in the endpoint definition. These must be resolved by FastAPI's dependency injection system.
 
+```python
+from hypermedia.fastapi import htmx, full
+```
+
 The `partial` argument is a function that returns the partial HTML.
 The `full` argument is a function that needs to return the whole HTML, for example on first navigation or a refresh.
 

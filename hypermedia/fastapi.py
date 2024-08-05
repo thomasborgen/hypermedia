@@ -72,7 +72,7 @@ def htmx(
 def full(
     func: Callable[Param, ReturnType],
 ) -> Callable[Param, Coroutine[Any, Any, Callable[[], ReturnType]]]:
-    """Wrap the paru full page render dependency and makes it lazy."""
+    """Wrap the full page render dependency and makes it lazy."""
 
     @wraps(func)
     async def wrapper(
