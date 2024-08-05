@@ -1,6 +1,7 @@
 from abc import ABCMeta, abstractmethod
+from enum import StrEnum
 from html import escape
-from typing import TypeAlias, Union
+from typing import Any, AnyStr, Generic, Literal, TypeAlias, TypeVar, Union
 
 from typing_extensions import Self
 
@@ -134,6 +135,131 @@ class ElementList(Element):
     def dump(self) -> str:
         """Dump the objects to a html document string."""
         return self._render_children()
+
+
+# String: TypeAlias = str
+
+String = TypeVar("String", bound=str)
+
+
+class SwapOptions(StrEnum):
+    """Swap options."""
+
+    innerHTML = "innerHTML"
+    outerHTML = "outerHTML"
+    beforebegin = "beforebegin"
+    afterbegin = "afterbegin"
+    beforeend = "beforeend"
+    afterend = "afterend"
+    delete = "delete"
+
+
+class HtmxElement(Element):
+    """Htmx element."""
+
+    hx_get: str
+    hx_post: str
+    hx_push_url: Literal["true"] | str
+    hx_select: str
+
+    hx_swap: Literal[
+        "innerHTML",
+        "outerHTML",
+        "beforebegin",
+        "afterbegin",
+        "beforeend",
+        "afterend",
+        "delete",
+    ]
+
+    hx_target: str
+
+    hx_request: str
+    hx_trigger: (
+        Literal["load", "click", "dblclick", "hover", "focus", "blur"] | str
+    )
+
+    hx_include: str
+    hx_indicator: str
+    hx_params: Literal["*", "none"] | list[str]
+    hx_prompt: str
+    hx_sse: str  # URL to open a Server-Sent Events connection.
+    hx_ws: str  # URL to open a WebSocket connection.
+    hx_boost: Literal[
+        "true", "false"
+    ]  # Enables htmx to boost links and forms.
+    hx_swap_oob: Literal["true", "false"]  # Allows out-of-band swaps.
+
+    hx_headers: dict[
+        str, Any
+    ]  # JSON object to add custom headers to the request.
+    hx_encoding: Literal[
+        "text/plain",
+        "application/x-www-form-urlencoded",
+        "multipart/form-data",
+    ]  # Specifies how to encode the request. Possible values:
+
+    hx_vals: dict[
+        str, Any
+    ]  # JSON object to send additional values with the request.
+
+    hx_history_elt: (
+        str  # CSS selector to specify an element for history handling.
+    )
+
+    def __init__(  # noqa: PLR0913
+        self,
+        hx_get: str,
+        hx_post: str,
+        hx_push_url: Literal["true"] | String,
+        hx_select: str,
+        hx_swap: SwapOptions,
+        hx_target: str,
+        hx_request: str,
+        hx_trigger: (
+            Literal["load", "click", "dblclick", "hover", "focus", "blur"]
+            | String
+        ),
+        hx_include: str,
+        hx_indicator: str,
+        hx_params: Literal["*", "none"] | list[str],
+        hx_prompt: str,
+        hx_sse: str,
+        hx_ws: str,
+        hx_boost: Literal["true", "false"],
+        hx_swap_oob: Literal["true", "false"],
+        hx_headers: dict[str, Any],
+        hx_encoding: Literal[
+            "text/plain",
+            "application/x-www-form-urlencoded",
+            "multipart/form-data",
+        ],
+        hx_vals: dict[str, Any],
+        hx_history_elt: str,
+    ) -> None:
+        self.hx_get = hx_get
+        self.hx_post = hx_post
+        self.hx_push_url = hx_push_url
+        self.hx_select = hx_select
+        self.hx_swap = hx_swap
+        self.hx_target = hx_target
+        self.hx_request = hx_request
+        self.hx_trigger = hx_trigger
+        self.hx_include = hx_include
+        self.hx_indicator = hx_indicator
+        self.hx_params = hx_params
+        self.hx_prompt = hx_prompt
+        self.hx_sse = hx_sse
+        self.hx_ws = hx_ws
+        self.hx_boost = hx_boost
+        self.hx_swap_oob = hx_swap_oob
+        self.hx_headers = hx_headers
+        self.hx_encoding = hx_encoding
+        self.hx_vals = hx_vals
+        self.hx_history_elt = hx_history_elt
+
+
+HtmxElement(hx_push_url="test")
 
 
 class BaseElement(Element):
