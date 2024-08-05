@@ -40,12 +40,12 @@ use `.dump()` to dump your code to html.
 
 
 ```python
-from hypermedia import Div
+from hypermedia import Bold, Div
 
-Div("Hello world!").dump()
+Div("Hello ", Bold("world!").dump()
 
 # outputs
-# '<div>hello world</div>'
+# '<div>Hello <b>world!</bold></div>'
 ```
 
 ## Composability with slots
