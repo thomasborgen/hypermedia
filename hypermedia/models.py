@@ -1,19 +1,25 @@
 from abc import ABCMeta, abstractmethod
 from html import escape
-from typing import TypeAlias
+from typing import TypeAlias, Union
 
 from typing_extensions import Self
 
 Attribute: TypeAlias = str | bool | None
 
+Child: TypeAlias = Union["Element", str]
+Children: TypeAlias = list[Child]
+
 
 def get_child_slots(
-    slots: dict[str, "Element"], children: list["Element"]
+    slots: dict[str, "Element"], children: Children
 ) -> dict[str, "Element"]:
     """Get slots from direct child."""
     slot_keys = slots.keys()
 
     for child in children:
+        if isinstance(child, str):
+            continue
+
         if duplicate_keys := [
             key for key in child.slots.keys() if key in slot_keys
         ]:
@@ -26,11 +32,13 @@ def get_child_slots(
 
 
 def get_slots(
-    elements: list["Element"],
+    elements: Children,
 ) -> dict[str, "Element"]:
     """Calculate slots."""
     slots: dict[str, "Element"] = {}
     for child in elements:
+        if isinstance(child, str):
+            continue
         if child.slot:
             if child.slot in slots:
                 raise ValueError(
@@ -51,14 +59,14 @@ class Element(metaclass=ABCMeta):
     css classes.
     """
 
-    children: list["Element"]
+    children: Children
     slot: str | None = None
     slots: dict[str, "Element"]
     attributes: dict[str, Attribute]
 
     def __init__(
         self,
-        *children: "Element",
+        *children: Child,
         slot: str | None = None,
         **attributes: Attribute,
     ) -> None:
@@ -73,7 +81,7 @@ class Element(metaclass=ABCMeta):
         """Dump the objects to a html document string."""
         pass
 
-    def extend(self, slot: str, *children: "Element") -> Self:
+    def extend(self, slot: str, *children: Child) -> Self:
         """Extend the child with the given slots children."""
         if slot not in self.slots:
             raise ValueError(f"Could not find a slot with name: {slot}")
@@ -112,7 +120,12 @@ class Element(metaclass=ABCMeta):
         return ""
 
     def _render_children(self) -> str:
-        return "".join([child.dump() for child in self.children])
+        return "".join(
+            [
+                escape(child) if isinstance(child, str) else child.dump()
+                for child in self.children
+            ]
+        )
 
 
 class ElementList(Element):
@@ -120,7 +133,7 @@ class ElementList(Element):
 
     def dump(self) -> str:
         """Dump the objects to a html document string."""
-        return "".join(child.dump() for child in self.children)
+        return self._render_children()
 
 
 class BaseElement(Element):
@@ -132,12 +145,11 @@ class BaseElement(Element):
     text: str | None
     composed_text: list[str | Element] | None
 
-    def __init__(  # noqa: PLR0913
+    def __init__(
         self,
-        *children: "Element",
+        *children: Child,
         id: str | None = None,
         classes: list[str] | None = None,
-        text: str | None = None,
         composed_text: list[str | Element] | None = None,
         slot: str | None = None,
         **properties: str | bool,
@@ -146,25 +158,14 @@ class BaseElement(Element):
         super().__init__(*children, slot=slot, **properties)
         self.id = id
         self.classes = classes or []
-        self.text = text
-        self.composed_text = composed_text
 
     def dump(self) -> str:
         """Dump to html, while escaping text data."""
-        composed = []
-        if self.composed_text:
-            composed = [
-                escape(item) if isinstance(item, str) else item.dump()
-                for item in self.composed_text
-            ]
-
-        return "<{tag}{id}{classes}{attributes}>{text}{composed}{children}</{tag}>".format(  # noqa: E501
+        return "<{tag}{id}{classes}{attributes}>{children}</{tag}>".format(
             tag=self.tag,
             id=f" id='{self.id}'" if self.id else "",
             classes=self._render_classes(),
             attributes=self._render_attributes(),
-            text=escape(self.text or ""),
-            composed="".join(composed) if composed else "",
             children=self._render_children(),
         )
 

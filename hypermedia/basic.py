@@ -129,12 +129,20 @@ class HorizontalRule(Hr):
     """Alias for hr tag."""
 
 
-class Comment(BaseElement):
+class Comment(Element):
     """Defines a comment."""
+
+    children = list[str]
+
+    def __init__(self, *children: str) -> None:
+        """Initialize class."""
+        super().__init__(*children)
 
     def dump(self) -> str:
         """Dump to html."""
-        return "<!-- {text} -->".format(text=escape(self.text or ""))
+        return "<!-- {text} -->".format(
+            text="".join(escape(child) for child in self.children)  # type: ignore
+        )
 
 
 # william <- my son writing his name.

@@ -5,7 +5,7 @@ from hypermedia.basic import Doctype
 
 
 def test_comment_dump() -> None:
-    assert Comment(text="foo").dump() == "<!-- foo -->"
+    assert Comment("foo").dump() == "<!-- foo -->"
 
 
 @pytest.mark.parametrize(
@@ -19,7 +19,7 @@ def test_comment_dump() -> None:
     ],
 )
 def test_comment_dump_is_escaped(test_input: str, expected: str) -> None:
-    assert Comment(text=test_input).dump() == f"<!-- {expected} -->"
+    assert Comment(test_input).dump() == f"<!-- {expected} -->"
 
 
 def test_doctype_dump() -> None:

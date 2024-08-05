@@ -31,21 +31,21 @@ Html(Body(Div(), Div()))
 Add text to your tag:
 
 ```python
-from hypermedia import Html, Body, Div
+from hypermedia import Div
 
-Html(text="Hello world!")
+Div("Hello world!")
 ```
 
 use `.dump()` to dump your code to html.
 
 
 ```python
-from hypermedia import Html, Body, Div
+from hypermedia import Bold, Div
 
-Html(text="Hello world!").dump()
+Div("Hello ", Bold("world!")).dump()
 
 # outputs
-# '<html>hello world</html>'
+# '<div>Hello <b>world!</bold></div>'
 ```
 
 ## Composability with slots
@@ -56,7 +56,7 @@ from hypermedia import Html, Body, Div, Menu, Header, Div, Ul, Li
 base = Html(
     Body(
         Menu(slot="menu"),
-        Header(slot="header", text="my header"),
+        Header("my header", slot="header"),
         Div(slot="content"),
     ),
 )
@@ -111,7 +111,7 @@ def render_base():
 
 def render_fruits_partial():
     """Return partial HTML."""
-    return Div(Ul(Li(text="Apple"), Li(text="Banana"), Button(text="reload", hx_get="/fruits")))
+    return Div(Ul(Li("Apple"), Li("Banana"), Button("reload", hx_get="/fruits")))
 
 
 def render_fruits():
@@ -148,7 +148,7 @@ def render_fruit_partial(
     fruit: str = Depends(get_fruit),
 ) -> Element:
     """Return partial HTML."""
-    return Div(text=fruit)
+    return Div(fruit)
 
 def render_fruit(
     partial: Element = Depends(render_fruit_partial),

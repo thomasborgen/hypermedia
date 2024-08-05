@@ -9,6 +9,23 @@
 
 ## Latest Changes
 
+## Version 4.0.0
+
+### Breaking
+
+Instead of having to use `text` and `composed_text` keywords you can now write text like this:
+
+```python
+Div("My text", Bold("My bold text"), "Tail")
+```
+
+* Removes `text` argument.
+* Removes `composed_text` argument.
+
+### Features
+
+* The direct `*args` are now is a list of `Element | str`. This is basically exactly how `composed_text` worked, If we have a string child, we escape it, otherwise we call the child Elements `.dump()`. This should be a lot smoother to work with and read.
+
 ## Version 3.0.0
 
 ### Breaking
