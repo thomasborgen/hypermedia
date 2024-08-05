@@ -28,7 +28,7 @@ def test_all_attributes() -> None:
 
 
 def test_text_rendering() -> None:
-    assert TestBaseElement(text="test").dump() == "<test>test</test>"
+    assert TestBaseElement("test").dump() == "<test>test</test>"
 
 
 @pytest.mark.parametrize(
@@ -42,9 +42,7 @@ def test_text_rendering() -> None:
     ],
 )
 def test_text_escaping_rendering(test_input: str, expected: str) -> None:
-    assert (
-        TestBaseElement(text=test_input).dump() == f"<test>{expected}</test>"
-    )
+    assert TestBaseElement(test_input).dump() == f"<test>{expected}</test>"
 
 
 def test_children_rendering() -> None:
@@ -55,23 +53,22 @@ def test_children_rendering() -> None:
 
 
 def test_children_rendering_with_text() -> None:
-    child = TestBaseElement(text="test")
+    child = TestBaseElement("test")
     element = TestBaseElement(child)
 
     assert element.dump() == "<test><test>test</test></test>"
 
 
 def test_child_renders_after_text() -> None:
-    element = TestBaseElement(TestBaseElement(), text="test")
+    element = TestBaseElement("test", TestBaseElement())
 
     assert element.dump() == "<test>test<test></test></test>"
 
 
-def test_composed_text_rendering() -> None:
-    """Note, useful for inline tags like <a>, <br> etc."""
-    element = TestBaseElement(composed_text=["te", TestBaseElement(), "st"])
+def test_child_renders_before_text() -> None:
+    element = TestBaseElement(TestBaseElement(), "test")
 
-    assert element.dump() == "<test>te<test></test>st</test>"
+    assert element.dump() == "<test><test></test>test</test>"
 
 
 def test_to_string() -> None:
