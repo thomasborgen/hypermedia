@@ -42,7 +42,7 @@ use `.dump()` to dump your code to html.
 ```python
 from hypermedia import Bold, Div
 
-Div("Hello ", Bold("world!").dump()
+Div("Hello ", Bold("world!")).dump()
 
 # outputs
 # '<div>Hello <b>world!</bold></div>'
