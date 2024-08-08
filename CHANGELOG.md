@@ -9,6 +9,10 @@
 
 ## Latest Changes
 
+### Internal
+
+* Document how to add attributes with symbols like dash and period.
+
 ## Version 4.0.0
 
 ### Breaking
