@@ -79,12 +79,12 @@ Attributes with dashes, periods etc can be added by spreading a dictionary
 
 ```python
 # Alpine.js
-Button(**{"@click": "open = ! open"}).dump()
-# <button @click='open'></button>
+Div(**{x-show="open", "x-transition.duration_500ms"}).dump()
+# <div x-show="open" x-transition.duration.500ms></div>
 
 # Datastar
-Div(**{"x-transition.duration_500ms": "$show"}).dump()
-# <div x-transition.duration_500ms='$show'></div>
+Div(**{"data-show.duration_500ms":"$show"}).dump()
+# <div data-show.duration_500ms="$show"></div>
 ```
 
 Note: The </> HTMX attributes get special treatment. [The documentation](https://htmx.org/attributes/hx-on/) specifies that all hx attributes can be written with all dashes. Because of that Hypermedia lets users write hx attributes with underscores and Hypermedia changes them to dashes for you.
