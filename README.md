@@ -73,6 +73,36 @@ base.dump()
 # '<html><body><menu><ul><li>main</li></ul></menu><header>my header</header><div><div>Some content</div></div></body></html>'
 ```
 
+## Symbol attributes
+
+Attributes with dashes, periods etc can be added by spreading a dictionary
+
+```python
+# Alpine.js
+Button(**{"@click": "open = ! open"}).dump()
+# <button @click='open'></button>
+
+# Datastar
+Div(**{"x-transition.duration_500ms": "$show"}).dump()
+# <div x-transition.duration_500ms='$show'></div>
+```
+
+Note: The </> HTMX attributes get special treatment. [The documentation](https://htmx.org/attributes/hx-on/) specifies that all hx attributes can be written with all dashes. Because of that Hypermedia lets users write hx attributes with underscores and Hypermedia changes them to dashes for you.
+
+```python
+
+Div(hx_on_click='alert("Making a request!")')
+# <div hx-on-click='alert("Making a request!")'></div>
+# Which is equivalent to:
+# <div hx-on:click='alert("Making a request!"'></div>
+
+Div(hx_on_htmx_before_request='alert("Making a request!")')
+# <div hx-on-htmx-before-request='alert("Making a request!")'></div>
+
+# shorthand version of above statement
+Div(hx_on__before_request='alert("Making a request!")')
+# <div hx-on--before-request='alert("Making a request!")'></div>
+```
 
 # HTMX
 

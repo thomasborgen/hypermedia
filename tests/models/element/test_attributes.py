@@ -41,3 +41,15 @@ def test_htmx_keys_added_with_hyphen() -> None:
     element = TestElement(hx_get="url")
 
     assert element._render_attributes() == " hx-get='url'"
+
+
+def test_custom_attributes() -> None:
+    element = TestElement(**{"data-show.duration_500ms": "$show"})
+    assert element._render_attributes() == " data-show.duration_500ms='$show'"
+
+
+def test_custom_attributes_with_normal_ones() -> None:
+    element = TestElement(test="green", **{"@-.%": "test"}, bob="bob")
+    assert (
+        element._render_attributes() == " test='green' @-.%='test' bob='bob'"
+    )
