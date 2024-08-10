@@ -1,4 +1,4 @@
-from typing import Unpack
+from typing_extensions import Unpack
 
 from hypermedia.models import VoidElement
 from hypermedia.types.attributes import BaseAttrs, MetaAttrs

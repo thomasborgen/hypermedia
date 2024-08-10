@@ -1,5 +1,6 @@
 from html import escape
-from typing import Unpack
+
+from typing_extensions import Unpack
 
 from hypermedia.models import BaseElement, Element, VoidElement
 from hypermedia.models.elements import ElementStrict

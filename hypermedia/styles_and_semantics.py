@@ -1,4 +1,4 @@
-from typing import Unpack
+from typing_extensions import Unpack
 
 from hypermedia.models import Element
 from hypermedia.types.attributes import (
