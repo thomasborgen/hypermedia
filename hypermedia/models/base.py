@@ -7,10 +7,13 @@ from typing import (
     Mapping,
     Sequence,
     Union,
+    cast,
     get_type_hints,
 )
 
-from typing_extensions import Self
+from typing_extensions import Final, Self
+
+FINAL_KEY_PREFIX: Final[str] = "$"
 
 
 @lru_cache
@@ -120,7 +123,15 @@ class Element(metaclass=ABCMeta):
 
         attribute_aliases = _load_attribute_aliases()
 
-        for key, value in self.attributes.items():
+        # can't use `.pop()` with TypedDict/Mapping
+        # https://github.com/python/mypy/issues/4976
+        attributes = cast(dict[str, Any], self.attributes)
+
+        classes = attributes.pop("classes", [])
+        if class_ := attributes.pop("class_", None):
+            classes.append(class_)
+
+        for key, value in attributes.items():
             # Skip None values, use `True` for key only values
             if value is None:
                 continue
@@ -128,19 +139,23 @@ class Element(metaclass=ABCMeta):
             if value is False:
                 continue
 
-            alias = attribute_aliases.get(key, key)
+            if key in attribute_aliases:
+                alias = attribute_aliases[key]
+            elif key.startswith(FINAL_KEY_PREFIX):
+                alias = key[1:]
+            else:
+                alias = key.replace("_", "-")
 
             # Add true boolean attributes as key only.
             if value is True:
                 result.append(alias)
                 continue
 
-            # Add css classes
-            if alias == "class" and len(value) > 0:
-                result.append(f"{alias}='{' '.join(value)}'")
-                continue
-
             result.append(f"{alias}='{value}'")
+
+        # Add css classes
+        if len(classes) > 0:
+            result.append(f"class='{' '.join(classes)}'")
 
         if result:
             return " " + " ".join(result)
