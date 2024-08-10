@@ -2,7 +2,7 @@ from html import escape
 
 from typing_extensions import Unpack
 
-from hypermedia.models import Element, BasicElement, VoidElement
+from hypermedia.models import BasicElement, Element, VoidElement
 from hypermedia.models.elements import ElementStrict
 from hypermedia.types.attributes import (
     GlobalAttrs,

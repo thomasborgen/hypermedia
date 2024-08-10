@@ -1,4 +1,4 @@
-from hypermedia.models import Element, BasicElement, VoidElement
+from hypermedia.models import BasicElement, Element, VoidElement
 from hypermedia.types.attributes import GlobalAttrs
 from hypermedia.types.types import AnyChildren
 
