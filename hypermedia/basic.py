@@ -9,7 +9,7 @@ from hypermedia.types.attributes import (
     HypermediaAttrs,
     NoAttrs,
 )
-from hypermedia.types.types import AnyChildren, NoChildren, PrimitiveChildren
+from hypermedia.types.types import AnyChildren, PrimitiveChildren
 
 """
 All basic html tags as defined by W3Schools.
@@ -31,7 +31,7 @@ class Html(ElementStrict["Head", "Body", HtmlTagAttrs]):
 
     def __init__(
         self,
-        *children: *tuple["Head", "Body"],
+        *children: Unpack[tuple["Head", "Body"]],
         **attributes: Unpack[HtmlTagAttrs],
     ) -> None:
         super().__init__(*children, **attributes)

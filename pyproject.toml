@@ -121,9 +121,6 @@ no_implicit_reexport = true
 # for strict mypy: (this is the tricky one :-))
 disallow_untyped_defs = true
 
-# for Unpack
-enable_incomplete_features = true
-
 [tool.pytest.ini_options]
 # py.test options:
 norecursedirs = ["*.egg", ".eggs", "dist", "build", "docs", ".tox", ".git", "__pycache__"]

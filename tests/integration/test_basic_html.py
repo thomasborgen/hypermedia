@@ -39,7 +39,7 @@ def test_basic_elements() -> None:
                 P("Hello world!"),
             ),
         ).dump()
-        == "<html><head><title>Hypermedia</title></head><body><p>Hello world!</p></body></html>"
+        == "<html><head><title>Hypermedia</title></head><body><p>Hello world!</p></body></html>"  # noqa: E501
     )
 
 

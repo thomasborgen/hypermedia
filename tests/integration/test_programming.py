@@ -1,6 +1,6 @@
-from hypermedia.programming import Embed, NoScript, Object, Script
-
 import pytest
+
+from hypermedia.programming import Embed, NoScript, Object, Script
 
 
 @pytest.mark.parametrize(

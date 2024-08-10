@@ -16,7 +16,7 @@ class Element(Generic[TChildren, TAttrs], BaseElement):
 
     tag: str
 
-    def __init__(  # type: ignore
+    def __init__(
         self,
         *children: TChildren,
         # FIXME: https://github.com/python/typing/issues/1399
@@ -50,7 +50,7 @@ class ElementStrict(Generic[Unpack[TChildrenArgs], TAttrs], BaseElement):
 
     tag: str
 
-    def __init__(  # type: ignore
+    def __init__(
         self,
         *children: Unpack[TChildrenArgs],
         # FIXME: https://github.com/python/typing/issues/1399
@@ -87,7 +87,7 @@ class VoidElement(Generic[TAttrs], BaseElement):
 
     tag: str
 
-    def __init__(  # type: ignore
+    def __init__(
         self,
         *,
         slot: str | None = None,

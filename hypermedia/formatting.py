@@ -12,7 +12,7 @@ from hypermedia.types.attributes import (
     QAttrs,
     TimeAttrs,
 )
-from hypermedia.types.types import AnyChildren, NoChildren
+from hypermedia.types.types import AnyChildren
 
 
 class Abbr(Element[AnyChildren, GlobalAttrs]):
