@@ -33,6 +33,17 @@ Div(**{"$funky-format_test.value": True})  # <div funky-format_test.value></div>
 Div(**{"$funky-format_test.value": "name"})  # <div funky-format_test.value='name'></div>
 ```
 
+### Feature
+
+* `classes` and `class_` attributes are now merged. 
+
+```python
+def test_class_and_classes_are_combined() -> None:
+    element = TestElement(class_="three", classes=["one", "two"])
+
+    assert element._render_attributes() == " class='one two three'"
+```
+
 ## Version 4.1.0
 
 ### Feature
