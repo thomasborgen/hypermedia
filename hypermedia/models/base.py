@@ -7,6 +7,7 @@ from typing import (
     Mapping,
     Sequence,
     Union,
+    cast,
     get_type_hints,
 )
 
@@ -122,11 +123,15 @@ class Element(metaclass=ABCMeta):
 
         attribute_aliases = _load_attribute_aliases()
 
-        classes = self.attributes.pop("classes", [])
-        if class_ := self.attributes.pop("class_", None):
+        # can't use `.pop()` with TypedDict/Mapping
+        # https://github.com/python/mypy/issues/4976
+        attributes = cast(dict[str, Any], self.attributes)
+
+        classes = attributes.pop("classes", [])
+        if class_ := attributes.pop("class_", None):
             classes.append(class_)
 
-        for key, value in self.attributes.items():
+        for key, value in attributes.items():
             # Skip None values, use `True` for key only values
             if value is None:
                 continue
