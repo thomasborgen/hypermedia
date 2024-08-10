@@ -71,7 +71,10 @@ class HtmxAttrs(Attrs, total=False):
     hx_on: Annotated[str, Alias("hx-on")]
     hx_include: Annotated[str, Alias("hx-include")]
     hx_confirm: Annotated[str, Alias("hx-confirm")]
-    hx_trigger: Annotated[str, Alias("hx-trigger")]
+    hx_trigger: Annotated[
+        Literal["load", "click", "dblclick", "hover", "focus" "blur"] | str,
+        Alias("hx-trigger"),
+    ]
     hx_target: Annotated[
         Literal["this", "next", "previous"] | str, Alias("hx-target")
     ]
@@ -91,26 +94,28 @@ class HtmxAttrs(Attrs, total=False):
         | str,
         Alias("hx-swap"),
     ]
-    hx_swap_oob: Annotated[str, Alias("hx-swap-oob")]
-    hx_vals: Annotated[str, Alias("hx-vals")]
+    hx_swap_oob: Annotated[Literal["true", "false"], Alias("hx-swap-oob")]
+    hx_vals: Annotated[str, Alias("hx-vals")]  # TODO: dict
     hx_sync: Annotated[str, Alias("hx-sync")]
-    hx_boost: Annotated[bool, Alias("hx-boost")]
+    hx_boost: Annotated[Literal["true", "false"], Alias("hx-boost")]
     hx_indicator: Annotated[str, Alias("hx-indicator")]
-    hx_push_url: Annotated[bool, Alias("hx-push-url")]
-    hx_history: Annotated[bool, Alias("hx-history")]
+    hx_push_url: Annotated[
+        Literal["true", "false"] | str, Alias("hx-push-url")
+    ]
+    hx_history: Annotated[Literal["false"], Alias("hx-history")]
     hx_history_elt: Annotated[str, Alias("hx-history-elt")]
     hx_ext: Annotated[str, Alias("hx-ext")]
     hx_disable: Annotated[bool, Alias("hx-disable")]
     hx_disabled_elt: Annotated[str, Alias("hx-disabled-elt")]
     hx_disinherit: Annotated[str, Alias("hx-disinherit")]
     hx_encoding: Annotated[str, Alias("hx-encoding")]
-    hx_headers: Annotated[str, Alias("hx-headers")]
-    hx_params: Annotated[str, Alias("hx-params")]
+    hx_headers: Annotated[str, Alias("hx-headers")]  # TODO: dict
+    hx_params: Annotated[Literal["*", "none"] | str, Alias("hx-params")]
     hx_preserve: Annotated[bool, Alias("hx-preserve")]
     hx_prompt: Annotated[str, Alias("hx-prompt")]
     hx_replace_url: Annotated[URLType, Alias("hx-replace-url")]
     hx_request: Annotated[str, Alias("hx-request")]
-    hx_validate: Annotated[bool, Alias("hx-validate")]
+    hx_validate: Annotated[Literal["true", "false"], Alias("hx-validate")]
     hx_ws: Annotated[str, Alias("hx-ws")]
     hx_sse: Annotated[str, Alias("hx-sse")]
 
