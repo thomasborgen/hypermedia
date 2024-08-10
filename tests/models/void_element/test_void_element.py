@@ -22,7 +22,7 @@ def test_attribute_rendering() -> None:
 def test_all_attributes() -> None:
     assert TestVoidElement(
         id="test", classes=["one", "two"], test="green"
-    ).dump() == ("<test id='test' class='one two' test='green'>")
+    ).dump() == ("<test id='test' test='green' class='one two'>")
 
 
 def test_to_string() -> None:

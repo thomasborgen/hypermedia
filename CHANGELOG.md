@@ -9,6 +9,30 @@
 
 ## Latest Changes
 
+
+## Version 5.0.0
+
+### Breaking
+
+We need a way to handle html attributes like `hx-on:click` or `any_weird.format`. At the same time I want it to be easy to add attributes. I've decided to let all kwargs added normally like `data_test` where no `Alias` is defined will have its underscores replaced with hyphens. Any kwarg that has a `$` prefix, will be outputted as is minus the `$`. This kwarg can only have been added by spreading a dict into the constructor, so we can assume that it is done on purpose.
+
+* Any attribute that does not have an Alias will have any underscores (`_`) changed to hyphens (`-`).
+* Any attribute that is prefixed with `$` will be outputted as is without the first `$`.
+
+ie
+
+```python
+# Is a specified attribute(typed) with an Alias:
+Div(on_afterprint="test")  # <div onafterprint='test'></div>
+# Unspecified attribute without Alias:
+Div(data_test="test")  # <div data-test='test'></div>
+# Spreaded without $ prefix gets its underscores changed to hyphens.
+Div(**{"funky-format_test.value": True})  # <div funky-format-test.value></div>
+# Spreaded with $ prefix
+Div(**{"$funky-format_test.value": True})  # <div funky-format_test.value></div>
+Div(**{"$funky-format_test.value": "name"})  # <div funky-format_test.value='name'></div>
+```
+
 ## Version 4.1.0
 
 ### Feature

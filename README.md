@@ -74,21 +74,33 @@ base.dump()
 # '<html><body><menu><ul><li>main</li></ul></menu><header>my header</header><div><div>Some content</div></div></body></html>'
 ```
 
-## Symbol attributes
+## Attribute names with special characters
 
-Attributes with dashes, periods etc can be added by spreading a dictionary
+Most `html` and `</>htmx` attributes are typed and has Aliases where needed. That means that most of the time you won't have to think about this and it should _just work_.
+
+The attribute name output rules are:
+
+1. Any attribute that does not have an Alias will have any underscores (`_`) changed to hyphens (`-`).
+2. Any attribute that is prefixed with `$` will be outputted as is without the first `$`.
+
+ie
 
 ```python
-# Alpine.js
-Button(**{"@click": "open = ! open"}).dump()
-# <button @click='open'></button>
+# Is a specified attribute(typed) with an Alias:
+Div(on_afterprint="test")  # <div onafterprint='test'></div>
 
-# Datastar
-Div(**{"x-transition.duration_500ms": "$show"}).dump()
-# <div x-transition.duration_500ms='$show'></div>
+# Unspecified attribute without Alias:
+Div(data_test="test")  # <div data-test='test'></div>
+
+# Spreaded without $ prefix gets its underscores changed to hyphens:
+Div(**{"funky-format_test.value": True})  # <div funky-format-test.value></div>
+
+# Spreaded with $ prefix
+Div(**{"$funky-format_test.value": True})  # <div funky-format_test.value></div>
+Div(**{"$funky-format_test.value": "name"})  # <div funky-format_test.value='name'></div>
 ```
 
-Note: The </> HTMX attributes get special treatment. [The documentation](https://htmx.org/attributes/hx-on/) specifies that all hx attributes can be written with all dashes. Because of that Hypermedia lets users write hx attributes with underscores and Hypermedia changes them to dashes for you.
+Note: About the </> HTMX attributes. [The documentation](https://htmx.org/attributes/hx-on/) specifies that all hx attributes can be written with all dashes. Because of that Hypermedia lets users write hx attributes with underscores and Hypermedia changes them to dashes for you.
 
 ```python
 

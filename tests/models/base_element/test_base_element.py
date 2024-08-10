@@ -24,7 +24,7 @@ def test_attribute_rendering() -> None:
 def test_all_attributes() -> None:
     assert TestBaseElement(
         id="test", classes=["one", "two"], test="green"
-    ).dump() == ("<test id='test' class='one two' test='green'></test>")
+    ).dump() == ("<test id='test' test='green' class='one two'></test>")
 
 
 def test_text_rendering() -> None:
