@@ -3,13 +3,13 @@ from typing import Unpack
 
 from hypermedia.models import BaseElement, Element, VoidElement
 from hypermedia.models.elements import ElementStrict
-from hypermedia.models.types import AnyChildren, NoChildren, PrimitiveChildren
 from hypermedia.types.attributes import (
     GlobalAttrs,
     HtmlTagAttrs,
     HypermediaAttrs,
     NoAttrs,
 )
+from hypermedia.types.types import AnyChildren, NoChildren, PrimitiveChildren
 
 """
 All basic html tags as defined by W3Schools.

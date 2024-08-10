@@ -1,6 +1,6 @@
 from hypermedia.models import BaseElement, Element, VoidElement
-from hypermedia.models.types import AnyChildren
 from hypermedia.types.attributes import GlobalAttrs
+from hypermedia.types.types import AnyChildren
 
 
 class TestElement(BaseElement):

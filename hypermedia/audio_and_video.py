@@ -1,13 +1,13 @@
 from typing import Unpack
 
 from hypermedia.models import Element, VoidElement
-from hypermedia.models.types import AnyChildren
 from hypermedia.types.attributes import (
     AudioAttrs,
     SourceAttrs,
     TrackAttrs,
     VideoAttrs,
 )
+from hypermedia.types.types import AnyChildren
 
 
 class Audio(Element[AnyChildren, AudioAttrs]):

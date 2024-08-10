@@ -1,7 +1,6 @@
 from typing import Unpack
 
 from hypermedia.models import Element, VoidElement
-from hypermedia.models.types import AnyChildren, PrimitiveChildren
 from hypermedia.types.attributes import (
     ButtonAttrs,
     FieldsetAttrs,
@@ -15,6 +14,7 @@ from hypermedia.types.attributes import (
     SelectAttrs,
     TextAreaAttrs,
 )
+from hypermedia.types.types import AnyChildren, PrimitiveChildren
 
 
 class Form(Element[AnyChildren, FormAttrs]):

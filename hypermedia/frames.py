@@ -1,8 +1,8 @@
 from typing import Unpack
 
 from hypermedia.models.elements import Element
-from hypermedia.models.types import NoChildren
 from hypermedia.types.attributes import IframeAttrs
+from hypermedia.types.types import NoChildren
 
 
 class IFrame(Element[NoChildren, IframeAttrs]):

@@ -1,9 +1,7 @@
 from typing import Never, TypeAlias, TypeVar, TypeVarTuple
 
-from hypermedia.types.attributes import Attrs, NoAttrs, URLType
-from hypermedia.types.styles import CSSProperties
-
-from .base import BaseElement
+from hypermedia.models.base import BaseElement
+from hypermedia.types.attributes import Attrs, NoAttrs
 
 NoChildren: TypeAlias = Never
 """Type alias for elements that are not allowed to have children."""
@@ -28,16 +26,3 @@ TChildrenArgs = TypeVarTuple("TChildrenArgs")
 
 TAttrs = TypeVar("TAttrs", bound=Attrs | NoAttrs, covariant=True)
 """Type variable for elements representing type of attributes. (**kwargs)"""
-
-
-__all__ = (
-    "AnyChildren",
-    "ComplexChildren",
-    "CSSProperties",
-    "URLType",
-    "NoChildren",
-    "PrimitiveChildren",
-    "TAttrs",
-    "TChildren",
-    "TChildrenArgs",
-)

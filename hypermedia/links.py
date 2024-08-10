@@ -1,12 +1,12 @@
 from typing import Unpack
 
 from hypermedia.models import Element, VoidElement
-from hypermedia.models.types import AnyChildren
 from hypermedia.types.attributes import (
     GlobalAttrs,
     HeadLinkAttrs,
     HyperlinkAttrs,
 )
+from hypermedia.types.types import AnyChildren
 
 
 class A(Element[AnyChildren, HyperlinkAttrs]):

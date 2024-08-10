@@ -1,7 +1,6 @@
 from typing import Unpack
 
 from hypermedia.models import Element, VoidElement
-from hypermedia.models.types import AnyChildren
 from hypermedia.types.attributes import (
     AreaAttrs,
     CanvasAttrs,
@@ -17,6 +16,7 @@ from hypermedia.types.attributes import (
     RectAttrs,
     SvgAttrs,
 )
+from hypermedia.types.types import AnyChildren
 
 
 class Img(VoidElement[ImgAttrs]):

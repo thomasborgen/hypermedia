@@ -1,13 +1,13 @@
 from typing import Unpack
 
 from hypermedia.models import Element, VoidElement
-from hypermedia.models.types import AnyChildren, PrimitiveChildren
 from hypermedia.types.attributes import (
     EmbedAttrs,
     GlobalAttrs,
     ObjectAttrs,
     ScriptAttrs,
 )
+from hypermedia.types.types import AnyChildren, PrimitiveChildren
 
 
 class Script(Element[PrimitiveChildren, ScriptAttrs]):

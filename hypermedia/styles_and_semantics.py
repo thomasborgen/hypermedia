@@ -1,16 +1,16 @@
 from typing import Unpack
 
 from hypermedia.models import Element
-from hypermedia.models.types import (
-    AnyChildren,
-    ComplexChildren,
-    PrimitiveChildren,
-)
 from hypermedia.types.attributes import (
     DataAttrs,
     DetailsAttrs,
     DialogAttrs,
     GlobalAttrs,
+)
+from hypermedia.types.types import (
+    AnyChildren,
+    ComplexChildren,
+    PrimitiveChildren,
 )
 
 

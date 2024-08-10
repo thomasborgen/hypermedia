@@ -137,7 +137,7 @@ from hypermedia.lists import (
     UnorderedList,
 )
 from hypermedia.meta_info import Base, Meta
-from hypermedia.models import Element, ElementList
+from hypermedia.models import BaseElement, ElementList
 from hypermedia.programming import Embed, NoScript, Object, Script
 from hypermedia.styles_and_semantics import (
     Article,
@@ -180,7 +180,7 @@ from hypermedia.tables import (
 
 __all__ = [
     # Models
-    "Element",
+    "BaseElement",
     "ElementList",
     # audio and video
     "Audio",

@@ -1,8 +1,8 @@
 from typing import Unpack
 
 from hypermedia.models import Element, VoidElement
-from hypermedia.models.types import AnyChildren, ComplexChildren
 from hypermedia.types.attributes import ColAttrs, GlobalAttrs, TdAttrs, ThAttrs
+from hypermedia.types.types import AnyChildren, ComplexChildren
 
 
 class Table(Element[ComplexChildren, GlobalAttrs]):

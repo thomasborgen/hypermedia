@@ -4,8 +4,8 @@ from typing import (
 )
 
 from hypermedia.models.base import BaseElement
-from hypermedia.models.types import TAttrs, TChildren, TChildrenArgs
 from hypermedia.types.attributes import NoAttrs
+from hypermedia.types.types import TAttrs, TChildren, TChildrenArgs
 
 
 class Element(Generic[TChildren, TAttrs], BaseElement):

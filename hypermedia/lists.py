@@ -1,8 +1,8 @@
 from typing import Unpack
 
 from hypermedia.models import Element
-from hypermedia.models.types import AnyChildren, ComplexChildren
 from hypermedia.types.attributes import GlobalAttrs, LiAttrs, OlAttrs
+from hypermedia.types.types import AnyChildren, ComplexChildren
 
 
 class Menu(Element[AnyChildren, GlobalAttrs]):

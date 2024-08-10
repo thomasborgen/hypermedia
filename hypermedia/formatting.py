@@ -1,7 +1,6 @@
 from typing import Unpack
 
 from hypermedia.models import Element, VoidElement
-from hypermedia.models.types import AnyChildren, NoChildren
 from hypermedia.types.attributes import (
     BlockquoteAttrs,
     DelAttrs,
@@ -13,6 +12,7 @@ from hypermedia.types.attributes import (
     QAttrs,
     TimeAttrs,
 )
+from hypermedia.types.types import AnyChildren, NoChildren
 
 
 class Abbr(Element[AnyChildren, GlobalAttrs]):
