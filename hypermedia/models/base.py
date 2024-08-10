@@ -61,21 +61,16 @@ def get_child_slots(
 
 
 def get_slots(
-    elements: Sequence[Union[str, "BaseElement"]],
+    element: "BaseElement",
 ) -> dict[str, "BaseElement"]:
     """Calculate slots."""
     slots: dict[str, "BaseElement"] = {}
-    for child in elements:
-        if isinstance(child, str):
-            continue
-        if child.slot:
-            if child.slot in slots:
-                raise ValueError(
-                    f"All slot names must be unique: {child.slot}"
-                )
-            slots[child.slot] = child
-        if child.children:
-            get_child_slots(slots, child.children)
+
+    if element.slot:
+        slots[element.slot] = element
+
+    if element.children:
+        get_child_slots(slots, element.children)
 
     return slots
 
@@ -102,7 +97,7 @@ class BaseElement(metaclass=ABCMeta):
         """Initialize Root with children."""
         self.children = children
         self.slot = slot
-        self.slots = get_slots([self])
+        self.slots = get_slots(self)
         self.attributes = attributes
 
     @abstractmethod

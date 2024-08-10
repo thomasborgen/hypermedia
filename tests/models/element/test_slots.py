@@ -25,7 +25,6 @@ def test_raises_when_duplicate_slot_names_element_list() -> None:
             TestElement(slot="my_slot"),
             TestElement(slot="my_slot"),
         )
-        # element.extend("wrong_slot_name", TestElement())
 
     assert str(excinfo.value) == "All slot names must be unique: ['my_slot']"
 
@@ -35,8 +34,6 @@ def test_raises_when_duplicate_slot_names_in_extended_tree() -> None:
         TestElement(slot="my_slot").extend(
             "my_slot", TestElement(slot="my_slot")
         )
-
-        # element.extend("wrong_slot_name", TestElement())
 
     assert str(excinfo.value) == "All slot names must be unique: ['my_slot']"
 
@@ -63,3 +60,10 @@ def test_slots_return_all_descendants_slots() -> None:
         "child_slot": child,
         "grandchild_slot": grandchild,
     }
+
+
+def test_child_slots_with_strings_are_skipped() -> None:
+    child = TestElement("test")
+    element = TestElement("test", child)
+
+    assert element.slots == {}
