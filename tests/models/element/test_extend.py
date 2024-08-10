@@ -7,7 +7,7 @@ def test_extend_adds_child_to_slot() -> None:
 
     element.extend("my_slot", child)
 
-    assert element.children == [child]
+    assert element.children == (child,)
 
 
 def test_extend_adds_children_to_slot() -> None:
@@ -17,7 +17,7 @@ def test_extend_adds_children_to_slot() -> None:
 
     element.extend("my_slot", child_1, child_2)
 
-    assert element.children == [child_1, child_2]
+    assert element.children == (child_1, child_2)
 
 
 def test_extend_adds_child_to_any_descendant_slot() -> None:
@@ -27,4 +27,4 @@ def test_extend_adds_child_to_any_descendant_slot() -> None:
 
     parent.extend("descendant_slot", element)
 
-    assert child.children == [element]
+    assert child.children == (element,)

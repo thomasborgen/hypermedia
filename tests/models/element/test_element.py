@@ -10,4 +10,4 @@ def test_can_have_children() -> None:
 
     parent = TestElement(child)
 
-    assert parent.children == [child]
+    assert parent.children == (child,)

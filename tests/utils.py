@@ -1,4 +1,6 @@
-from hypermedia.models import BaseElement, Element, VoidElement
+from hypermedia.models import BasicElement, Element, VoidElement
+from hypermedia.types.attributes import GlobalAttrs
+from hypermedia.types.types import AnyChildren
 
 
 class TestElement(Element):
@@ -6,9 +8,9 @@ class TestElement(Element):
         return str(self)
 
 
-class TestBaseElement(BaseElement):
+class TestBaseElement(BasicElement[AnyChildren, GlobalAttrs]):
     tag: str = "test"
 
 
-class TestVoidElement(VoidElement):
+class TestVoidElement(VoidElement[GlobalAttrs]):
     tag: str = "test"

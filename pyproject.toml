@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hypermedia"
-version = "4.0.0"
+version = "4.1.0"
 description = "An opinionated way to work with html in pure python with htmx support."
 authors = ["Thomas Borgen <thomasborgen91@gmail.com>"]
 readme = "README.md"
@@ -64,11 +64,13 @@ select = [
 
 ignore = [
     "D100", # Docstring in modules
+    "D107", # Docstring in __init__
     "D203", # Incompatible with D211
     "D212", # Incompatible with D213
     # FastApi uses a lot of dependency injection and performs calls/object inits
     # in argument defaults.
     "B008",
+    "PLC0105", # Let typevar covariants be named without _co suffix
 ]
 
 fixable = ["ALL"]

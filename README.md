@@ -1,6 +1,6 @@
 # Hypermedia
 
-Hypermedia is a pure python library for working with `HTML`. Hypermedia's killer feature is that it is composable through a `slot` concept. Because of that, it works great with `</> htmx` where you need to respond with both __partials__ and __full page__ reloads.
+Hypermedia is a pure python library for working with `HTML`. Hypermedia's killer feature is that it is composable through a `slot` concept. Because of that, it works great with `</> htmx` where you need to respond with both __partials__ and __full page__ html.
 
 Hypermedia is made to work with `FastAPI` and `</> htmx`, but can be used by anything to create HTML.
 
@@ -9,6 +9,7 @@ Hypermedia is made to work with `FastAPI` and `</> htmx`, but can be used by any
 * Build __HTML__ with python classes
 * __Composable__ templates through a __slot__ system
 * Seamless integration with __</> htmx__
+* Fully typed and __Autocompletion__ for html/htmx attributes and styles
 * Opinionated simple decorator for __FastAPI__
 * Unlike other template engines like Jinja2 we have full typing since we never leave python land.
 
