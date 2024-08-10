@@ -9,6 +9,12 @@
 
 ## Latest Changes
 
+### Breaking
+
+Added types for html elements and their attributes. The type system is taken from [Ludic.](https://github.com/getludic/ludic). It is just so good. This gives us autocomplete support for everything. This breaks because we are moving some code around and switching the names of `BaseElement` and `Element`
+
+* Types html elements and attributes.
+
 ### Internal
 
 * Document how to add attributes with symbols like dash and period.

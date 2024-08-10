@@ -15,33 +15,23 @@ class Element(Generic[TChildren, TAttrs], BaseElement):
     attributes: TAttrs
 
     tag: str
-    classes: list[str]
 
     def __init__(  # type: ignore
         self,
         *children: TChildren,
-        classes: list[str] | None = None,
         # FIXME: https://github.com/python/typing/issues/1399
         **attributes: Unpack[TAttrs],  # type: ignore
     ) -> None:
         super().__init__(*children, **attributes)
         self.slot = attributes.pop("slot", None)
-        self.classes = classes or []
 
     def dump(self) -> str:
         """Dump to html, while escaping text data."""
-        return "<{tag}{classes}{attributes}>{children}</{tag}>".format(
+        return "<{tag}{attributes}>{children}</{tag}>".format(
             tag=self.tag,
-            # id=f" id='{self.id}'" if self.id else "",
-            classes=self._render_classes(),
             attributes=self._render_attributes(),
             children=self._render_children(),
         )
-
-    def _render_classes(self) -> str:
-        if not self.classes:
-            return ""
-        return f" class='{' '.join(self.classes)}'"
 
 
 class ElementStrict(Generic[Unpack[TChildrenArgs], TAttrs], BaseElement):
@@ -59,32 +49,22 @@ class ElementStrict(Generic[Unpack[TChildrenArgs], TAttrs], BaseElement):
     attributes: TAttrs
 
     tag: str
-    classes: list[str]
 
     def __init__(  # type: ignore
         self,
         *children: Unpack[TChildrenArgs],
-        classes: list[str] | None = None,
         # FIXME: https://github.com/python/typing/issues/1399
         **attributes: Unpack[TAttrs],  # type: ignore
     ) -> None:
         super().__init__(*children, **attributes)
-        self.classes = classes or []
 
     def dump(self) -> str:
         """Dump to html, while escaping text data."""
-        return "<{tag}{classes}{attributes}>{children}</{tag}>".format(
+        return "<{tag}{attributes}>{children}</{tag}>".format(
             tag=self.tag,
-            # id=f" id='{self.id}'" if self.id else "",
-            classes=self._render_classes(),
             attributes=self._render_attributes(),
             children=self._render_children(),
         )
-
-    def _render_classes(self) -> str:
-        if not self.classes:
-            return ""
-        return f" class='{' '.join(self.classes)}'"
 
 
 class ElementList(Element[TChildren, NoAttrs]):
@@ -106,32 +86,22 @@ class VoidElement(Generic[TAttrs], BaseElement):
     attributes: TAttrs
 
     tag: str
-    classes: list[str]
 
-    def __init__(
+    def __init__(  # type: ignore
         self,
         *,
         slot: str | None = None,
         # FIXME: https://github.com/python/typing/issues/1399
-        classes: list[str] | None = None,
         **attributes: Unpack[TAttrs],  # type: ignore
     ) -> None:
         super().__init__(slot=slot, **attributes)
-        self.classes = classes or []
 
     def dump(self) -> str:
         """Dump to html."""
-        return """<{tag}{classes}{attributes}>""".format(
+        return """<{tag}{attributes}>""".format(
             tag=self.tag,
-            # id=f" id='{self.id}'" if self.id else "",
-            classes=self._render_classes(),
             attributes=self._render_attributes(),
         )
-
-    def _render_classes(self) -> str:
-        if not self.classes:
-            return ""
-        return f" class='{' '.join(self.classes)}'"
 
     def __str__(self) -> str:
         """Return tag."""

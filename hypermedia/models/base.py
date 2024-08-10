@@ -1,8 +1,41 @@
+import inspect
 from abc import ABCMeta, abstractmethod
+from functools import lru_cache
 from html import escape
-from typing import Any, Mapping, Sequence, Union
+from typing import (
+    Any,
+    Mapping,
+    Sequence,
+    Union,
+    get_type_hints,
+)
 
 from typing_extensions import Self
+
+
+@lru_cache
+def _load_attribute_aliases() -> Mapping[str, str]:  # noqa: C901
+    """
+    Get a mapping of attribute names to their aliases.
+
+    Taken from Ludic:
+    https://github.com/getludic/ludic/blob/main/ludic/format.py
+    """
+    from hypermedia.types import attributes
+
+    result = {}
+    for name, cls in inspect.getmembers(attributes, inspect.isclass):
+        if not name.endswith("Attrs"):
+            continue
+
+        hints = get_type_hints(cls, include_extras=True)
+        for key, value in hints.items():
+            if metadata := getattr(value, "__metadata__", None):
+                for meta in metadata:
+                    if isinstance(meta, attributes.Alias):
+                        result[key] = str(meta)
+
+    return result
 
 
 def get_child_slots(
@@ -70,7 +103,7 @@ class BaseElement(metaclass=ABCMeta):
         self.children = children
         self.slot = slot
         self.slots = get_slots([self])
-        self.attributes = self._parse_attributes(attributes)
+        self.attributes = attributes
 
     @abstractmethod
     def dump(self) -> str:
@@ -87,15 +120,11 @@ class BaseElement(metaclass=ABCMeta):
         get_child_slots(self.slots, list(children))
         return self
 
-    def _parse_attributes(self, attributes: dict[str, Any]) -> dict[str, Any]:
-        hx_keys = [key for key in attributes.keys() if key.startswith("hx_")]
-        for key in hx_keys:
-            new_key = key.replace("_", "-")
-            attributes[new_key] = attributes.pop(key)
-        return attributes
-
-    def _render_attributes(self) -> str:
+    def _render_attributes(self) -> str:  # noqa: C901
         result = []
+
+        attribute_aliases = _load_attribute_aliases()
+
         for key, value in self.attributes.items():
             # Skip None values, use `True` for key only values
             if value is None:
@@ -103,11 +132,21 @@ class BaseElement(metaclass=ABCMeta):
             # Skip false boolean attributes
             if value is False:
                 continue
+
+            alias = attribute_aliases.get(key, key)
+
             # Add true boolean attributes as key only.
             if value is True:
-                result.append(key)
+                result.append(alias)
                 continue
-            result.append(f"{key}='{value}'")
+
+            # Add css classes
+            if alias == "class" and len(value) > 0:
+                result.append(f"{alias}='{' '.join(value)}'")
+                continue
+
+            result.append(f"{alias}='{value}'")
+
         if result:
             return " " + " ".join(result)
         return ""

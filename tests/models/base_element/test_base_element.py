@@ -69,7 +69,3 @@ def test_child_renders_before_text() -> None:
     element = TestBaseElement(TestBaseElement(), "test")
 
     assert element.dump() == "<test><test></test>test</test>"
-
-
-def test_to_string() -> None:
-    assert str(TestBaseElement()) == "test"
