@@ -1,6 +1,6 @@
-from typing import TypeAlias, TypeVar, TypeVarTuple
+from typing import TypeAlias, TypeVar
 
-from typing_extensions import Never
+from typing_extensions import Never, TypeVarTuple
 
 from hypermedia.models.base import BaseElement
 from hypermedia.types.attributes import Attrs, NoAttrs

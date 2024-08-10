@@ -1,7 +1,6 @@
-from typing import (
-    Generic,
-    Unpack,
-)
+from typing import Generic
+
+from typing_extensions import Unpack
 
 from hypermedia.models.base import BaseElement
 from hypermedia.types.attributes import NoAttrs
