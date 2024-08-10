@@ -1,11 +1,11 @@
 from typing_extensions import Unpack
 
-from hypermedia.models import Element, VoidElement
+from hypermedia.models import BasicElement, VoidElement
 from hypermedia.types.attributes import ColAttrs, GlobalAttrs, TdAttrs, ThAttrs
 from hypermedia.types.types import AnyChildren, ComplexChildren
 
 
-class Table(Element[ComplexChildren, GlobalAttrs]):
+class Table(BasicElement[ComplexChildren, GlobalAttrs]):
     """Defines a table."""
 
     tag: str = "table"
@@ -16,7 +16,7 @@ class Table(Element[ComplexChildren, GlobalAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Caption(Element[AnyChildren, GlobalAttrs]):
+class Caption(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines a table caption."""
 
     tag: str = "caption"
@@ -27,7 +27,7 @@ class Caption(Element[AnyChildren, GlobalAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Th(Element[AnyChildren, ThAttrs]):
+class Th(BasicElement[AnyChildren, ThAttrs]):
     """Defines a header cell in a table."""
 
     tag: str = "th"
@@ -42,7 +42,7 @@ class TableHeader(Th):
     """Alias for `Th`."""
 
 
-class Tr(Element[ComplexChildren, GlobalAttrs]):
+class Tr(BasicElement[ComplexChildren, GlobalAttrs]):
     """Defines a row in a table."""
 
     tag: str = "tr"
@@ -57,7 +57,7 @@ class TableRow(Tr):
     """Alias for `Tr`."""
 
 
-class Td(Element[AnyChildren, TdAttrs]):
+class Td(BasicElement[AnyChildren, TdAttrs]):
     """Defines a cell in a table."""
 
     tag: str = "td"
@@ -72,7 +72,7 @@ class TableData(Td):
     """Alias for `Td`."""
 
 
-class THead(Element[ComplexChildren, GlobalAttrs]):
+class THead(BasicElement[ComplexChildren, GlobalAttrs]):
     """Groups the header content in a table."""
 
     tag: str = "thead"
@@ -87,7 +87,7 @@ class TableHead(THead):
     """Alias for `THead`."""
 
 
-class TBody(Element[ComplexChildren, GlobalAttrs]):
+class TBody(BasicElement[ComplexChildren, GlobalAttrs]):
     """Groups the body content in a table."""
 
     tag: str = "tbody"
@@ -102,7 +102,7 @@ class TableBody(TBody):
     """Alias for `TBody`."""
 
 
-class TFoot(Element[ComplexChildren, GlobalAttrs]):
+class TFoot(BasicElement[ComplexChildren, GlobalAttrs]):
     """Groups the footer content in a table."""
 
     tag: str = "tfoot"
@@ -134,7 +134,7 @@ class Column(Col):
     """Alias for `Col`."""
 
 
-class ColGroup(Element[AnyChildren, GlobalAttrs]):
+class ColGroup(BasicElement[AnyChildren, GlobalAttrs]):
     """Specifies a group of one or more columns in a table for formatting."""
 
     tag: str = "colgroup"

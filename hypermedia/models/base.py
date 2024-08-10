@@ -39,9 +39,9 @@ def _load_attribute_aliases() -> Mapping[str, str]:  # noqa: C901
 
 
 def get_child_slots(
-    slots: dict[str, "BaseElement"],
-    children: Sequence[Union[str, "BaseElement"]],
-) -> dict[str, "BaseElement"]:
+    slots: dict[str, "Element"],
+    children: Sequence[Union[str, "Element"]],
+) -> dict[str, "Element"]:
     """Get slots from direct child."""
     slot_keys = slots.keys()
 
@@ -61,10 +61,10 @@ def get_child_slots(
 
 
 def get_slots(
-    element: "BaseElement",
-) -> dict[str, "BaseElement"]:
+    element: "Element",
+) -> dict[str, "Element"]:
     """Calculate slots."""
-    slots: dict[str, "BaseElement"] = {}
+    slots: dict[str, "Element"] = {}
 
     if element.slot:
         slots[element.slot] = element
@@ -75,7 +75,7 @@ def get_slots(
     return slots
 
 
-class BaseElement(metaclass=ABCMeta):
+class Element(metaclass=ABCMeta):
     """
     Base class for all elements.
 
@@ -85,7 +85,7 @@ class BaseElement(metaclass=ABCMeta):
 
     children: tuple[Any, ...]
     slot: str | None = None
-    slots: dict[str, "BaseElement"]
+    slots: dict[str, "Element"]
     attributes: Mapping[str, Any]
 
     def __init__(
@@ -105,7 +105,7 @@ class BaseElement(metaclass=ABCMeta):
         """Dump the objects to a html document string."""
         pass
 
-    def extend(self, slot: str, *children: Union[str, "BaseElement"]) -> Self:
+    def extend(self, slot: str, *children: Union[str, "Element"]) -> Self:
         """Extend the child with the given slots children."""
         if slot not in self.slots:
             raise ValueError(f"Could not find a slot with name: {slot}")

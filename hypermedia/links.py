@@ -1,6 +1,6 @@
 from typing_extensions import Unpack
 
-from hypermedia.models import Element, VoidElement
+from hypermedia.models import BasicElement, VoidElement
 from hypermedia.types.attributes import (
     GlobalAttrs,
     HeadLinkAttrs,
@@ -9,7 +9,7 @@ from hypermedia.types.attributes import (
 from hypermedia.types.types import AnyChildren
 
 
-class A(Element[AnyChildren, HyperlinkAttrs]):
+class A(BasicElement[AnyChildren, HyperlinkAttrs]):
     """Defines a hyperlink."""
 
     tag: str = "a"
@@ -37,7 +37,7 @@ class Link(VoidElement[HeadLinkAttrs]):
         super().__init__(**attributes)
 
 
-class Nav(Element[AnyChildren, GlobalAttrs]):
+class Nav(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines navigation links."""
 
     tag: str = "nav"

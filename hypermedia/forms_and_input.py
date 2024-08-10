@@ -1,6 +1,6 @@
 from typing_extensions import Unpack
 
-from hypermedia.models import Element, VoidElement
+from hypermedia.models import BasicElement, VoidElement
 from hypermedia.types.attributes import (
     ButtonAttrs,
     FieldsetAttrs,
@@ -17,7 +17,7 @@ from hypermedia.types.attributes import (
 from hypermedia.types.types import AnyChildren, PrimitiveChildren
 
 
-class Form(Element[AnyChildren, FormAttrs]):
+class Form(BasicElement[AnyChildren, FormAttrs]):
     """Defines an HTML form for user input."""
 
     tag: str = "form"
@@ -37,7 +37,7 @@ class Input(VoidElement[InputAttrs]):
         super().__init__(**attributes)
 
 
-class TextArea(Element[AnyChildren, TextAreaAttrs]):
+class TextArea(BasicElement[AnyChildren, TextAreaAttrs]):
     """Defines a multiline input control (text area)."""
 
     tag: str = "textarea"
@@ -48,7 +48,7 @@ class TextArea(Element[AnyChildren, TextAreaAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Button(Element[AnyChildren, ButtonAttrs]):
+class Button(BasicElement[AnyChildren, ButtonAttrs]):
     """Defines a clickable button."""
 
     tag: str = "button"
@@ -59,7 +59,7 @@ class Button(Element[AnyChildren, ButtonAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Select(Element[AnyChildren, SelectAttrs]):
+class Select(BasicElement[AnyChildren, SelectAttrs]):
     """Defines a drop-down list."""
 
     tag: str = "select"
@@ -70,7 +70,7 @@ class Select(Element[AnyChildren, SelectAttrs]):
         super().__init__(*children, **attributes)
 
 
-class OptGroup(Element[AnyChildren, OptgroupAttrs]):
+class OptGroup(BasicElement[AnyChildren, OptgroupAttrs]):
     """Defines a group of related options in a drop-down list."""
 
     tag: str = "optgroup"
@@ -85,7 +85,7 @@ class OptionGroup(OptGroup):
     """Alias for `OptGroup`."""
 
 
-class Option(Element[PrimitiveChildren, OptionAttrs]):
+class Option(BasicElement[PrimitiveChildren, OptionAttrs]):
     """Defines an option in a drop-down list."""
 
     tag: str = "option"
@@ -96,7 +96,7 @@ class Option(Element[PrimitiveChildren, OptionAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Label(Element[AnyChildren, LabelAttrs]):
+class Label(BasicElement[AnyChildren, LabelAttrs]):
     """Defines a label for an `input` element."""
 
     tag: str = "label"
@@ -107,7 +107,7 @@ class Label(Element[AnyChildren, LabelAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Fieldset(Element[AnyChildren, FieldsetAttrs]):
+class Fieldset(BasicElement[AnyChildren, FieldsetAttrs]):
     """Groups related elements in a form."""
 
     tag: str = "fieldset"
@@ -118,7 +118,7 @@ class Fieldset(Element[AnyChildren, FieldsetAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Legend(Element[PrimitiveChildren, GlobalAttrs]):
+class Legend(BasicElement[PrimitiveChildren, GlobalAttrs]):
     """Defines a caption for a `fieldset` element."""
 
     tag: str = "legend"
@@ -129,7 +129,7 @@ class Legend(Element[PrimitiveChildren, GlobalAttrs]):
         super().__init__(*children, **attributes)
 
 
-class DataList(Element[AnyChildren, GlobalAttrs]):
+class DataList(BasicElement[AnyChildren, GlobalAttrs]):
     """Specifies a list of pre-defined options for input controls."""
 
     tag: str = "datalist"
@@ -140,7 +140,7 @@ class DataList(Element[AnyChildren, GlobalAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Output(Element[AnyChildren, OutputAttrs]):
+class Output(BasicElement[AnyChildren, OutputAttrs]):
     """Defines the result of a calculation."""
 
     tag: str = "output"

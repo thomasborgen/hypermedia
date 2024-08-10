@@ -1,6 +1,6 @@
 from typing_extensions import Unpack
 
-from hypermedia.models import Element, VoidElement
+from hypermedia.models import BasicElement, VoidElement
 from hypermedia.types.attributes import (
     EmbedAttrs,
     GlobalAttrs,
@@ -10,7 +10,7 @@ from hypermedia.types.attributes import (
 from hypermedia.types.types import AnyChildren, PrimitiveChildren
 
 
-class Script(Element[PrimitiveChildren, ScriptAttrs]):
+class Script(BasicElement[PrimitiveChildren, ScriptAttrs]):
     """Defines a client-side script."""
 
     tag: str = "script"
@@ -21,7 +21,7 @@ class Script(Element[PrimitiveChildren, ScriptAttrs]):
         super().__init__(*children, **attributes)
 
 
-class NoScript(Element[AnyChildren, GlobalAttrs]):
+class NoScript(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines alternate content when client-side scripts aren't supported."""
 
     tag: str = "noscript"
@@ -41,7 +41,7 @@ class Embed(VoidElement[EmbedAttrs]):
         super().__init__(**attributes)
 
 
-class Object(Element[AnyChildren, ObjectAttrs]):
+class Object(BasicElement[AnyChildren, ObjectAttrs]):
     """Defines an embedded object."""
 
     tag: str = "object"

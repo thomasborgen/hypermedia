@@ -2,7 +2,7 @@ from html import escape
 
 from typing_extensions import Unpack
 
-from hypermedia.models import BaseElement, Element, VoidElement
+from hypermedia.models import Element, BasicElement, VoidElement
 from hypermedia.models.elements import ElementStrict
 from hypermedia.types.attributes import (
     GlobalAttrs,
@@ -17,7 +17,7 @@ All basic html tags as defined by W3Schools.
 """
 
 
-class Doctype(BaseElement):
+class Doctype(Element):
     """Defines the document type."""
 
     def dump(self) -> str:
@@ -38,7 +38,7 @@ class Html(ElementStrict["Head", "Body", HtmlTagAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Head(Element[AnyChildren, HypermediaAttrs]):
+class Head(BasicElement[AnyChildren, HypermediaAttrs]):
     """Contains metadata/information for the document."""
 
     tag: str = "head"
@@ -49,7 +49,7 @@ class Head(Element[AnyChildren, HypermediaAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Title(Element[PrimitiveChildren, NoAttrs]):
+class Title(BasicElement[PrimitiveChildren, NoAttrs]):
     """Defines a title for the document."""
 
     tag: str = "title"
@@ -60,7 +60,7 @@ class Title(Element[PrimitiveChildren, NoAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Body(Element[AnyChildren, GlobalAttrs]):
+class Body(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines the document's body."""
 
     tag: str = "body"
@@ -71,7 +71,7 @@ class Body(Element[AnyChildren, GlobalAttrs]):
         super().__init__(*children, **attributes)
 
 
-class H1(Element[AnyChildren, GlobalAttrs]):
+class H1(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines HTML heading 1."""
 
     tag: str = "h1"
@@ -86,7 +86,7 @@ class Header1(H1):
     """Alias for h1 tag."""
 
 
-class H2(Element[AnyChildren, GlobalAttrs]):
+class H2(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines HTML heading 2."""
 
     tag: str = "h2"
@@ -101,7 +101,7 @@ class Header2(H2):
     """Alias for h2 tag."""
 
 
-class H3(Element[AnyChildren, GlobalAttrs]):
+class H3(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines HTML heading 3."""
 
     tag: str = "h3"
@@ -116,7 +116,7 @@ class Header3(H3):
     """Alias for h3 tag."""
 
 
-class H4(Element[AnyChildren, GlobalAttrs]):
+class H4(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines HTML heading 4."""
 
     tag: str = "h4"
@@ -131,7 +131,7 @@ class Header4(H4):
     """Alias for h4 tag."""
 
 
-class H5(Element[AnyChildren, GlobalAttrs]):
+class H5(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines HTML heading 5."""
 
     tag: str = "h5"
@@ -146,7 +146,7 @@ class Header5(H5):
     """Alias for h5 tag."""
 
 
-class H6(Element[AnyChildren, GlobalAttrs]):
+class H6(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines HTML heading 6."""
 
     tag: str = "h6"
@@ -161,7 +161,7 @@ class Header6(H6):
     """For h6 tag."""
 
 
-class P(Element[AnyChildren, GlobalAttrs]):
+class P(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines a paragraph."""
 
     tag: str = "p"

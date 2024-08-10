@@ -1,11 +1,11 @@
 from typing_extensions import Unpack
 
-from hypermedia.models import Element
+from hypermedia.models import BasicElement
 from hypermedia.types.attributes import GlobalAttrs, LiAttrs, OlAttrs
 from hypermedia.types.types import AnyChildren, ComplexChildren
 
 
-class Menu(Element[AnyChildren, GlobalAttrs]):
+class Menu(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines an alternative unordered list."""
 
     tag: str = "menu"
@@ -16,7 +16,7 @@ class Menu(Element[AnyChildren, GlobalAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Ul(Element[ComplexChildren, GlobalAttrs]):
+class Ul(BasicElement[ComplexChildren, GlobalAttrs]):
     """Defines an unordered list."""
 
     tag: str = "ul"
@@ -31,7 +31,7 @@ class UnorderedList(Ul):
     """Alias for `Ul`."""
 
 
-class Ol(Element[ComplexChildren, OlAttrs]):
+class Ol(BasicElement[ComplexChildren, OlAttrs]):
     """Defines an ordered list."""
 
     tag: str = "ol"
@@ -46,7 +46,7 @@ class OrderedList(Ol):
     """Alias for `Ol`."""
 
 
-class Li(Element[AnyChildren, LiAttrs]):
+class Li(BasicElement[AnyChildren, LiAttrs]):
     """Defines a list item."""
 
     tag: str = "li"
@@ -61,7 +61,7 @@ class ListItem(Li):
     """Alias for `Li`."""
 
 
-class Dl(Element[ComplexChildren, GlobalAttrs]):
+class Dl(BasicElement[ComplexChildren, GlobalAttrs]):
     """Defines a description list."""
 
     tag: str = "dl"
@@ -76,7 +76,7 @@ class DescriptionList(Dl):
     """Alias for `Dl`."""
 
 
-class Dt(Element[AnyChildren, GlobalAttrs]):
+class Dt(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines a term/name in a description list."""
 
     tag: str = "dt"
@@ -91,7 +91,7 @@ class DescriptionListTerm(Dt):
     """Alias for `Dt`."""
 
 
-class Dd(Element[AnyChildren, GlobalAttrs]):
+class Dd(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines a description of a term/name in a description list."""
 
     tag: str = "dd"

@@ -1,6 +1,6 @@
 from typing_extensions import Unpack
 
-from hypermedia.models import Element
+from hypermedia.models import BasicElement
 from hypermedia.types.attributes import (
     DataAttrs,
     DetailsAttrs,
@@ -14,7 +14,7 @@ from hypermedia.types.types import (
 )
 
 
-class Style(Element[PrimitiveChildren, GlobalAttrs]):
+class Style(BasicElement[PrimitiveChildren, GlobalAttrs]):
     """Defines style information for a document."""
 
     tag: str = "style"
@@ -25,7 +25,7 @@ class Style(Element[PrimitiveChildren, GlobalAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Div(Element[AnyChildren, GlobalAttrs]):
+class Div(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines a section in a document."""
 
     tag: str = "div"
@@ -36,7 +36,7 @@ class Div(Element[AnyChildren, GlobalAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Span(Element[AnyChildren, GlobalAttrs]):
+class Span(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines a section in a document."""
 
     tag: str = "span"
@@ -47,7 +47,7 @@ class Span(Element[AnyChildren, GlobalAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Header(Element[AnyChildren, GlobalAttrs]):
+class Header(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines a header for a document or section."""
 
     tag: str = "header"
@@ -58,7 +58,7 @@ class Header(Element[AnyChildren, GlobalAttrs]):
         super().__init__(*children, **attributes)
 
 
-class HGroup(Element[ComplexChildren, GlobalAttrs]):
+class HGroup(BasicElement[ComplexChildren, GlobalAttrs]):
     """Defines a header and related content."""
 
     tag: str = "hgroup"
@@ -73,7 +73,7 @@ class HeaderGroup(HGroup):
     """Alias for `HGroup`."""
 
 
-class Footer(Element[AnyChildren, GlobalAttrs]):
+class Footer(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines a footer for a document or section."""
 
     tag: str = "footer"
@@ -84,7 +84,7 @@ class Footer(Element[AnyChildren, GlobalAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Main(Element[AnyChildren, GlobalAttrs]):
+class Main(BasicElement[AnyChildren, GlobalAttrs]):
     """Specifies the main content of a document."""
 
     tag: str = "main"
@@ -95,7 +95,7 @@ class Main(Element[AnyChildren, GlobalAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Section(Element[AnyChildren, GlobalAttrs]):
+class Section(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines a section in a document."""
 
     tag: str = "section"
@@ -106,7 +106,7 @@ class Section(Element[AnyChildren, GlobalAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Search(Element[AnyChildren, GlobalAttrs]):
+class Search(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines a search section."""
 
     tag: str = "search"
@@ -117,7 +117,7 @@ class Search(Element[AnyChildren, GlobalAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Article(Element[AnyChildren, GlobalAttrs]):
+class Article(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines an article."""
 
     tag: str = "article"
@@ -128,7 +128,7 @@ class Article(Element[AnyChildren, GlobalAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Aside(Element[AnyChildren, GlobalAttrs]):
+class Aside(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines content aside from the page content."""
 
     tag: str = "aside"
@@ -139,7 +139,7 @@ class Aside(Element[AnyChildren, GlobalAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Details(Element[AnyChildren, DetailsAttrs]):
+class Details(BasicElement[AnyChildren, DetailsAttrs]):
     """Defines additional details that the user can view or hide."""
 
     tag: str = "details"
@@ -150,7 +150,7 @@ class Details(Element[AnyChildren, DetailsAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Dialog(Element[AnyChildren, DialogAttrs]):
+class Dialog(BasicElement[AnyChildren, DialogAttrs]):
     """Defines a dialog box or window."""
 
     tag: str = "dialog"
@@ -161,7 +161,7 @@ class Dialog(Element[AnyChildren, DialogAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Summary(Element[AnyChildren, GlobalAttrs]):
+class Summary(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines a visible heading for a `details` element."""
 
     tag: str = "summary"
@@ -172,7 +172,7 @@ class Summary(Element[AnyChildren, GlobalAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Data(Element[AnyChildren, DataAttrs]):
+class Data(BasicElement[AnyChildren, DataAttrs]):
     """Adds a machine-readable translation of a given content."""
 
     tag: str = "data"

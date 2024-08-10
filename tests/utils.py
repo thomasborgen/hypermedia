@@ -1,14 +1,14 @@
-from hypermedia.models import BaseElement, Element, VoidElement
+from hypermedia.models import Element, BasicElement, VoidElement
 from hypermedia.types.attributes import GlobalAttrs
 from hypermedia.types.types import AnyChildren
 
 
-class TestElement(BaseElement):
+class TestElement(Element):
     def dump(self) -> str:
         return str(self)
 
 
-class TestBaseElement(Element[AnyChildren, GlobalAttrs]):
+class TestBaseElement(BasicElement[AnyChildren, GlobalAttrs]):
     tag: str = "test"
 
 

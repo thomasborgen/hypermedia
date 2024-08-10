@@ -1,6 +1,6 @@
 from typing_extensions import Unpack
 
-from hypermedia.models import Element, VoidElement
+from hypermedia.models import BasicElement, VoidElement
 from hypermedia.types.attributes import (
     AreaAttrs,
     CanvasAttrs,
@@ -34,7 +34,7 @@ class Image(Img):
     """Alias for `Img`."""
 
 
-class Map(Element[AnyChildren, MapAttrs]):
+class Map(BasicElement[AnyChildren, MapAttrs]):
     """Defines a client-side image map."""
 
     tag: str = "map"
@@ -54,7 +54,7 @@ class Area(VoidElement[AreaAttrs]):
         super().__init__(**attributes)
 
 
-class Canvas(Element[AnyChildren, CanvasAttrs]):
+class Canvas(BasicElement[AnyChildren, CanvasAttrs]):
     """Used to draw graphics, on the fly, via scripting."""
 
     tag: str = "canvas"
@@ -65,7 +65,7 @@ class Canvas(Element[AnyChildren, CanvasAttrs]):
         super().__init__(*children, **attributes)
 
 
-class FigCaption(Element[AnyChildren, GlobalAttrs]):
+class FigCaption(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines a caption for a `figure` element."""
 
     tag: str = "figcaption"
@@ -80,7 +80,7 @@ class FigureCaption(FigCaption):
     """Alias for `FigCaption`."""
 
 
-class Figure(Element[AnyChildren, GlobalAttrs]):
+class Figure(BasicElement[AnyChildren, GlobalAttrs]):
     """Specifies self-contained content."""
 
     tag: str = "figure"
@@ -91,7 +91,7 @@ class Figure(Element[AnyChildren, GlobalAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Picture(Element[AnyChildren, GlobalAttrs]):
+class Picture(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines a container for multiple image resources."""
 
     tag: str = "picture"
@@ -102,7 +102,7 @@ class Picture(Element[AnyChildren, GlobalAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Svg(Element[AnyChildren, SvgAttrs]):
+class Svg(BasicElement[AnyChildren, SvgAttrs]):
     """Defines a container for SVG graphics."""
 
     tag: str = "svg"

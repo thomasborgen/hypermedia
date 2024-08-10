@@ -8,7 +8,7 @@ from typing import (
     TypeVar,
 )
 
-from hypermedia.models import BaseElement
+from hypermedia.models import Element
 
 Param = ParamSpec("Param")
 ReturnType = TypeVar("ReturnType")
@@ -18,7 +18,7 @@ class RequestPartialAndFull(Protocol):
     """Requires, `request`, `partial` and `full` args on decorated function."""
 
     def __call__(  # noqa: D102
-        self, request: Any, partial: BaseElement, full: BaseElement
+        self, request: Any, partial: Element, full: Element
     ) -> Coroutine[Any, Any, None]: ...
 
 
@@ -26,7 +26,7 @@ class RequestAndPartial(Protocol):
     """Requires, `request` and `partial` args on decorated function."""
 
     def __call__(  # noqa: D102
-        self, request: Any, partial: BaseElement
+        self, request: Any, partial: Element
     ) -> Coroutine[Any, Any, None]: ...
 
 
@@ -52,8 +52,8 @@ def htmx(
     async def wrapper(
         *,
         request: Any,
-        partial: BaseElement,
-        full: None | Callable[..., BaseElement] = None,
+        partial: Element,
+        full: None | Callable[..., Element] = None,
     ) -> str:
         """Wrap function."""
         hx_request = "HX-Request" in request.headers

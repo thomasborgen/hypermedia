@@ -1,6 +1,6 @@
 from typing_extensions import Unpack
 
-from hypermedia.models import Element, VoidElement
+from hypermedia.models import BasicElement, VoidElement
 from hypermedia.types.attributes import (
     BlockquoteAttrs,
     DelAttrs,
@@ -15,7 +15,7 @@ from hypermedia.types.attributes import (
 from hypermedia.types.types import AnyChildren
 
 
-class Abbr(Element[AnyChildren, GlobalAttrs]):
+class Abbr(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines an abbreviation or an acronym."""
 
     tag: str = "abbr"
@@ -30,7 +30,7 @@ class Abbreviation(Abbr):
     """Alias for `Abbr`."""
 
 
-class Address(Element[AnyChildren, GlobalAttrs]):
+class Address(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines contact information for the author of a document/article."""
 
     tag: str = "address"
@@ -41,7 +41,7 @@ class Address(Element[AnyChildren, GlobalAttrs]):
         super().__init__(*children, **attributes)
 
 
-class B(Element[AnyChildren, GlobalAttrs]):
+class B(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines bold text."""
 
     tag: str = "b"
@@ -56,7 +56,7 @@ class Bold(B):
     """Alias for `B`."""
 
 
-class Bdi(Element[AnyChildren, GlobalAttrs]):
+class Bdi(BasicElement[AnyChildren, GlobalAttrs]):
     """
     BDI stands for Bi-Directional Isolation.
 
@@ -76,7 +76,7 @@ class BiDirectionalIsolation(Bdi):
     """Alias for `Bdi`."""
 
 
-class Bdo(Element[AnyChildren, GlobalAttrs]):
+class Bdo(BasicElement[AnyChildren, GlobalAttrs]):
     """
     BDO stands for Bi-Directional Override.
 
@@ -95,7 +95,7 @@ class BiDirectionalOverride(Bdo):
     """Alias for `Bdo`."""
 
 
-class Blockquote(Element[AnyChildren, BlockquoteAttrs]):
+class Blockquote(BasicElement[AnyChildren, BlockquoteAttrs]):
     """Defines a section that is quoted from another source."""
 
     tag: str = "blockquote"
@@ -106,7 +106,7 @@ class Blockquote(Element[AnyChildren, BlockquoteAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Cite(Element[AnyChildren, GlobalAttrs]):
+class Cite(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines the title of a work."""
 
     tag: str = "cite"
@@ -117,7 +117,7 @@ class Cite(Element[AnyChildren, GlobalAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Code(Element[AnyChildren, GlobalAttrs]):
+class Code(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines a piece of computer code."""
 
     tag: str = "code"
@@ -128,7 +128,7 @@ class Code(Element[AnyChildren, GlobalAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Del(Element[AnyChildren, DelAttrs]):
+class Del(BasicElement[AnyChildren, DelAttrs]):
     """Defines text that has been deleted from a document."""
 
     tag: str = "del"
@@ -143,7 +143,7 @@ class Deleted(Del):
     """Alias for del tag."""
 
 
-class Dfn(Element[AnyChildren, GlobalAttrs]):
+class Dfn(BasicElement[AnyChildren, GlobalAttrs]):
     """
     DFN stands for definition element.
 
@@ -162,7 +162,7 @@ class DefinitionElement(Dfn):
     """Alias for `Dfn`."""
 
 
-class Em(Element[AnyChildren, GlobalAttrs]):
+class Em(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines emphasized text ."""
 
     tag: str = "em"
@@ -177,7 +177,7 @@ class Emphasized(Em):
     """Alias for `Em`."""
 
 
-class I(Element[AnyChildren, GlobalAttrs]):  # noqa: E742
+class I(BasicElement[AnyChildren, GlobalAttrs]):  # noqa: E742
     """Defines a part of text in an alternate voice or mood."""
 
     tag: str = "i"
@@ -192,7 +192,7 @@ class Italic(I):
     """Alias for `I`."""
 
 
-class Ins(Element[AnyChildren, InsAttrs]):
+class Ins(BasicElement[AnyChildren, InsAttrs]):
     """Defines a text that has been inserted into a document."""
 
     tag: str = "ins"
@@ -207,7 +207,7 @@ class Inserted(Ins):
     """Alias for `Ins`."""
 
 
-class Kbd(Element[AnyChildren, GlobalAttrs]):
+class Kbd(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines keyboard input."""
 
     tag: str = "kbd"
@@ -222,7 +222,7 @@ class Keyboard(Kbd):
     """Alias for `Kbd`."""
 
 
-class Mark(Element[AnyChildren, GlobalAttrs]):
+class Mark(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines marked/highlighted text."""
 
     tag: str = "mark"
@@ -233,7 +233,7 @@ class Mark(Element[AnyChildren, GlobalAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Meter(Element[AnyChildren, MeterAttrs]):
+class Meter(BasicElement[AnyChildren, MeterAttrs]):
     """Defines a scalar measurement within a known range (a gauge)."""
 
     tag: str = "meter"
@@ -244,7 +244,7 @@ class Meter(Element[AnyChildren, MeterAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Pre(Element[AnyChildren, GlobalAttrs]):
+class Pre(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines preformatted text."""
 
     tag: str = "pre"
@@ -259,7 +259,7 @@ class Preformatted(Pre):
     """Alias for `Pre`."""
 
 
-class Progress(Element[AnyChildren, ProgressAttrs]):
+class Progress(BasicElement[AnyChildren, ProgressAttrs]):
     """Represents the progress of a task."""
 
     tag: str = "progress"
@@ -270,7 +270,7 @@ class Progress(Element[AnyChildren, ProgressAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Q(Element[AnyChildren, QAttrs]):
+class Q(BasicElement[AnyChildren, QAttrs]):
     """Defines a short quotation."""
 
     tag: str = "q"
@@ -285,7 +285,7 @@ class Quotation(Q):
     """Alias for `Abbr`."""
 
 
-class Rp(Element[AnyChildren, GlobalAttrs]):
+class Rp(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines what to show in browsers that don't support ruby annotations."""
 
     tag: str = "rp"
@@ -296,7 +296,7 @@ class Rp(Element[AnyChildren, GlobalAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Rt(Element[AnyChildren, GlobalAttrs]):
+class Rt(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines an explanation/pronunciation of characters."""
 
     tag: str = "rt"
@@ -307,7 +307,7 @@ class Rt(Element[AnyChildren, GlobalAttrs]):
         super().__init__(*children, **attributes)
 
 
-class ruby(Element[AnyChildren, GlobalAttrs]):
+class ruby(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines a ruby annotation (for East Asian typography)."""
 
     tag: str = "ruby"
@@ -318,7 +318,7 @@ class ruby(Element[AnyChildren, GlobalAttrs]):
         super().__init__(*children, **attributes)
 
 
-class S(Element[AnyChildren, GlobalAttrs]):
+class S(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines text that is no longer correct."""
 
     tag: str = "s"
@@ -333,7 +333,7 @@ class StrikeThrough(S):
     """Alias for `S`."""
 
 
-class Samp(Element[AnyChildren, GlobalAttrs]):
+class Samp(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines sample output from a computer program."""
 
     tag: str = "samp"
@@ -348,7 +348,7 @@ class SampleOutput(Samp):
     """Alias for `Samp`."""
 
 
-class Small(Element[AnyChildren, GlobalAttrs]):
+class Small(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines smaller text."""
 
     tag: str = "small"
@@ -359,7 +359,7 @@ class Small(Element[AnyChildren, GlobalAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Strong(Element[AnyChildren, GlobalAttrs]):
+class Strong(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines important text."""
 
     tag: str = "strong"
@@ -370,7 +370,7 @@ class Strong(Element[AnyChildren, GlobalAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Sub(Element[AnyChildren, GlobalAttrs]):
+class Sub(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines subscripted text."""
 
     tag: str = "sub"
@@ -385,7 +385,7 @@ class Subscripted(Sub):
     """Alias for `Sub`."""
 
 
-class Sup(Element[AnyChildren, GlobalAttrs]):
+class Sup(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines superscripted text."""
 
     tag: str = "sup"
@@ -400,7 +400,7 @@ class Superscripted(Sup):
     """Alias for `Sup`."""
 
 
-class Template(Element[AnyChildren, HtmlAttrs]):
+class Template(BasicElement[AnyChildren, HtmlAttrs]):
     """Defines a container for content, that should be hidden on page load."""
 
     tag: str = "template"
@@ -411,7 +411,7 @@ class Template(Element[AnyChildren, HtmlAttrs]):
         super().__init__(*children, **attributes)
 
 
-class Time(Element[AnyChildren, TimeAttrs]):
+class Time(BasicElement[AnyChildren, TimeAttrs]):
     """Defines a specific time (or datetime)."""
 
     tag: str = "time"
@@ -422,7 +422,7 @@ class Time(Element[AnyChildren, TimeAttrs]):
         super().__init__(*children, **attributes)
 
 
-class U(Element[AnyChildren, GlobalAttrs]):
+class U(BasicElement[AnyChildren, GlobalAttrs]):
     """
     Defines unarticulated text.
 
@@ -441,7 +441,7 @@ class Unarticulated(U):
     """Alias for `U`."""
 
 
-class Var(Element[AnyChildren, GlobalAttrs]):
+class Var(BasicElement[AnyChildren, GlobalAttrs]):
     """Defines a variable."""
 
     tag: str = "var"

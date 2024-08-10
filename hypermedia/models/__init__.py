@@ -1,4 +1,4 @@
-from .base import BaseElement
-from .elements import Element, ElementList, VoidElement
+from .base import Element
+from .elements import BasicElement, ElementList, VoidElement
 
-__all__ = ["BaseElement", "Element", "ElementList", "VoidElement"]
+__all__ = ["Element", "BasicElement", "ElementList", "VoidElement"]

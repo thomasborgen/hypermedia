@@ -1,6 +1,6 @@
 from typing_extensions import Unpack
 
-from hypermedia.models import Element, VoidElement
+from hypermedia.models import BasicElement, VoidElement
 from hypermedia.types.attributes import (
     AudioAttrs,
     SourceAttrs,
@@ -10,7 +10,7 @@ from hypermedia.types.attributes import (
 from hypermedia.types.types import AnyChildren
 
 
-class Audio(Element[AnyChildren, AudioAttrs]):
+class Audio(BasicElement[AnyChildren, AudioAttrs]):
     """Defines sound content."""
 
     tag: str = "audio"
@@ -41,7 +41,7 @@ class Track(VoidElement[TrackAttrs]):
         super().__init__(**attributes)
 
 
-class Video(Element[AnyChildren, VideoAttrs]):
+class Video(BasicElement[AnyChildren, VideoAttrs]):
     """Defines a video or movie."""
 
     tag: str = "video"

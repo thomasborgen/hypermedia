@@ -2,7 +2,7 @@ from typing import TypeAlias, TypeVar
 
 from typing_extensions import Never, TypeVarTuple
 
-from hypermedia.models.base import BaseElement
+from hypermedia.models.base import Element
 from hypermedia.types.attributes import Attrs, NoAttrs
 
 NoChildren: TypeAlias = Never
@@ -14,7 +14,7 @@ PrimitiveChildren: TypeAlias = str | bool | int | float
 Primitive children are ``str``, ``bool``, ``int`` and ``float``.
 """
 
-ComplexChildren: TypeAlias = BaseElement
+ComplexChildren: TypeAlias = Element
 """Type alias for elements that are allowed to have only non-primitive children."""  # noqa: E501
 
 AnyChildren: TypeAlias = PrimitiveChildren | ComplexChildren

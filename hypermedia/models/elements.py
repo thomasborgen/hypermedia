@@ -2,12 +2,12 @@ from typing import Generic
 
 from typing_extensions import Unpack
 
-from hypermedia.models.base import BaseElement
+from hypermedia.models.base import Element
 from hypermedia.types.attributes import NoAttrs
 from hypermedia.types.types import TAttrs, TChildren, TChildrenArgs
 
 
-class Element(Generic[TChildren, TAttrs], BaseElement):
+class BasicElement(Generic[TChildren, TAttrs], Element):
     """Base class for Hypermedia elements."""
 
     children: tuple[TChildren, ...]
@@ -33,7 +33,7 @@ class Element(Generic[TChildren, TAttrs], BaseElement):
         )
 
 
-class ElementStrict(Generic[Unpack[TChildrenArgs], TAttrs], BaseElement):
+class ElementStrict(Generic[Unpack[TChildrenArgs], TAttrs], Element):
     """
     Base class for strict elements (elements with concrete types of children).
 
@@ -66,7 +66,7 @@ class ElementStrict(Generic[Unpack[TChildrenArgs], TAttrs], BaseElement):
         )
 
 
-class ElementList(Element[TChildren, NoAttrs]):
+class ElementList(BasicElement[TChildren, NoAttrs]):
     """Use to render a list of child elements without a parent."""
 
     def dump(self) -> str:
@@ -74,7 +74,7 @@ class ElementList(Element[TChildren, NoAttrs]):
         return self._render_children()
 
 
-class VoidElement(Generic[TAttrs], BaseElement):
+class VoidElement(Generic[TAttrs], Element):
     """
     A void element is an element in HTML that cannot have any child nodes.
 
