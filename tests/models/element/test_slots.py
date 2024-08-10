@@ -62,7 +62,7 @@ def test_slots_return_all_descendants_slots() -> None:
     }
 
 
-def test_child_slots_with_strings_are_skipped() -> None:
+def test_non_element_children_are_safely_skipped() -> None:
     child = TestElement("test")
     element = TestElement("test", child)
 
