@@ -26,9 +26,9 @@ ie
 Div(on_afterprint="test")  # <div onafterprint='test'></div>
 # Unspecified attribute without Alias:
 Div(data_test="test")  # <div data-test='test'></div>
-# Spreaded without $ prefix gets its underscores changed to hyphens.
+# Spread without $ prefix gets its underscores changed to hyphens.
 Div(**{"funky-format_test.value": True})  # <div funky-format-test.value></div>
-# Spreaded with $ prefix
+# Spread with $ prefix
 Div(**{"$funky-format_test.value": True})  # <div funky-format_test.value></div>
 Div(**{"$funky-format_test.value": "name"})  # <div funky-format_test.value='name'></div>
 ```
