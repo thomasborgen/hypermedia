@@ -8,7 +8,7 @@ class TestElement(Element):
         return str(self)
 
 
-class TestBaseElement(BasicElement[AnyChildren, GlobalAttrs]):
+class TestBasicElement(BasicElement[AnyChildren, GlobalAttrs]):
     tag: str = "test"
 
 

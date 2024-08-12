@@ -123,15 +123,15 @@ class Element(metaclass=ABCMeta):
 
         attribute_aliases = _load_attribute_aliases()
 
-        # can't use `.pop()` with TypedDict/Mapping
-        # https://github.com/python/mypy/issues/4976
-        attributes = cast(dict[str, Any], self.attributes)
-
-        classes = attributes.pop("classes", [])
-        if class_ := attributes.pop("class_", None):
+        # make a copy of classes list so we don't modify the original
+        classes = list(self.attributes.get("classes", []))
+        if class_ := self.attributes.get("class_", None):
             classes.append(class_)
 
-        for key, value in attributes.items():
+        for key, value in self.attributes.items():
+            # Skip class attributes that are already handled
+            if key in ["classes", "class_"]:
+                continue
             # Skip None values, use `True` for key only values
             if value is None:
                 continue
