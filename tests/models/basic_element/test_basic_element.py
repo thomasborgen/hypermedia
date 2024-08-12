@@ -1,34 +1,36 @@
 import pytest
 
-from tests.utils import TestBaseElement
+from tests.utils import TestBasicElement
 
 
 def test_tag_rendering() -> None:
-    assert TestBaseElement().dump() == "<test></test>"
+    assert TestBasicElement().dump() == "<test></test>"
 
 
 def test_id_rendering() -> None:
-    assert TestBaseElement(id="test").dump() == "<test id='test'></test>"
+    assert TestBasicElement(id="test").dump() == "<test id='test'></test>"
 
 
 def test_class_rendering() -> None:
-    assert TestBaseElement(classes=["one", "two"]).dump() == (
+    assert TestBasicElement(classes=["one", "two"]).dump() == (
         "<test class='one two'></test>"
     )
 
 
 def test_attribute_rendering() -> None:
-    assert TestBaseElement(test="green").dump() == "<test test='green'></test>"
+    assert (
+        TestBasicElement(test="green").dump() == "<test test='green'></test>"
+    )
 
 
 def test_all_attributes() -> None:
-    assert TestBaseElement(
+    assert TestBasicElement(
         id="test", classes=["one", "two"], test="green"
     ).dump() == ("<test id='test' test='green' class='one two'></test>")
 
 
 def test_text_rendering() -> None:
-    assert TestBaseElement("test").dump() == "<test>test</test>"
+    assert TestBasicElement("test").dump() == "<test>test</test>"
 
 
 @pytest.mark.parametrize(
@@ -42,30 +44,30 @@ def test_text_rendering() -> None:
     ],
 )
 def test_text_escaping_rendering(test_input: str, expected: str) -> None:
-    assert TestBaseElement(test_input).dump() == f"<test>{expected}</test>"
+    assert TestBasicElement(test_input).dump() == f"<test>{expected}</test>"
 
 
 def test_children_rendering() -> None:
-    child = TestBaseElement()
-    element = TestBaseElement(child)
+    child = TestBasicElement()
+    element = TestBasicElement(child)
 
     assert element.dump() == "<test><test></test></test>"
 
 
 def test_children_rendering_with_text() -> None:
-    child = TestBaseElement("test")
-    element = TestBaseElement(child)
+    child = TestBasicElement("test")
+    element = TestBasicElement(child)
 
     assert element.dump() == "<test><test>test</test></test>"
 
 
 def test_child_renders_after_text() -> None:
-    element = TestBaseElement("test", TestBaseElement())
+    element = TestBasicElement("test", TestBasicElement())
 
     assert element.dump() == "<test>test<test></test></test>"
 
 
 def test_child_renders_before_text() -> None:
-    element = TestBaseElement(TestBaseElement(), "test")
+    element = TestBasicElement(TestBasicElement(), "test")
 
     assert element.dump() == "<test><test></test>test</test>"

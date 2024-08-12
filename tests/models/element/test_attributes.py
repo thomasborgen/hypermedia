@@ -43,6 +43,15 @@ def test_class_and_classes_are_combined() -> None:
     assert element._render_attributes() == " class='one two three'"
 
 
+def test_class_and_classes_disappear() -> None:
+    element = TestElement(class_="three", classes=["one", "two"])
+
+    element._render_attributes()
+
+    assert element.attributes["class_"] == "three"
+    assert element.attributes["classes"] == ["one", "two"]
+
+
 def test_aliased_keys() -> None:
     element = TestElement(on_afterprint="test")
 

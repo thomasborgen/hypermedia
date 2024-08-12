@@ -11,3 +11,13 @@ def test_can_have_children() -> None:
     parent = TestElement(child)
 
     assert parent.children == (child,)
+
+
+def test_can_double_dump_safely() -> None:
+    child = TestElement()
+
+    parent = TestElement(
+        child, test="test", slot="slot", classes=["a", "b"], class_="c"
+    )
+
+    assert parent.dump() == parent.dump()
