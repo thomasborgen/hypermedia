@@ -10,6 +10,13 @@
 ## Latest Changes
 
 
+## Version 5.1.0
+
+### Fix
+
+* Calling `dump()`, more specifically `render_attributes()` popped out `class_` and `classes` attributes from the element. So subsequent calls would be missing the attributes. [PR](https://github.com/thomasborgen/hypermedia/pull/32)
+
+
 ## Version 5.0.0
 
 ### Breaking

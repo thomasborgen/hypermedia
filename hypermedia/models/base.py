@@ -7,7 +7,6 @@ from typing import (
     Mapping,
     Sequence,
     Union,
-    cast,
     get_type_hints,
 )
 
