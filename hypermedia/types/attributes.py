@@ -55,6 +55,12 @@ class HtmlAttrs(HypermediaAttrs, total=False):
     translate: Literal["yes", "no"]
 
 
+class HypertextAttrs(Attrs, total=False):
+    """Hypertext attributes for HTML elements."""
+
+    _: Annotated[str, Alias("_")]
+
+
 class HtmxAttrs(Attrs, total=False):
     """
     HTMX attributes for HTML elements.
