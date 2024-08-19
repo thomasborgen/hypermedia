@@ -10,6 +10,11 @@
 ## Latest Changes
 
 
+### Fix
+
+* Fix missing Alias for the `for_` attribute. It now renders correctly as `for='value'`
+
+
 ## Version 5.1.0
 
 ### Fix
