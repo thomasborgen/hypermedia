@@ -10,6 +10,12 @@
 ## Latest Changes
 
 
+## Version 5.2.0
+
+### Feature
+
+* Can now use hyperscript with the `_` attribute that renders as: `_='value'`
+
 ### Fix
 
 * Fix missing Alias for the `for_` attribute. It now renders correctly as `for='value'`
