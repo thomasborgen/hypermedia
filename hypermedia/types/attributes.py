@@ -55,8 +55,8 @@ class HtmlAttrs(HypermediaAttrs, total=False):
     translate: Literal["yes", "no"]
 
 
-class HypertextAttrs(Attrs, total=False):
-    """Hypertext attributes for HTML elements."""
+class HyperscriptAttrs(Attrs, total=False):
+    """Hyperscript attributes for HTML elements."""
 
     _: Annotated[str, Alias("_")]
 
@@ -226,7 +226,7 @@ class HtmlAndEventAttrs(HtmlAttrs, EventAttrs, total=False):
     """Common HTML and event attributes."""
 
 
-class GlobalAttrs(HtmxAttrs, HtmlAndEventAttrs, total=False):
+class GlobalAttrs(HtmlAndEventAttrs, HtmxAttrs, HyperscriptAttrs, total=False):
     """Global attributes for HTML elements."""
 
 
