@@ -354,7 +354,7 @@ class InputAttrs(GlobalAttrs, total=False):
 class OutputAttrs(GlobalAttrs, total=False):
     """Attributes for `<output>` elements."""
 
-    for_: Annotated[str, "for"]
+    for_: Annotated[str, Alias("for")]
     form: str
     name: str
 
@@ -509,7 +509,7 @@ class ButtonAttrs(GlobalAttrs, total=False):
 class LabelAttrs(GlobalAttrs, total=False):
     """Attributes for `<label>` elements."""
 
-    for_: Annotated[str, "for"]
+    for_: Annotated[str, Alias("for")]
     name: str
 
 
