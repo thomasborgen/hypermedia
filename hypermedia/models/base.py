@@ -12,6 +12,8 @@ from typing import (
 
 from typing_extensions import Final, Self
 
+from hypermedia.types.types import SafeString
+
 FINAL_KEY_PREFIX: Final[str] = "$"
 
 
@@ -103,7 +105,7 @@ class Element(metaclass=ABCMeta):
         self.attributes = attributes
 
     @abstractmethod
-    def dump(self) -> str:
+    def dump(self) -> SafeString:
         """Dump the objects to a html document string."""
         pass
 
@@ -163,7 +165,11 @@ class Element(metaclass=ABCMeta):
     def _render_children(self) -> str:
         return "".join(
             [
-                escape(child) if isinstance(child, str) else child.dump()
+                child
+                if isinstance(child, SafeString)
+                else escape(child)
+                if isinstance(child, str)
+                else child.dump()
                 for child in self.children
             ]
         )

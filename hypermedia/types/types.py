@@ -1,9 +1,16 @@
-from typing import TypeAlias, TypeVar
+from typing import TYPE_CHECKING, TypeAlias, TypeVar, Union
 
 from typing_extensions import Never, TypeVarTuple
 
-from hypermedia.models.base import Element
 from hypermedia.types.attributes import Attrs, NoAttrs
+
+if TYPE_CHECKING:
+    from hypermedia.models.base import Element
+
+
+class SafeString(str):
+    """No html escaping will be done."""
+
 
 NoChildren: TypeAlias = Never
 """Type alias for elements that are not allowed to have children."""
@@ -14,10 +21,10 @@ PrimitiveChildren: TypeAlias = str | bool | int | float
 Primitive children are ``str``, ``bool``, ``int`` and ``float``.
 """
 
-ComplexChildren: TypeAlias = Element
+ComplexChildren: TypeAlias = "Element"
 """Type alias for elements that are allowed to have only non-primitive children."""  # noqa: E501
 
-AnyChildren: TypeAlias = PrimitiveChildren | ComplexChildren
+AnyChildren: TypeAlias = Union[PrimitiveChildren, ComplexChildren]
 """Type alias for elements that are allowed to have any children."""
 
 TChildren = TypeVar("TChildren", bound=AnyChildren, covariant=True)
