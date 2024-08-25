@@ -1,5 +1,13 @@
 import pytest
 
+from hypermedia.models.base import Element
+from hypermedia.models.elements import (
+    BasicElement,
+    ElementList,
+    ElementStrict,
+    VoidElement,
+)
+from hypermedia.types.types import SafeString
 from tests.utils import TestBasicElement
 
 
@@ -71,3 +79,30 @@ def test_child_renders_before_text() -> None:
     element = TestBasicElement(TestBasicElement(), "test")
 
     assert element.dump() == "<test><test></test>test</test>"
+
+
+def test_all_subclasses_dumps_to_safestring() -> None:
+    """Make sure everything dumps to SafeString."""
+    assert all(
+        isinstance(sub().dump(), SafeString)
+        for sub in BasicElement.__subclasses__()
+    )
+
+    assert all(
+        isinstance(sub("test").dump(), SafeString)
+        for sub in ElementStrict.__subclasses__()
+    )
+
+    assert all(
+        isinstance(sub().dump(), SafeString)
+        for sub in VoidElement.__subclasses__()
+    )
+
+    assert isinstance(ElementList().dump(), SafeString)
+
+    skip = {"BasicElement", "ElementList", "ElementStrict", "VoidElement"}
+    assert all(
+        isinstance(sub(), Element)
+        for sub in Element.__subclasses__()
+        if sub.__name__ not in skip
+    )

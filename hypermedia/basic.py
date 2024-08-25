@@ -10,7 +10,7 @@ from hypermedia.types.attributes import (
     HypermediaAttrs,
     NoAttrs,
 )
-from hypermedia.types.types import AnyChildren, PrimitiveChildren
+from hypermedia.types.types import AnyChildren, PrimitiveChildren, SafeString
 
 """
 All basic html tags as defined by W3Schools.
@@ -20,9 +20,9 @@ All basic html tags as defined by W3Schools.
 class Doctype(Element):
     """Defines the document type."""
 
-    def dump(self) -> str:
+    def dump(self) -> SafeString:
         """Dump doctype string."""
-        return "<!DOCTYPE html>"
+        return SafeString("<!DOCTYPE html>")
 
 
 class Html(ElementStrict["Head", "Body", HtmlTagAttrs]):
@@ -211,10 +211,12 @@ class Comment(ElementStrict[PrimitiveChildren, NoAttrs]):
         """Initialize class."""
         super().__init__(*children)
 
-    def dump(self) -> str:
+    def dump(self) -> SafeString:
         """Dump to html."""
-        return "<!-- {text} -->".format(
-            text="".join(escape(child) for child in self.children)  # type: ignore
+        return SafeString(
+            "<!-- {text} -->".format(
+                text="".join(escape(child) for child in self.children)  # type: ignore
+            )
         )
 
 

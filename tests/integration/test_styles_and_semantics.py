@@ -54,3 +54,7 @@ def test_normal_elements_and_aliases(
 )
 def test_normal_elements(element: type, result: str) -> None:
     assert element("test").dump() == result
+
+
+def test_style_is_not_escaped() -> None:
+    assert Style('"<>').dump() == '<style>"<></style>'

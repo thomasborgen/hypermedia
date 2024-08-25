@@ -1,6 +1,9 @@
+from typing import Never
+
 from typing_extensions import Unpack
 
 from hypermedia.models import BasicElement
+from hypermedia.models.elements import ElementStrict
 from hypermedia.types.attributes import (
     DataAttrs,
     DetailsAttrs,
@@ -10,19 +13,19 @@ from hypermedia.types.attributes import (
 from hypermedia.types.types import (
     AnyChildren,
     ComplexChildren,
-    PrimitiveChildren,
+    SafeString,
 )
 
 
-class Style(BasicElement[PrimitiveChildren, GlobalAttrs]):
+class Style(ElementStrict[str, GlobalAttrs]):
     """Defines style information for a document."""
 
     tag: str = "style"
 
     def __init__(
-        self, *children: PrimitiveChildren, **attributes: Unpack[GlobalAttrs]
+        self, child: str, *children: Never, **attributes: Unpack[GlobalAttrs]
     ) -> None:
-        super().__init__(*children, **attributes)
+        super().__init__(SafeString(child), **attributes)
 
 
 class Div(BasicElement[AnyChildren, GlobalAttrs]):

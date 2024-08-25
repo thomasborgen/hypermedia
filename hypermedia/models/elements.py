@@ -3,8 +3,7 @@ from typing import Generic
 from typing_extensions import Unpack
 
 from hypermedia.models.base import Element
-from hypermedia.types.attributes import NoAttrs
-from hypermedia.types.types import TAttrs, TChildren, TChildrenArgs
+from hypermedia.types.types import SafeString, TAttrs, TChildren, TChildrenArgs
 
 
 class BasicElement(Generic[TChildren, TAttrs], Element):
@@ -22,14 +21,15 @@ class BasicElement(Generic[TChildren, TAttrs], Element):
         **attributes: Unpack[TAttrs],  # type: ignore
     ) -> None:
         super().__init__(*children, **attributes)
-        self.slot = attributes.pop("slot", None)
 
-    def dump(self) -> str:
+    def dump(self) -> SafeString:
         """Dump to html, while escaping text data."""
-        return "<{tag}{attributes}>{children}</{tag}>".format(
-            tag=self.tag,
-            attributes=self._render_attributes(),
-            children=self._render_children(),
+        return SafeString(
+            "<{tag}{attributes}>{children}</{tag}>".format(
+                tag=self.tag,
+                attributes=self._render_attributes(),
+                children=self._render_children(),
+            )
         )
 
 
@@ -57,21 +57,32 @@ class ElementStrict(Generic[Unpack[TChildrenArgs], TAttrs], Element):
     ) -> None:
         super().__init__(*children, **attributes)
 
-    def dump(self) -> str:
+    def dump(self) -> SafeString:
         """Dump to html, while escaping text data."""
-        return "<{tag}{attributes}>{children}</{tag}>".format(
-            tag=self.tag,
-            attributes=self._render_attributes(),
-            children=self._render_children(),
+        return SafeString(
+            "<{tag}{attributes}>{children}</{tag}>".format(
+                tag=self.tag,
+                attributes=self._render_attributes(),
+                children=self._render_children(),
+            )
         )
 
 
-class ElementList(BasicElement[TChildren, NoAttrs]):
+class ElementList(Generic[TChildren], Element):
     """Use to render a list of child elements without a parent."""
 
-    def dump(self) -> str:
+    children: tuple[TChildren, ...]
+
+    def __init__(
+        self,
+        *children: TChildren,
+        slot: str | None = None,
+    ) -> None:
+        super().__init__(*children, slot=slot)
+
+    def dump(self) -> SafeString:
         """Dump the objects to a html document string."""
-        return self._render_children()
+        return SafeString(self._render_children())
 
 
 class VoidElement(Generic[TAttrs], Element):
@@ -95,11 +106,13 @@ class VoidElement(Generic[TAttrs], Element):
     ) -> None:
         super().__init__(slot=slot, **attributes)
 
-    def dump(self) -> str:
+    def dump(self) -> SafeString:
         """Dump to html."""
-        return """<{tag}{attributes}>""".format(
-            tag=self.tag,
-            attributes=self._render_attributes(),
+        return SafeString(
+            "<{tag}{attributes}>".format(
+                tag=self.tag,
+                attributes=self._render_attributes(),
+            )
         )
 
     def __str__(self) -> str:
