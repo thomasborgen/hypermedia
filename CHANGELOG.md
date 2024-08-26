@@ -10,6 +10,63 @@
 ## Latest Changes
 
 
+## Version 5.3.0
+
+### Feature
+
+* Adds `SafeString` type as a wrapper around the normal `str` class. This can be used to tell hypermedia not to `html.escape` the string in any element.
+
+
+```python
+Div("this is always escaped")
+Div(SafeString("This will not be escaped"))
+```
+
+* Hypermedia is now cachable - All calls to `.dump()` now returns a `SafeString`. This means that caching a dumped element is now possible because we won't call `html.escape` on it again.
+
+```python
+@lru_cache()
+def stylesheets() -> SafeString:
+    return ElementList(
+        Link(
+            rel="stylesheet",
+            href="/static/css/normalize.css",
+            type="text/css",
+        ),
+        Link(
+            rel="stylesheet",
+            href="/static/css/simple.min.css",
+            type="text/css",
+        )
+    ).dump()
+
+def base():
+    """
+    Once `stylesheets()` is called once, it will always use the cached String in subsequent
+    calls to `base()`
+    """
+    return ElementList(
+        Doctype(),
+        Html(
+            Head(
+                Meta(charset="UTF-8"),
+                stylesheets(),
+                slot="head",
+            ),
+            Body(...)
+            lan="en",
+        ),
+    )
+```
+
+* `Script` and `Style` elements wraps input in `SafeString` by default.
+
+```python
+Script("This is wrapped in `SafeString` by default")
+Style("This is wrapped in `SafeString` by default")
+```
+
+
 ## Version 5.2.0
 
 ### Feature
