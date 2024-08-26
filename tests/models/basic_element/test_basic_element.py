@@ -102,7 +102,7 @@ def test_all_subclasses_dumps_to_safestring() -> None:
 
     skip = {"BasicElement", "ElementList", "ElementStrict", "VoidElement"}
     assert all(
-        isinstance(sub(), Element)
+        isinstance(sub().dump(), SafeString)  # type: ignore
         for sub in Element.__subclasses__()
         if sub.__name__ not in skip
     )

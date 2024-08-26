@@ -1,6 +1,4 @@
-from typing import Never
-
-from typing_extensions import Unpack
+from typing_extensions import Never, Unpack
 
 from hypermedia.models import BasicElement
 from hypermedia.models.elements import ElementStrict

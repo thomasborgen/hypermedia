@@ -1,9 +1,6 @@
-from typing import Never
-
-from typing_extensions import Unpack
+from typing_extensions import Never, Unpack
 
 from hypermedia.models import BasicElement, VoidElement
-from hypermedia.models.elements import ElementStrict
 from hypermedia.types.attributes import (
     EmbedAttrs,
     GlobalAttrs,
@@ -13,7 +10,7 @@ from hypermedia.types.attributes import (
 from hypermedia.types.types import AnyChildren, SafeString
 
 
-class Script(ElementStrict[str, ScriptAttrs]):
+class Script(BasicElement[str, ScriptAttrs]):
     """Defines a client-side script."""
 
     tag: str = "script"
