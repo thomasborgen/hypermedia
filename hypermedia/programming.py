@@ -1,4 +1,4 @@
-from typing_extensions import Unpack
+from typing_extensions import Never, Unpack
 
 from hypermedia.models import BasicElement, VoidElement
 from hypermedia.types.attributes import (
@@ -7,18 +7,24 @@ from hypermedia.types.attributes import (
     ObjectAttrs,
     ScriptAttrs,
 )
-from hypermedia.types.types import AnyChildren, PrimitiveChildren
+from hypermedia.types.types import AnyChildren, SafeString
 
 
-class Script(BasicElement[PrimitiveChildren, ScriptAttrs]):
+class Script(BasicElement[str, ScriptAttrs]):
     """Defines a client-side script."""
 
     tag: str = "script"
 
     def __init__(
-        self, *children: PrimitiveChildren, **attributes: Unpack[ScriptAttrs]
+        self,
+        child: str | None = None,
+        *args: Never,
+        **attributes: Unpack[ScriptAttrs],
     ) -> None:
-        super().__init__(*children, **attributes)
+        if child is None:
+            super().__init__(**attributes)
+        else:
+            super().__init__(SafeString(child), **attributes)
 
 
 class NoScript(BasicElement[AnyChildren, GlobalAttrs]):

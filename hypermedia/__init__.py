@@ -177,11 +177,14 @@ from hypermedia.tables import (
     THead,
     Tr,
 )
+from hypermedia.types.types import SafeString
 
 __all__ = [
     # Models
     "Element",
     "ElementList",
+    # Types
+    "SafeString",
     # audio and video
     "Audio",
     "Source",

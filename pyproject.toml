@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hypermedia"
-version = "5.2.0"
+version = "5.3.0"
 description = "An opinionated way to work with html in pure python with htmx support."
 authors = ["Thomas Borgen <thomasborgen91@gmail.com>"]
 readme = "README.md"
