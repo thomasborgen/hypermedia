@@ -46,6 +46,31 @@
 
 * Adds `lang` as an attribute to the `Html` element.
 
+## Version 5.3.4
+
+### Features
+
+* Add `capture` attribute to input element with the allowed values `"user"` and `"environment"`
+* Add `dialog` as a posible value to a forms `method` attribute
+
+###  Internal 
+
+* Migrate dependency manager to uv.
+* Remove safety check that now requires login
+
+
+## Version 5.3.3
+
+* Fixes bug with svg element dumping. (#48)[https://github.com/thomasborgen/hypermedia/issues/48]
+
+## Version 5.3.2
+
+* Fixes `style` attribute rendering.
+
+## Version 5.3.1
+
+* Adds `lang` as an attribute to the `Html` element.
+
 ## Version 5.3.0
 
 ### Feature
