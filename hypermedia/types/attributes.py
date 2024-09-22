@@ -233,6 +233,7 @@ class GlobalAttrs(HtmlAndEventAttrs, HtmxAttrs, HyperscriptAttrs, total=False):
 class HtmlTagAttrs(HypermediaAttrs, total=False):
     """Common attributes for HTML elements."""
 
+    lang: str
     xmlns: str
 
 
