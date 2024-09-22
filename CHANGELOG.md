@@ -10,6 +10,10 @@
 ## Latest Changes
 
 
+## Version 5.3.1
+
+* Adds `lang` as an attribute to the `Html` element.
+
 ## Version 5.3.0
 
 ### Feature
