@@ -89,7 +89,7 @@ def test_all_subclasses_dumps_to_safestring() -> None:
     )
 
     assert all(
-        isinstance(sub("test").dump(), SafeString)  # type: ignore
+        isinstance(sub("test").dump(), SafeString)
         for sub in ElementStrict.__subclasses__()
     )
 
