@@ -9,6 +9,9 @@
 
 ## Latest Changes
 
+## Version 5.3.2
+
+* Fixes `style` attribute rendering.
 
 ## Version 5.3.1
 
