@@ -16,7 +16,7 @@ from hypermedia.types.types import SafeString
 
 FINAL_KEY_PREFIX: Final[str] = "$"
 
-_CUSTOM_RENDERED_ATTRIBUTES = Final[set[str]] = {
+_CUSTOM_RENDERED_ATTRIBUTES: Final[set[str]] = {
     "classes",
     "class_",
     "style",
