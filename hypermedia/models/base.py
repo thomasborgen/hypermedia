@@ -16,6 +16,12 @@ from hypermedia.types.types import SafeString
 
 FINAL_KEY_PREFIX: Final[str] = "$"
 
+_CUSTOM_RENDERED_ATTRIBUTES = Final[set[str]] = {
+    "classes",
+    "class_",
+    "style",
+}
+
 
 @lru_cache
 def _load_attribute_aliases() -> Mapping[str, str]:  # noqa: C901
@@ -130,8 +136,8 @@ class Element(metaclass=ABCMeta):
             classes.append(class_)
 
         for key, value in self.attributes.items():
-            # Skip class attributes that are already handled
-            if key in ["classes", "class_"]:
+            # Skip class and style attributes that we handle separately
+            if key in _CUSTOM_RENDERED_ATTRIBUTES:
                 continue
             # Skip None values, use `True` for key only values
             if value is None:
@@ -158,6 +164,14 @@ class Element(metaclass=ABCMeta):
         if len(classes) > 0:
             result.append(f"class='{' '.join(classes)}'")
 
+        if style := self.attributes.get("style", None):
+            result.append(
+                "style='{styles}'".format(
+                    styles="".join(
+                        f"{key}:{value};" for key, value in style.items()
+                    )
+                )
+            )
         if result:
             return " " + " ".join(result)
         return ""
