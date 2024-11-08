@@ -1,6 +1,7 @@
 from typing_extensions import Unpack
 
 from hypermedia.models import BasicElement, VoidElement
+from hypermedia.models.elements import XMLVoidElement
 from hypermedia.types.attributes import (
     AreaAttrs,
     CanvasAttrs,
@@ -116,82 +117,68 @@ class Svg(BasicElement[AnyChildren, SvgAttrs]):
 # Basic SVG elements. These should hopefully cover most use cases.
 # If they don't, feel free to add them.
 # Alternatively, consider using Image with a `src="my.svg` or css.
-class Path(VoidElement[PathAttrs]):
+class Path(XMLVoidElement[PathAttrs]):
     """Element used to define paths for SVG graphics."""
 
     tag: str = "path"
 
-    def __init__(
-        self, *children: AnyChildren, **attributes: Unpack[PathAttrs]
-    ) -> None:
-        super().__init__(*children, **attributes)
+    def __init__(self, **attributes: Unpack[PathAttrs]) -> None:
+        super().__init__(**attributes)
 
 
-class Rect(VoidElement[RectAttrs]):
+class Rect(XMLVoidElement[RectAttrs]):
     """Element used to define rectangles for SVG graphics."""
 
     tag: str = "rect"
 
-    def __init__(
-        self, *children: AnyChildren, **attributes: Unpack[RectAttrs]
-    ) -> None:
-        super().__init__(*children, **attributes)
+    def __init__(self, **attributes: Unpack[RectAttrs]) -> None:
+        super().__init__(**attributes)
 
 
 class Rectangle(Rect):
     """Alias for `Rect`."""
 
 
-class Circle(VoidElement[CircleAttrs]):
+class Circle(XMLVoidElement[CircleAttrs]):
     """Element used to define circles for SVG graphics."""
 
     tag: str = "circle"
 
-    def __init__(
-        self, *children: AnyChildren, **attributes: Unpack[CircleAttrs]
-    ) -> None:
-        super().__init__(*children, **attributes)
+    def __init__(self, **attributes: Unpack[CircleAttrs]) -> None:
+        super().__init__(**attributes)
 
 
-class Ellipse(VoidElement[EllipseAttrs]):
+class Ellipse(XMLVoidElement[EllipseAttrs]):
     """Element used to define ellipses for SVG graphics."""
 
     tag: str = "ellipse"
 
-    def __init__(
-        self, *children: AnyChildren, **attributes: Unpack[EllipseAttrs]
-    ) -> None:
-        super().__init__(*children, **attributes)
+    def __init__(self, **attributes: Unpack[EllipseAttrs]) -> None:
+        super().__init__(**attributes)
 
 
-class Line(VoidElement[LineAttrs]):
+class Line(XMLVoidElement[LineAttrs]):
     """Element used to define lines for SVG graphics."""
 
     tag: str = "line"
 
-    def __init__(
-        self, *children: AnyChildren, **attributes: Unpack[LineAttrs]
-    ) -> None:
-        super().__init__(*children, **attributes)
+    def __init__(self, **attributes: Unpack[LineAttrs]) -> None:
+        super().__init__(**attributes)
 
 
-class Polyline(VoidElement[PolylineAttrs]):
+class Polyline(XMLVoidElement[PolylineAttrs]):
     """Element used to define polylines for SVG graphics."""
 
     tag: str = "polyline"
 
-    def __init__(
-        self, *children: AnyChildren, **attributes: Unpack[PolylineAttrs]
-    ) -> None:
-        super().__init__(*children, **attributes)
+    def __init__(self, **attributes: Unpack[PolylineAttrs]) -> None:
+        super().__init__(**attributes)
 
 
-class Polygon(VoidElement[PolygonAttrs]):
+class Polygon(XMLVoidElement[PolygonAttrs]):
     """Element used to define polygons for SVG graphics."""
 
     tag: str = "polygon"
 
-    def __init__(
-        self, *children: AnyChildren, **attributes: Unpack[PolygonAttrs]
-    ) -> None:
-        super().__init__(*children, **attributes)
+    def __init__(self, **attributes: Unpack[PolygonAttrs]) -> None:
+        super().__init__(**attributes)

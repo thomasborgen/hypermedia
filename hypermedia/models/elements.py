@@ -118,3 +118,33 @@ class VoidElement(Generic[TAttrs], Element):
     def __str__(self) -> str:
         """Return tag."""
         return self.tag
+
+
+class XMLVoidElement(Generic[TAttrs], Element):
+    """Same as VoidElement, but for XML. Requires closing tags with `/>`."""
+
+    attributes: TAttrs
+
+    tag: str
+
+    def __init__(
+        self,
+        *,
+        slot: str | None = None,
+        # FIXME: https://github.com/python/typing/issues/1399
+        **attributes: Unpack[TAttrs],  # type: ignore
+    ) -> None:
+        super().__init__(slot=slot, **attributes)
+
+    def dump(self) -> SafeString:
+        """Dump to html."""
+        return SafeString(
+            "<{tag}{attributes} />".format(
+                tag=self.tag,
+                attributes=self._render_attributes(),
+            )
+        )
+
+    def __str__(self) -> str:
+        """Return tag."""
+        return self.tag

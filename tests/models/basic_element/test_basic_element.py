@@ -6,6 +6,7 @@ from hypermedia.models.elements import (
     ElementList,
     ElementStrict,
     VoidElement,
+    XMLVoidElement,
 )
 from hypermedia.types.types import SafeString
 from tests.utils import TestBasicElement
@@ -98,9 +99,20 @@ def test_all_subclasses_dumps_to_safestring() -> None:
         for sub in VoidElement.__subclasses__()
     )
 
+    assert all(
+        isinstance(sub().dump(), SafeString)
+        for sub in XMLVoidElement.__subclasses__()
+    )
+
     assert isinstance(ElementList().dump(), SafeString)
 
-    skip = {"BasicElement", "ElementList", "ElementStrict", "VoidElement"}
+    skip = {
+        "BasicElement",
+        "ElementList",
+        "ElementStrict",
+        "VoidElement",
+        "XMLVoidElement",
+    }
     assert all(
         isinstance(sub().dump(), SafeString)  # type: ignore
         for sub in Element.__subclasses__()
