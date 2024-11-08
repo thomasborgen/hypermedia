@@ -53,17 +53,26 @@ def test_normal_elements(element: type, result: str) -> None:
     "element,result",
     [
         (Area, "<area>"),
-        (Circle, "<circle>"),
-        (Ellipse, "<ellipse>"),
         (Img, "<img>"),
         (Image, "<img>"),
-        (Line, "<line>"),
-        (Path, "<path>"),
-        (Polygon, "<polygon>"),
-        (Polyline, "<polyline>"),
-        (Rect, "<rect>"),
-        (Rectangle, "<rect>"),
     ],
 )
 def test_void_elements(element: type, result: str) -> None:
+    assert element().dump() == result
+
+
+@pytest.mark.parametrize(
+    "element,result",
+    [
+        (Circle, "<circle />"),
+        (Ellipse, "<ellipse />"),
+        (Line, "<line />"),
+        (Path, "<path />"),
+        (Polygon, "<polygon />"),
+        (Polyline, "<polyline />"),
+        (Rect, "<rect />"),
+        (Rectangle, "<rect />"),
+    ],
+)
+def test_xml_void_elements(element: type, result: str) -> None:
     assert element().dump() == result

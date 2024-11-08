@@ -9,6 +9,10 @@
 
 ## Latest Changes
 
+## Version 5.3.3
+
+* Fixes bug with svg element dumping. (#48)[https://github.com/thomasborgen/hypermedia/issues/48]
+
 ## Version 5.3.2
 
 * Fixes `style` attribute rendering.
