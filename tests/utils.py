@@ -1,4 +1,5 @@
 from hypermedia.models import BasicElement, Element, VoidElement
+from hypermedia.models.elements import XMLVoidElement
 from hypermedia.types.attributes import GlobalAttrs
 from hypermedia.types.types import AnyChildren, SafeString
 
@@ -17,5 +18,10 @@ class TestBasicElement(BasicElement[AnyChildren, GlobalAttrs]):
 
 
 class TestVoidElement(VoidElement[GlobalAttrs]):
+    __test__ = False  # Not an executable test class
+    tag: str = "test"
+
+
+class TestXMLVoidElement(XMLVoidElement[GlobalAttrs]):
     __test__ = False  # Not an executable test class
     tag: str = "test"
