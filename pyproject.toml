@@ -1,35 +1,38 @@
-[tool.poetry]
+[project]
 name = "hypermedia"
 version = "5.3.3"
 description = "An opinionated way to work with html in pure python with htmx support."
-authors = ["Thomas Borgen <thomasborgen91@gmail.com>"]
-readme = "README.md"
-license = "MIT"
-homepage = "https://github.com/thomasborgen/hypermedia"
-repository = "https://github.com/thomasborgen/hypermedia"
+readme = {file = "README.md", content-type = "text/markdown"}
+license = {"text" = "MIT"}
+requires-python = ">=3.9"
 keywords = ["HTML", "HTMX", "Extendable", "Partial HTML", "HTML Templating", "FastAPI"]
-classifiers = [
-    "Development Status :: 3 - Alpha",
-    "Programming Language :: Python",
-    "Framework :: FastAPI",
-    "Topic :: Text Processing :: Markup :: HTML",
+authors = [
+    { name = "Thomas Borgen", email = "thomas@borgenit.no" },
 ]
 
-[tool.poetry.dependencies]
-python = "^3.10"
-typing-extensions = "^4.11.0"
+dependencies = [
+    "typing-extensions>=4.12.2",
+]
 
-
-[tool.poetry.group.dev.dependencies]
-ruff = "^0.3.5"
-mypy = "^1.9.0"
-pytest = "^8.1.1"
-pytest-cov = "^5.0.0"
-safety = "^3.2.4"
+[dependency-groups]
+dev = [
+    "mypy>=1.14.1",
+    "pytest-cov>=6.0.0",
+    "pytest>=8.3.4",
+    "ruff>=0.9.4",
+    "safety>=3.2.14",
+]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ['setuptools']
+build-backend = 'setuptools.build_meta'
+
+[project.urls]
+Homepage = "https://github.com/thomasborgen/hypermedia"
+Documentation = "https://github.com/thomasborgen/hypermedia"
+Repository = "https://github.com/thomasborgen/hypermedia"
+Changelog = "https://github.com/thomasborgen/hypermedia/blob/main/CHANGELOG.md"
+
 
 [tool.ruff]
 line-length = 79
@@ -64,13 +67,8 @@ select = [
 
 ignore = [
     "D100", # Docstring in modules
-    "D107", # Docstring in __init__
     "D203", # Incompatible with D211
-    "D212", # Incompatible with D213
-    # FastApi uses a lot of dependency injection and performs calls/object inits
-    # in argument defaults.
-    "B008",
-    "PLC0105", # Let typevar covariants be named without _co suffix
+    "D213", # Incompatible with D212
 ]
 
 fixable = ["ALL"]
@@ -85,10 +83,6 @@ fixable = ["ALL"]
 "**/conftest.py" = [
     "F811", # Allow redefinition (imported fixtures)
 ]
-"tests/**" = [
-    "D101", # Allow missing docstring in class
-    "D102", # Allow missing docstring in method
-]
 
 [tool.ruff.lint.mccabe]
 # Flag errors (`C901`) whenever the complexity level exceeds 6.
@@ -97,18 +91,22 @@ max-complexity = 6
 [tool.ruff.lint.pylint]
 max-public-methods = 8
 
+[tool.ruff.format]
+quote-style = "double"
+
 [tool.ruff.lint.flake8-tidy-imports]
 ban-relative-imports = "parents"
 
 [tool.ruff.lint.isort]
 combine-as-imports = true
 
-[tool.ruff.format]
-quote-style = "double"
-
 [tool.mypy]
 plugins = [
   "pydantic.mypy",
+]
+
+exclude = [
+    "tests/*"
 ]
 
 # follow_imports = "silent"
@@ -121,27 +119,14 @@ no_implicit_reexport = true
 # for strict mypy: (this is the tricky one :-))
 disallow_untyped_defs = true
 
+[[tool.mypy.overrides]]
+module = ["google.*"]
+follow_untyped_imports = true
+ignore_errors = true
+
 [tool.pytest.ini_options]
 # py.test options:
 norecursedirs = ["*.egg", ".eggs", "dist", "build", "docs", ".tox", ".git", "__pycache__"]
 testpaths = [
     "tests",
-]
-addopts = [
-  "--doctest-modules",
-  "--cov=hypermedia",
-  "--cov-report=term",
-  "--cov-report=html",
-  "--cov-report=xml",
-  "--cov-branch",
-  "--cov-fail-under=80",
-]
-
-[tool.coverage.run]
-branch = true
-
-[tool.coverage.report]
-exclude_lines = [
-    # Skip any pass lines such as may be used for @abstractmethod
-    "pass",
 ]
