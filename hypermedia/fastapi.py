@@ -33,8 +33,7 @@ class RequestAndPartial(Protocol):
 def htmx(
     func: RequestPartialAndFull | RequestAndPartial,
 ) -> Callable[..., str]:
-    """
-    Wrap a FastAPI endpoint, to enable partial and full rendering.
+    """Wrap a FastAPI endpoint, to enable partial and full rendering.
 
     The endpoint function _must_ have a partial render dependency, and
     _can_ have a full render dependency.

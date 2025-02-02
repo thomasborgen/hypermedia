@@ -25,8 +25,7 @@ class Anchor(A):
 
 
 class Link(VoidElement[HeadLinkAttrs]):
-    """
-    Defines the relationship between a document and an external resource.
+    """Defines the relationship between a document and an external resource.
 
     (most used to link to style sheets).
     """

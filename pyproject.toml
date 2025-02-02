@@ -69,6 +69,7 @@ ignore = [
     "D100", # Docstring in modules
     "D203", # Incompatible with D211
     "D213", # Incompatible with D212
+    "D107", # Missing docstring in __init__
 ]
 
 fixable = ["ALL"]

@@ -118,8 +118,7 @@ class TableFoot(TFoot):
 
 
 class Col(VoidElement[ColAttrs]):
-    """
-    Specifies column properties.
+    """Specifies column properties.
 
     For each column within a `colgroup` element.
     """

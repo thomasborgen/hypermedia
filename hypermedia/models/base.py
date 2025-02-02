@@ -25,8 +25,7 @@ _CUSTOM_RENDERED_ATTRIBUTES: Final[set[str]] = {
 
 @lru_cache
 def _load_attribute_aliases() -> Mapping[str, str]:  # noqa: C901
-    """
-    Get a mapping of attribute names to their aliases.
+    """Get a mapping of attribute names to their aliases.
 
     Taken from Ludic:
     https://github.com/getludic/ludic/blob/main/ludic/format.py
@@ -86,8 +85,7 @@ def get_slots(
 
 
 class Element(metaclass=ABCMeta):
-    """
-    Base class for all elements.
+    """Base class for all elements.
 
     This handles handles slot extension, children, attributes and
     css classes.

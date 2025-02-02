@@ -34,8 +34,7 @@ class BasicElement(Generic[TChildren, TAttrs], Element):
 
 
 class ElementStrict(Generic[Unpack[TChildrenArgs], TAttrs], Element):
-    """
-    Base class for strict elements (elements with concrete types of children).
+    """Base class for strict elements elements with concrete types of children.
 
     Args:
     ----
@@ -86,8 +85,7 @@ class ElementList(Generic[TChildren], Element):
 
 
 class VoidElement(Generic[TAttrs], Element):
-    """
-    A void element is an element in HTML that cannot have any child nodes.
+    """A void element is an element in HTML that cannot have any child nodes.
 
     Void elements only have a start tag; end tags must not be specified for
     void elements.
