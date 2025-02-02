@@ -9,6 +9,8 @@
 
 ## Latest Changes
 
+* Migrate dependency manager to uv.
+
 ## Version 5.3.3
 
 * Fixes bug with svg element dumping. (#48)[https://github.com/thomasborgen/hypermedia/issues/48]
