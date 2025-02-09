@@ -179,7 +179,7 @@ from hypermedia.tables import (
 )
 from hypermedia.types.types import SafeString
 
-__all__ = [
+__all__ = [  # noqa: RUF022
     # Models
     "Element",
     "ElementList",

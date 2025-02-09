@@ -3,8 +3,7 @@ from tests.utils import TestElement
 
 
 def test_render_children_calls_dump() -> None:
-    """
-    Test that all children are rendered.
+    """Test that all children are rendered.
 
     Our custom WithDump().dump() just returns str(self) so we can
     expect str(child_1) + str(child_2) as output.

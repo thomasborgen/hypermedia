@@ -20,8 +20,7 @@ class Audio(BasicElement[AnyChildren, AudioAttrs]):
 
 
 class Source(VoidElement[SourceAttrs]):
-    """
-    Defines multiple media resources for media elements.
+    """Defines multiple media resources for media elements.
 
     `video`, `audio` and `picture`.
     """

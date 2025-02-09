@@ -62,8 +62,7 @@ class HyperscriptAttrs(Attrs, total=False):
 
 
 class HtmxAttrs(Attrs, total=False):
-    """
-    HTMX attributes for HTML elements.
+    """HTMX attributes for HTML elements.
 
     See: https://htmx.org/
     """

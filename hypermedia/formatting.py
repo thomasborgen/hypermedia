@@ -57,8 +57,7 @@ class Bold(B):
 
 
 class Bdi(BasicElement[AnyChildren, GlobalAttrs]):
-    """
-    BDI stands for Bi-Directional Isolation.
+    """BDI stands for Bi-Directional Isolation.
 
     Isolates a part of text that might be formatted in a different direction
     from other text outside it.
@@ -77,8 +76,7 @@ class BiDirectionalIsolation(Bdi):
 
 
 class Bdo(BasicElement[AnyChildren, GlobalAttrs]):
-    """
-    BDO stands for Bi-Directional Override.
+    """BDO stands for Bi-Directional Override.
 
     Overrides the current text direction.
     """
@@ -144,8 +142,7 @@ class Deleted(Del):
 
 
 class Dfn(BasicElement[AnyChildren, GlobalAttrs]):
-    """
-    DFN stands for definition element.
+    """DFN stands for definition element.
 
     Specifies a term that is going to be defined within the content.
     """
@@ -423,8 +420,7 @@ class Time(BasicElement[AnyChildren, TimeAttrs]):
 
 
 class U(BasicElement[AnyChildren, GlobalAttrs]):
-    """
-    Defines unarticulated text.
+    """Defines unarticulated text.
 
     This is also styled differently from normal text.
     """
@@ -457,8 +453,7 @@ class Variable(Var):
 
 
 class Wbr(VoidElement[GlobalAttrs]):
-    """
-    Defines a possible line-break.
+    """Defines a possible line-break.
 
     WBR stands for Word Break Opportunity.
     """

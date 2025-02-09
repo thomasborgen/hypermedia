@@ -27,11 +27,15 @@ ComplexChildren: TypeAlias = "Element"
 AnyChildren: TypeAlias = Union[PrimitiveChildren, ComplexChildren]
 """Type alias for elements that are allowed to have any children."""
 
-TChildren = TypeVar("TChildren", bound=AnyChildren, covariant=True)
+# PLC0105 `TypeVar` name "TChildren" does not reflect its covariance;
+# consider renaming it to "TChildren_co"
+TChildren = TypeVar("TChildren", bound=AnyChildren, covariant=True)  # noqa: PLC0105  # type: ignore
 """Type variable for elements representing type of children. (*args)"""
 
 TChildrenArgs = TypeVarTuple("TChildrenArgs")
 """Type variable for strict elements representing type of children. (*args)"""
 
-TAttrs = TypeVar("TAttrs", bound=Attrs | NoAttrs, covariant=True)
+# PLC0105 `TypeVar` name "TChildren" does not reflect its covariance;
+# consider renaming it to "TChildren_co"
+TAttrs = TypeVar("TAttrs", bound=Attrs | NoAttrs, covariant=True)  # noqa: PLC0105
 """Type variable for elements representing type of attributes. (**kwargs)"""
