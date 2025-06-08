@@ -436,7 +436,7 @@ class FormAttrs(GlobalAttrs, total=False):
         "multipart/form-data",
         "text/plain",
     ]
-    method: Literal["get", "post"]
+    method: Literal["get", "post", "dialog"]
     name: str
     novalidate: bool
     rel: Literal[
