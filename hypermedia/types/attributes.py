@@ -77,7 +77,7 @@ class HtmxAttrs(Attrs, total=False):
     hx_include: Annotated[str, Alias("hx-include")]
     hx_confirm: Annotated[str, Alias("hx-confirm")]
     hx_trigger: Annotated[
-        Literal["load", "click", "dblclick", "hover", "focusblur"] | str,
+        Literal["load", "click", "dblclick", "hover", "focus", "blur"] | str,
         Alias("hx-trigger"),
     ]
     hx_target: Annotated[
