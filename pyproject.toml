@@ -20,7 +20,6 @@ dev = [
     "pytest-cov>=6.0.0",
     "pytest>=8.3.4",
     "ruff>=0.9.4",
-    "safety>=3.2.14",
 ]
 
 [build-system]
