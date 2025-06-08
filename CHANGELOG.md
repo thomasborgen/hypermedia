@@ -13,6 +13,7 @@
 ### Features
 
 * Add `capture` attribute to input element with the allowed values `"user"` and `"environment"`
+* Add `dialog` as a posible value to a forms `method` attribute
 
 ###  Internal 
 
