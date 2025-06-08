@@ -9,8 +9,16 @@
 
 ## Latest Changes
 
+
+### Features
+
+* Add `capture` attribute to input element with the allowed values `"user"` and `"environment"`
+
+###  Internal 
+
 * Migrate dependency manager to uv.
 * Remove safety check that now requires login
+
 
 ## Version 5.3.3
 
