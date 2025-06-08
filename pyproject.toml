@@ -20,7 +20,6 @@ dev = [
     "pytest-cov>=6.0.0",
     "pytest>=8.3.4",
     "ruff>=0.9.4",
-    "safety>=3.2.14",
 ]
 
 [build-system]
@@ -102,9 +101,7 @@ ban-relative-imports = "parents"
 combine-as-imports = true
 
 [tool.mypy]
-plugins = [
-  "pydantic.mypy",
-]
+plugins = []
 
 exclude = [
     "tests/*"
@@ -131,3 +128,4 @@ norecursedirs = ["*.egg", ".eggs", "dist", "build", "docs", ".tox", ".git", "__p
 testpaths = [
     "tests",
 ]
+pythonpath = ["."]

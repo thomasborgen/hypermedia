@@ -10,6 +10,7 @@
 ## Latest Changes
 
 * Migrate dependency manager to uv.
+* Remove safety check that now requires login
 
 ## Version 5.3.3
 
