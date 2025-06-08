@@ -101,9 +101,7 @@ ban-relative-imports = "parents"
 combine-as-imports = true
 
 [tool.mypy]
-plugins = [
-  "pydantic.mypy",
-]
+plugins = []
 
 exclude = [
     "tests/*"
