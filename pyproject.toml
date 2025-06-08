@@ -131,3 +131,4 @@ norecursedirs = ["*.egg", ".eggs", "dist", "build", "docs", ".tox", ".git", "__p
 testpaths = [
     "tests",
 ]
+pythonpath = ["."]
