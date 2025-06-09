@@ -1,6 +1,6 @@
 [project]
 name = "hypermedia"
-version = "5.3.3"
+version = "5.3.4"
 description = "An opinionated way to work with html in pure python with htmx support."
 readme = {file = "README.md", content-type = "text/markdown"}
 license = {"text" = "MIT"}
@@ -23,8 +23,8 @@ dev = [
 ]
 
 [build-system]
-requires = ['setuptools']
-build-backend = 'setuptools.build_meta'
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project.urls]
 Homepage = "https://github.com/thomasborgen/hypermedia"
