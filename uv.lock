@@ -100,7 +100,7 @@ wheels = [
 
 [[package]]
 name = "hypermedia"
-version = "5.3.3"
+version = "5.3.4"
 source = { editable = "." }
 dependencies = [
     { name = "typing-extensions" },
