@@ -10,6 +10,8 @@
 ## Latest Changes
 
 
+## Version 5.3.4
+
 ### Features
 
 * Add `capture` attribute to input element with the allowed values `"user"` and `"environment"`
