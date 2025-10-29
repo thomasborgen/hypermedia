@@ -5,14 +5,17 @@ from html import escape
 from typing import (
     Any,
     Mapping,
-    Sequence,
-    Union,
     get_type_hints,
 )
 
 from typing_extensions import Final, Self
 
-from hypermedia.types.types import SafeString
+from hypermedia.types.types import (
+    AnyChildren,
+    Children,
+    PrimitiveChildren,
+    SafeString,
+)
 
 FINAL_KEY_PREFIX: Final[str] = "$"
 
@@ -49,13 +52,13 @@ def _load_attribute_aliases() -> Mapping[str, str]:  # noqa: C901
 
 def get_child_slots(
     slots: dict[str, "Element"],
-    children: Sequence[Union[str, "Element"]],
+    children: tuple[Children],
 ) -> dict[str, "Element"]:
     """Get slots from direct child."""
     slot_keys = slots.keys()
 
     for child in children:
-        if isinstance(child, str):
+        if isinstance(child, PrimitiveChildren):
             continue
 
         if duplicate_keys := [
@@ -91,7 +94,7 @@ class Element(metaclass=ABCMeta):
     css classes.
     """
 
-    children: tuple[Any, ...]
+    children: tuple[Children]
     slot: str | None = None
     slots: dict[str, "Element"]
     attributes: Mapping[str, Any]
@@ -103,7 +106,7 @@ class Element(metaclass=ABCMeta):
         **attributes: Any,
     ) -> None:
         """Initialize Root with children."""
-        self.children = children
+        self.children = tuple(child for child in children if child is not None)
         self.slot = slot
         self.slots = get_slots(self)
         self.attributes = attributes
@@ -113,14 +116,17 @@ class Element(metaclass=ABCMeta):
         """Dump the objects to a html document string."""
         pass
 
-    def extend(self, slot: str, *children: Union[str, "Element"]) -> Self:
+    def extend(self, slot: str, *children: AnyChildren) -> Self:
         """Extend the child with the given slots children."""
         if slot not in self.slots:
             raise ValueError(f"Could not find a slot with name: {slot}")
         element = self.slots[slot]
-        element.children = element.children + children
+        extended_children = tuple(
+            child for child in children if child is not None
+        )
+        element.children = element.children + extended_children
 
-        get_child_slots(self.slots, list(children))
+        get_child_slots(self.slots, extended_children)
         return self
 
     def _render_attributes(self) -> str:  # noqa: C901

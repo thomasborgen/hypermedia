@@ -100,6 +100,13 @@ def test_normal_elements_and_aliases(
     assert alias("test").dump() == result
 
 
+def test_none_children_are_skipped() -> None:
+    assert Bold(None).dump() == "<b></b>"
+    assert Bold("Test", None).dump() == "<b>Test</b>"
+    assert Bold(None, "Test").dump() == "<b>Test</b>"
+    assert Bold(None, None).dump() == "<b></b>"
+
+
 @pytest.mark.parametrize(
     "element,alias,result",
     [

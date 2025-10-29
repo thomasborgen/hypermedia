@@ -15,7 +15,7 @@ class SafeString(str):
 NoChildren: TypeAlias = Never
 """Type alias for elements that are not allowed to have children."""
 
-PrimitiveChildren: TypeAlias = str | bool | int | float
+PrimitiveChildren: TypeAlias = SafeString | str | bool | int | float
 """Type alias for elements that are allowed to have only primitive children.
 
 Primitive children are ``str``, ``bool``, ``int`` and ``float``.
@@ -24,8 +24,12 @@ Primitive children are ``str``, ``bool``, ``int`` and ``float``.
 ComplexChildren: TypeAlias = "Element"
 """Type alias for elements that are allowed to have only non-primitive children."""  # noqa: E501
 
-AnyChildren: TypeAlias = Union[PrimitiveChildren, ComplexChildren]
-"""Type alias for elements that are allowed to have any children."""
+Children: TypeAlias = Union[PrimitiveChildren, ComplexChildren]
+"""Type alias for elements that are allowed to have any children except None."""  # noqa: E501
+
+AnyChildren: TypeAlias = Union[Children, None]
+"""Type alias for elements that are allowed to have any children, including None."""  # noqa: E501
+
 
 # PLC0105 `TypeVar` name "TChildren" does not reflect its covariance;
 # consider renaming it to "TChildren_co"

@@ -9,7 +9,7 @@ from hypermedia.types.types import SafeString, TAttrs, TChildren, TChildrenArgs
 class BasicElement(Generic[TChildren, TAttrs], Element):
     """Base class for Hypermedia elements."""
 
-    children: tuple[TChildren, ...]
+    children: tuple[TChildren]
     attributes: TAttrs
 
     tag: str
@@ -70,7 +70,7 @@ class ElementStrict(Generic[Unpack[TChildrenArgs], TAttrs], Element):
 class ElementList(Generic[TChildren], Element):
     """Use to render a list of child elements without a parent."""
 
-    children: tuple[TChildren, ...]
+    children: tuple[TChildren]
 
     def __init__(
         self,
