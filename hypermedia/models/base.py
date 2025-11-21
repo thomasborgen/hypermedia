@@ -5,6 +5,7 @@ from html import escape
 from typing import (
     Any,
     Mapping,
+    cast,
     get_type_hints,
 )
 
@@ -116,15 +117,19 @@ class Element(metaclass=ABCMeta):
         """Dump the objects to a html document string."""
         pass
 
-    def extend(self, slot: str, *children: AnyChildren) -> Self:
+    def extend(self, slot: str, *children: Children | None) -> Self:
         """Extend the child with the given slots children."""
         if slot not in self.slots:
             raise ValueError(f"Could not find a slot with name: {slot}")
         element = self.slots[slot]
+        # extended_children = cast(
+        #     tuple[Children],
+        #     tuple(child for child in children if child is not None),
+        # )
         extended_children = tuple(
             child for child in children if child is not None
         )
-        element.children = element.children + extended_children
+        element.children = element.children + extended_children  # type: ignore
 
         get_child_slots(self.slots, extended_children)
         return self
@@ -185,8 +190,8 @@ class Element(metaclass=ABCMeta):
             [
                 child
                 if isinstance(child, SafeString)
-                else escape(child)
-                if isinstance(child, str)
+                else escape(str(child))
+                if isinstance(child, PrimitiveChildren)
                 else child.dump()
                 for child in self.children
             ]

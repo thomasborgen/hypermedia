@@ -16,7 +16,7 @@ class BasicElement(Generic[TChildren, TAttrs], Element):
 
     def __init__(
         self,
-        *children: TChildren,
+        *children: TChildren | None,
         # FIXME: https://github.com/python/typing/issues/1399
         **attributes: Unpack[TAttrs],  # type: ignore
     ) -> None:
@@ -74,7 +74,7 @@ class ElementList(Generic[TChildren], Element):
 
     def __init__(
         self,
-        *children: TChildren,
+        *children: TChildren | None,
         slot: str | None = None,
     ) -> None:
         super().__init__(*children, slot=slot)
