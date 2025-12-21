@@ -1,3 +1,4 @@
+from decimal import Decimal
 from typing import TYPE_CHECKING, TypeAlias, TypeVar, Union
 
 from typing_extensions import Never, TypeVarTuple
@@ -15,7 +16,7 @@ class SafeString(str):
 NoChildren: TypeAlias = Never
 """Type alias for elements that are not allowed to have children."""
 
-PrimitiveChildren: TypeAlias = str | bool | int | float
+PrimitiveChildren: TypeAlias = str | bool | int | float | Decimal
 """Type alias for elements that are allowed to have only primitive children.
 
 Primitive children are ``str``, ``bool``, ``int`` and ``float``.
@@ -24,7 +25,7 @@ Primitive children are ``str``, ``bool``, ``int`` and ``float``.
 ComplexChildren: TypeAlias = "Element"
 """Type alias for elements that are allowed to have only non-primitive children."""  # noqa: E501
 
-AnyChildren: TypeAlias = Union[PrimitiveChildren, ComplexChildren]
+AnyChildren: TypeAlias = Union[PrimitiveChildren, ComplexChildren, None]
 """Type alias for elements that are allowed to have any children."""
 
 # PLC0105 `TypeVar` name "TChildren" does not reflect its covariance;
