@@ -28,20 +28,18 @@ This is all you have to do. open `localhost:port` in your browser and you should
 
 Notice the `.dump()`
 
-with @htmx decorator
+If you are using `htmx` you can use the @htmx decorator to have hypermedia return only the partial when the endpoint receives an `htmx` request and the full page only when it isn't.
 
 ```python
 @app.get("", response_class=HTMLResponse)
 @htmx
 async def index(
     request: Request,
-    partial: Element = Depends(render_simple_flows_index_partial),
-    full: Element = Depends(full(render_simple_flows_index)),
+    partial: Annotated[Element, Depends(render_index_partial)],
+    full: Annoated[Element, Depends(full(render_index))],
 ) -> None:
-    """Return the list of transformers."""
+    """Return the index of our page."""
     pass
-
-
 ```
 
 
@@ -53,7 +51,8 @@ from hypermedia.fastapi import htmx, full
 The `partial` argument is a function that returns the partial HTML.
 The `full` argument is a function that needs to return the whole HTML, for example on first navigation or a refresh.
 
-> Note: `partial` and `full` arguments needs to be wrapped in `Depends` so that the full function's dependencies are resolved! Hypermedia ships an extra `full` wrapper, which is basically just making the function lazily loaded. The `full` wrapper _must_ be used, and the `@htmx` decorator will call the lazily wrapped function to get the full HTML page when needed.
+!!! note
+    `partial` and `full` arguments needs to be wrapped in `Depends` so that the full function's dependencies are resolved! Hypermedia ships an extra `full` wrapper, which is basically just making the function lazily loaded. The `full` wrapper _must_ be used, and the `@htmx` decorator will call the lazily wrapped function to get the full HTML page when needed.
 
 > Note: The following code is in FastAPI, but could have been anything. As long as you check for HX-Request and return partial/full depending on if it exists or not.
 
