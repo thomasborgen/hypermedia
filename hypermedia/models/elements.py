@@ -3,10 +3,16 @@ from typing import Generic
 from typing_extensions import Unpack
 
 from hypermedia.models.base import Element
-from hypermedia.types.types import SafeString, TAttrs, TChildren, TChildrenArgs
+from hypermedia.types.types import (
+    SafeString,
+    TAnyChildren,
+    TAttrs,
+    TChildren,
+    TChildrenArgs,
+)
 
 
-class BasicElement(Generic[TChildren, TAttrs], Element):
+class BasicElement(Generic[TAnyChildren, TAttrs], Element):
     """Base class for Hypermedia elements."""
 
     children: tuple[TChildren]
@@ -16,7 +22,7 @@ class BasicElement(Generic[TChildren, TAttrs], Element):
 
     def __init__(
         self,
-        *children: TChildren | None,
+        *children: TAnyChildren | None,
         # FIXME: https://github.com/python/typing/issues/1399
         **attributes: Unpack[TAttrs],  # type: ignore
     ) -> None:

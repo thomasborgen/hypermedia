@@ -117,7 +117,7 @@ class Element(metaclass=ABCMeta):
         """Dump the objects to a html document string."""
         pass
 
-    def extend(self, slot: str, *children: Children | None) -> Self:
+    def extend(self, slot: str, *children: AnyChildren) -> Self:
         """Extend the child with the given slots children."""
         if slot not in self.slots:
             raise ValueError(f"Could not find a slot with name: {slot}")

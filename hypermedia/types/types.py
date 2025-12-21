@@ -33,6 +33,12 @@ AnyChildren: TypeAlias = Union[Children, None]
 
 # PLC0105 `TypeVar` name "TChildren" does not reflect its covariance;
 # consider renaming it to "TChildren_co"
+TAnyChildren = TypeVar("TAnyChildren", bound=AnyChildren, covariant=True)  # noqa: PLC0105  # type: ignore
+"""Type variable for elements representing type of children. (*args)"""
+
+
+# PLC0105 `TypeVar` name "TChildren" does not reflect its covariance;
+# consider renaming it to "TChildren_co"
 TChildren = TypeVar("TChildren", bound=Children, covariant=True)  # noqa: PLC0105  # type: ignore
 """Type variable for elements representing type of children. (*args)"""
 
