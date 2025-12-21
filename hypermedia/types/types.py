@@ -25,7 +25,7 @@ Primitive children are ``str``, ``bool``, ``int`` and ``float``.
 ComplexChildren: TypeAlias = "Element"
 """Type alias for elements that are allowed to have only non-primitive children."""  # noqa: E501
 
-AnyChildren: TypeAlias = Union[PrimitiveChildren, ComplexChildren, None]
+AnyChildren: TypeAlias = Union[PrimitiveChildren, ComplexChildren]
 """Type alias for elements that are allowed to have any children."""
 
 # PLC0105 `TypeVar` name "TChildren" does not reflect its covariance;
