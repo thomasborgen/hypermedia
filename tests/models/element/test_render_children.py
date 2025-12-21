@@ -30,6 +30,7 @@ def test_renders_safe_string_children_as_is() -> None:
 def test_primitive_types_are_rendered() -> None:
     assert TestElement(1)._render_children() == "1"
     assert TestElement(1.1)._render_children() == "1.1"
+    assert TestElement(None)._render_children() == ""
     assert TestElement(True)._render_children() == "True"
     assert TestElement(False)._render_children() == "False"
     assert TestElement("test")._render_children() == "test"

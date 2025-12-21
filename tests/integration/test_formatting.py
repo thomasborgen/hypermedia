@@ -111,3 +111,10 @@ def test_void_elements_and_aliases(
 ) -> None:
     assert element().dump() == result
     assert alias().dump() == result
+
+
+def test_none_children_are_skipped() -> None:
+    assert Bold(None).dump() == "<b></b>"
+    assert Bold("Test", None).dump() == "<b>Test</b>"
+    assert Bold(None, "Test").dump() == "<b>Test</b>"
+    assert Bold(None, None).dump() == "<b></b>"
