@@ -1,4 +1,5 @@
 from decimal import Decimal
+
 from hypermedia.types.types import SafeString
 from tests.utils import TestElement
 
