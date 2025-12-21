@@ -29,7 +29,7 @@ def _load_attribute_aliases() -> Mapping[str, str]:  # noqa: C901
     Taken from Ludic:
     https://github.com/getludic/ludic/blob/main/ludic/format.py
     """
-    from hypermedia.types import attributes
+    from hypermedia.types import attributes  # noqa: PLC0415
 
     result = {}
     for name, cls in inspect.getmembers(attributes, inspect.isclass):
