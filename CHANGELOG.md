@@ -11,6 +11,7 @@
 
 ### Features
 
+* Allow None values through and skip them.
 * Allow primitives through without having to cast them to str first.
 * Add Decimal as an allowed primitive.
 
