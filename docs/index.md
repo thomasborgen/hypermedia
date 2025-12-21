@@ -1,7 +1,7 @@
 # Hypermedia
 
-A fully typed Python HTML Renderer with a focus on __composability__ of elements. All html tags available with autocompletion for all the tags attributes. A perfect companion for __</>htmx__ and ships with __FastAPI__ integration.
-___
+A fully typed Python HTML Renderer with a focus on __composability__ of elements. All html tags available with autocompletion for all the tags attributes. A perfect companion for __htmx__ and ships with __FastAPI__ integration.
+
 
 
 ## Showcase
@@ -15,7 +15,7 @@ ___
     1. This function is usually placed in `commons.py` or similar since it will be used by all view files.
 
 
-=== "index(user="John Doe").dump()"
+=== "full(user="John Doe").dump()"
 
     ```html hl_lines="10 14-17"
     <html>
@@ -63,7 +63,7 @@ Other reasons for __hypermedia__:
 
 * You need to create html with Python
 * You want to create html snippets and weave them together.
-* You think __</> HTMX__ makes a lot of sense.
+* You think __HTMX__ makes a lot of sense.
 * Html attributes? yes. Every html element have autocompletion for their specific attributes.
 * Jinja? tired of not being able to use your types and models? __hypermedia__ never leaves python land, so you keep it all!
 * You want to make a website with __FastAPI__ - `hypermedia` ships with special decorator for __FastAPI__
@@ -71,15 +71,18 @@ Other reasons for __hypermedia__:
 
 ## Goal
 
-To make it easy to write html in python.
+To make it easy to write a webapplication in python.
 
 ## Why
 
-This was just the way we wanted to write html with python. We didn't want to have jinja files were we lost all typing and autocompletion from our python project. And we felt that existing solutions didn't do `composability` the way we wanted to do it. Especially with regards to working with `</> htmx` with partials and full pages.
+This was just the way we wanted to write html with python. We didn't want to have jinja files were we lost all typing and autocompletion from our python project. And we felt that existing solutions didn't do `composability` the way we wanted to do it. Especially with regards to working with `htmx` with partials and full pages.
 
 ## Contributing
 
-Contributing section not written yet. but basically, add issues, ask good questions. Come with good suggestions <3
+
+Add issues, ask good questions. Come with good suggestions <3
+
+[check the contibuting section](/hypermedia/contributing)
 
 ## Installation
 

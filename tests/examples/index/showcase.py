@@ -37,6 +37,7 @@ def partial() -> Element:
 
 def full(user: str | None) -> Element:
     html = base()
+
     # add title:
     html.extend("head", Title("Welcome to test.com"))
 

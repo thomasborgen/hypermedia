@@ -437,6 +437,7 @@ name = "hypermedia"
 version = "5.4.0"
 source = { editable = "." }
 dependencies = [
+    { name = "mkdocs-material" },
     { name = "typing-extensions" },
 ]
 
@@ -451,7 +452,10 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "typing-extensions", specifier = ">=4.12.2" }]
+requires-dist = [
+    { name = "mkdocs-material", specifier = ">=9.7.1" },
+    { name = "typing-extensions", specifier = ">=4.12.2" },
+]
 
 [package.metadata.requires-dev]
 dev = [

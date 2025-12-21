@@ -11,6 +11,7 @@ authors = [
 ]
 
 dependencies = [
+    "mkdocs-material>=9.7.1",
     "typing-extensions>=4.12.2",
 ]
 
