@@ -9,6 +9,11 @@
 
 ## Latest Changes
 
+### Features
+
+* Allow primitives through without having to cast them to str first.
+* Add Decimal as an allowed primitive.
+
 
 ## Version 5.3.4
 

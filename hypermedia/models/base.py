@@ -6,13 +6,12 @@ from typing import (
     Any,
     Mapping,
     Sequence,
-    Union,
     get_type_hints,
 )
 
 from typing_extensions import Final, Self
 
-from hypermedia.types.types import SafeString
+from hypermedia.types.types import AnyChildren, PrimitiveChildren, SafeString
 
 FINAL_KEY_PREFIX: Final[str] = "$"
 
@@ -49,15 +48,12 @@ def _load_attribute_aliases() -> Mapping[str, str]:  # noqa: C901
 
 def get_child_slots(
     slots: dict[str, "Element"],
-    children: Sequence[Union[str, "Element"]],
+    children: Sequence["Element"],
 ) -> dict[str, "Element"]:
     """Get slots from direct child."""
     slot_keys = slots.keys()
 
     for child in children:
-        if isinstance(child, str):
-            continue
-
         if duplicate_keys := [
             key for key in child.slots.keys() if key in slot_keys
         ]:
@@ -79,7 +75,9 @@ def get_slots(
         slots[element.slot] = element
 
     if element.children:
-        get_child_slots(slots, element.children)
+        get_child_slots(
+            slots, [c for c in element.children if isinstance(c, Element)]
+        )
 
     return slots
 
@@ -113,14 +111,17 @@ class Element(metaclass=ABCMeta):
         """Dump the objects to a html document string."""
         pass
 
-    def extend(self, slot: str, *children: Union[str, "Element"]) -> Self:
+    def extend(self, slot: str, *children: AnyChildren) -> Self:
         """Extend the child with the given slots children."""
         if slot not in self.slots:
             raise ValueError(f"Could not find a slot with name: {slot}")
         element = self.slots[slot]
+
         element.children = element.children + children
 
-        get_child_slots(self.slots, list(children))
+        get_child_slots(
+            self.slots, [c for c in children if isinstance(c, Element)]
+        )
         return self
 
     def _render_attributes(self) -> str:  # noqa: C901
@@ -181,6 +182,8 @@ class Element(metaclass=ABCMeta):
                 if isinstance(child, SafeString)
                 else escape(child)
                 if isinstance(child, str)
+                else escape(str(child))
+                if isinstance(child, PrimitiveChildren)
                 else child.dump()
                 for child in self.children
             ]

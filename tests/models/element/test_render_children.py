@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from hypermedia.types.types import SafeString
 from tests.utils import TestElement
 
@@ -23,3 +25,12 @@ def test_renders_string_children_escaped() -> None:
 def test_renders_safe_string_children_as_is() -> None:
     """Test that safe string children are not escaped."""
     assert TestElement(SafeString("<>"))._render_children() == "<>"
+
+
+def test_primitive_types_are_rendered() -> None:
+    assert TestElement(1)._render_children() == "1"
+    assert TestElement(1.1)._render_children() == "1.1"
+    assert TestElement(True)._render_children() == "True"
+    assert TestElement(False)._render_children() == "False"
+    assert TestElement("test")._render_children() == "test"
+    assert TestElement(Decimal("1.2"))._render_children() == "1.2"
