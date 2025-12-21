@@ -10,6 +10,23 @@ def test_extend_adds_child_to_slot() -> None:
     assert element.children == (child,)
 
 
+def test_extend_skips_adding_none_child_to_slot() -> None:
+    element = TestElement(slot="my_slot")
+
+    element.extend("my_slot", None)
+
+    assert element.children == ()
+
+
+def test_extend_skips_only_none_values() -> None:
+    element = TestElement(slot="my_slot")
+    child = TestElement()
+
+    element.extend("my_slot", child, None)
+
+    assert element.children == (child,)
+
+
 def test_extend_adds_children_to_slot() -> None:
     element = TestElement(slot="my_slot")
     child_1 = TestElement()

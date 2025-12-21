@@ -101,7 +101,7 @@ class Element(metaclass=ABCMeta):
         **attributes: Any,
     ) -> None:
         """Initialize Root with children."""
-        self.children = children
+        self.children = tuple(c for c in children if c is not None)
         self.slot = slot
         self.slots = get_slots(self)
         self.attributes = attributes
@@ -117,10 +117,11 @@ class Element(metaclass=ABCMeta):
             raise ValueError(f"Could not find a slot with name: {slot}")
         element = self.slots[slot]
 
-        element.children = element.children + children
+        new_children = tuple(child for child in children if child is not None)
+        element.children = element.children + new_children
 
         get_child_slots(
-            self.slots, [c for c in children if isinstance(c, Element)]
+            self.slots, [c for c in new_children if isinstance(c, Element)]
         )
         return self
 
