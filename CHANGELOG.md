@@ -15,6 +15,10 @@
 * Add Decimal as an allowed primitive.
 
 
+### Internal
+
+* Run tests on python 3.14
+
 ## Version 5.3.4
 
 ### Features
