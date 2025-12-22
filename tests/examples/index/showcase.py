@@ -1,11 +1,11 @@
 from hypermedia import (
+    H1,
     Body,
     Button,
     Div,
     Footer,
     Head,
     Header,
-    Header1,
     Html,
     Main,
     Paragraph,
@@ -32,7 +32,7 @@ def user_header(user: str):
 
 
 def partial() -> Element:
-    return Div(Header1("Welcome"), Paragraph("Lorem ipsum..."))
+    return Div(H1("Welcome"), Paragraph("Lorem ipsum..."))
 
 
 def full(user: str | None) -> Element:

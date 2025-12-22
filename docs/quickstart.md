@@ -1,14 +1,18 @@
 ## Installation
 
-Package is on pypi. Use `pip` or `poetry` to install
+Package is on pypi. Use `uv`, `poetry` or `pip` to install
 
 ```sh
-pip install hypermedia
+uv add hypermedia
 ```
+
 ```sh
 poetry add hypermedia
 ```
 
+```sh
+pip install hypermedia
+```
 
 ## The Basics
 
