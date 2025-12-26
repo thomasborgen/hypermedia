@@ -4,6 +4,15 @@ Hypermedia is a pure python library for working with `HTML`. Hypermedia's killer
 
 Hypermedia is made to work with `FastAPI` and `</> htmx`, but can be used by anything to create HTML.
 
+___
+[![Python Version](https://img.shields.io/pypi/pyversions/hypermedia.svg)](https://pypi.org/project/hypermedia/)
+___
+
+**Documentation
+([Stable](https://thomasborgen.github.io/hypermedia/) |
+[Source Code](https://github.com/thomasborgen/hypermedia) |
+[Task Tracker](https://github.com/thomasborgen/hypermedia/issues)**
+
 ## Features
 
 * Build __HTML__ with python classes
