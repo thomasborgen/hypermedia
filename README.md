@@ -100,3 +100,5 @@ output
 # Documentation
 
 Head over to our [documentation](https://thomasborgen.github.io/hypermedia)
+
+If you are using this for HTMX, then please read the [HTMX section](https://thomasborgen.github.io/hypermedia/htmx/) of the documentation
