@@ -45,9 +45,12 @@ use `.dump()` to dump your Elements to html.
 from hypermedia import Bold, Div
 
 Div("Hello ", Bold("world!")).dump()
+```
 
-# outputs
-# '<div>Hello <b>world!</b></div>'
+outputs
+
+```html
+<div>Hello <b>world!</b></div>
 ```
 
 ## Composability with slots
@@ -71,6 +74,20 @@ base.extend("content", content)
 
 base.dump()
 
-# outputs
-# '<html><body><menu><ul><li>main</li></ul></menu><header>my header</header><div><div>Some content</div></div></body></html>'
+```
+
+output
+
+```html
+<html>
+    <body>
+        <menu>
+            <ul><li>main</li></ul>
+        </menu>
+        <header>my header</header>
+        <div>
+            <div>Some content</div>
+        </div>
+    </body>
+</html>'
 ```

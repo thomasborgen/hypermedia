@@ -5,11 +5,11 @@ Hypermedia is a pure python library for working with `HTML`. Hypermedia's killer
 Hypermedia is made to work with `FastAPI` and `</> htmx`, but can be used by anything to create HTML.
 
 ___
-[![Python Version](https://img.shields.io/pypi/pyversions/hypermedia.svg)](https://pypi.org/project/hypermedia/)
+![Python Version from PEP 621 TOML](https://img.shields.io/python/required-version-toml?tomlFilePath=https%3A%2F%2Fraw.githubusercontent.com%2Fthomasborgen%2Fhypermedia%2Fmain%2Fpyproject.toml)
 ___
 
 **Documentation
-([Stable](https://thomasborgen.github.io/hypermedia/) |
+[Stable](https://thomasborgen.github.io/hypermedia/) |
 [Source Code](https://github.com/thomasborgen/hypermedia) |
 [Task Tracker](https://github.com/thomasborgen/hypermedia/issues)**
 
@@ -53,9 +53,12 @@ use `.dump()` to dump your code to html.
 from hypermedia import Bold, Div
 
 Div("Hello ", Bold("world!")).dump()
+```
 
-# outputs
-# '<div>Hello <b>world!</b></div>'
+output
+
+```html
+<div>Hello <b>world!</b></div>
 ```
 
 ## Composability with slots
