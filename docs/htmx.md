@@ -111,8 +111,6 @@ def base() -> Element:
                 integrity="sha384-wS5l5IKJBvK6sPTKa2WZ1js3d947pvWXbPJ1OmWfEuxLgeHcEbjUUA5i9V5ZkpCw",
                 crossorigin="anonymous",
             ),
-            Script(src="https://unpkg.com/htmx-ext-preload@2.0.0/preload.js"),
-            Script(src="/static/auto_playback.js"),
             slot="html",
             lan="en",
         ),

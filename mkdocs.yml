@@ -1,6 +1,8 @@
 site_name: Hypermedia documentation
 
 site_url: https://thomasborgen.github.io/hypermedia/
+repo_url: https://github.com/thomasborgen/hypermedia
+
 theme:
   name: material
   features:
