@@ -3,12 +3,12 @@ from tests.examples.index.showcase import full, partial
 
 
 def test_full():
-    assert full("John Doe") == (
+    assert full("John Doe").dump() == (
         "<html>"
         "<head><title>Welcome to test.com</title></head>"
         "<body>"
         "<header>"
-        "<div>John Doe<button hx-get='/logout'>log out</button></div>"
+        "<div>John Doe<button hx-post='/logout'>log out</button></div>"
         "</header>"
         "<main><div><h1>Welcome</h1><p>Lorem ipsum...</p></div></main>"
         "<footer></footer>"
@@ -18,4 +18,6 @@ def test_full():
 
 
 def test_partial():
-    assert partial() == ("<div><h1>Welcome</h1><p>Lorem ipsum...</p></div>")
+    assert partial().dump() == (
+        "<div><h1>Welcome</h1><p>Lorem ipsum...</p></div>"
+    )
