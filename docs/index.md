@@ -82,7 +82,7 @@ This was just the way we wanted to write html with python. We didn't want to hav
 
 Add issues, ask good questions. Come with good suggestions <3
 
-[check the contibuting section](/hypermedia/contributing)
+[check the contibuting section](contributing.md)
 
 ## Installation
 
@@ -99,4 +99,4 @@ uv add hypermedia
 ```
 
 
-What to do next? head over to the [quickstart](/hypermedia/quickstart) section!
+What to do next? head over to the [quickstart](quickstart.md) section!

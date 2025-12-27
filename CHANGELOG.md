@@ -9,6 +9,11 @@
 
 ## Latest Changes
 
+### Docs
+
+Released some documentation with mkdocs material
+* Quickstart, Contributing, FastAPI, HTMX, and Tailwind+DaisyUI sections added.
+
 ## Version 5.4.0
 
 ### Features
