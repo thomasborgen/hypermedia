@@ -4,7 +4,7 @@ Hypermedia can be used with any framework, but was created with FastAPI in mind 
 
 In FastAPI you create function and decorate them to create routes. When FastAPI gets a request it looks for a function that is decorated with a path that matches the url. 
 
-This section assumes you have read the [html](/html) section of the documentation.
+This section assumes you have read the [htmx](../htmx.md) section of the documentation.
 
 
 ## Returning html in FastAPI
