@@ -66,8 +66,8 @@ base = Html(
     ),
 )
 
-menu = Ul(Li(text="main"))
-content = Div(text="Some content")
+menu = Ul(Li("Home"))
+content = Div("Some content")
 
 base.extend("menu", menu)
 base.extend("content", content)
@@ -82,7 +82,7 @@ output
 <html>
     <body>
         <menu>
-            <ul><li>main</li></ul>
+            <ul><li>Home</li></ul>
         </menu>
         <header>my header</header>
         <div>
