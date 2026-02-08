@@ -10,6 +10,15 @@ from typing import (
 
 from hypermedia.models import Element
 
+try:
+    from fastapi import Request
+except ImportError as ie:
+    raise ImportError(
+        "The 'fastapi' helpers function requires fastapi. "
+        "Install it with: `pip install 'hypermedia[fastapi]'`. "
+        "Or `uv add hypermedia --extras fastapi`"
+    ) from ie
+
 Param = ParamSpec("Param")
 ReturnType = TypeVar("ReturnType")
 
@@ -18,7 +27,7 @@ class RequestPartialAndFull(Protocol):
     """Requires, `request`, `partial` and `full` args on decorated function."""
 
     def __call__(  # noqa: D102
-        self, request: Any, partial: Element, full: Element
+        self, request: Request, partial: Element, full: Element
     ) -> Coroutine[Any, Any, None]: ...
 
 
@@ -26,7 +35,7 @@ class RequestAndPartial(Protocol):
     """Requires, `request` and `partial` args on decorated function."""
 
     def __call__(  # noqa: D102
-        self, request: Any, partial: Element
+        self, request: Request, partial: Element
     ) -> Coroutine[Any, Any, None]: ...
 
 

@@ -34,6 +34,11 @@ Documentation = "https://github.com/thomasborgen/hypermedia"
 Repository = "https://github.com/thomasborgen/hypermedia"
 Changelog = "https://github.com/thomasborgen/hypermedia/blob/main/CHANGELOG.md"
 
+[project.optional-dependencies]
+fastapi = [
+    "fastapi>=0.128.5",
+]
+
 
 [tool.ruff]
 line-length = 79
