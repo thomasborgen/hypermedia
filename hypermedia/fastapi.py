@@ -11,7 +11,7 @@ from typing import (
 from hypermedia.models import Element
 
 try:
-    from fastapi import Request
+    from fastapi import FastAPI, Request, Response
 except ImportError as ie:
     raise ImportError(
         "The 'fastapi' helpers function requires fastapi. "
@@ -91,3 +91,25 @@ def full(
         return lambda: func(*args, **kwargs)
 
     return wrapper
+
+
+def add_htmx_middleware(app: FastAPI) -> None:
+    """Instrument the app with middleware to add Vary: Accept header.
+
+    This allows the browser to cache the responses based on caller,
+    which should prevent the browser from caching htmx responses as a full page
+    """
+    # Check if we've already instrumented
+    if getattr(app.state, "hypermedia_htmx_instrumented", False):
+        return
+
+    @app.middleware("http")
+    async def add_vary_accept_header(  # type: ignore
+        request: Request,
+        call_next,
+    ) -> Response:
+        response: Response = await call_next(request)
+        response.headers["Vary"] = "Accept"
+        return response
+
+    app.state.hypermedia_htmx_instrumented = True
