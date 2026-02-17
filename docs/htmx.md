@@ -141,22 +141,12 @@ Meta(name="htmx-config", content=json.dumps(htmx_config)),
 
 ### Vary header
 
-One unfortunate thing is how back navigation is handled, if the browser issues the back navigation, it believes the last request is what should be returned and that is often a htmx partial. To prevent this we can set up a middleware that assigns a `Vary` header. This tells the browser to treat the history differently based on what did the requests.
+One unfortunate thing is how back navigation is handled. If the browser issues the back navigation, it believes the last request is what should be returned and that is often a htmx partial. To prevent this we can set up a middleware that assigns a `Vary` header. This tells the browser to treat the history differently based on what did the requests.
 
 ```python
-@app.middleware("http")
-async def add_vary_accept_header(  # type: ignore
-    request: Request,
-    call_next,
-) -> Response:
-    """Add the vary accept header.
+from hypermedia.fastapi import add_htmx_middleware
 
-    This allows the browser to cache the responses based on caller,
-    which should prevent the browser from caching htmx responses as a full page
-    """
-    response: Response = await call_next(request)
-    response.headers["Vary"] = "Accept"
-    return response
+add_htmx_middleware(app)
 ```
 
 

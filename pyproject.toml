@@ -17,6 +17,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "httpx>=0.28.1",
     "mkdocs-material>=9.6.14",
     "mypy>=1.14.1",
     "pytest-cov>=6.0.0",
@@ -33,6 +34,11 @@ Homepage = "https://github.com/thomasborgen/hypermedia"
 Documentation = "https://github.com/thomasborgen/hypermedia"
 Repository = "https://github.com/thomasborgen/hypermedia"
 Changelog = "https://github.com/thomasborgen/hypermedia/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+fastapi = [
+    "fastapi>=0.128.5",
+]
 
 
 [tool.ruff]

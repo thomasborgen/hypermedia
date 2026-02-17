@@ -10,6 +10,15 @@ from typing import (
 
 from hypermedia.models import Element
 
+try:
+    from fastapi import FastAPI, Request, Response
+except ImportError as ie:
+    raise ImportError(
+        "The 'fastapi' helpers function requires fastapi. "
+        "Install it with: `pip install 'hypermedia[fastapi]'`. "
+        "Or `uv add hypermedia --extras fastapi`"
+    ) from ie
+
 Param = ParamSpec("Param")
 ReturnType = TypeVar("ReturnType")
 
@@ -18,7 +27,7 @@ class RequestPartialAndFull(Protocol):
     """Requires, `request`, `partial` and `full` args on decorated function."""
 
     def __call__(  # noqa: D102
-        self, request: Any, partial: Element, full: Element
+        self, request: Request, partial: Element, full: Element
     ) -> Coroutine[Any, Any, None]: ...
 
 
@@ -26,7 +35,7 @@ class RequestAndPartial(Protocol):
     """Requires, `request` and `partial` args on decorated function."""
 
     def __call__(  # noqa: D102
-        self, request: Any, partial: Element
+        self, request: Request, partial: Element
     ) -> Coroutine[Any, Any, None]: ...
 
 
@@ -82,3 +91,25 @@ def full(
         return lambda: func(*args, **kwargs)
 
     return wrapper
+
+
+def add_htmx_middleware(app: FastAPI) -> None:
+    """Instrument the app with middleware to add Vary: Accept header.
+
+    This allows the browser to cache the responses based on caller,
+    which should prevent the browser from caching htmx responses as a full page
+    """
+    # Check if we've already instrumented
+    if getattr(app.state, "hypermedia_htmx_middleware", False):
+        return
+
+    @app.middleware("http")
+    async def add_vary_accept_header(  # type: ignore
+        request: Request,
+        call_next,
+    ) -> Response:
+        response: Response = await call_next(request)
+        response.headers["Vary"] = "Accept"
+        return response
+
+    app.state.hypermedia_htmx_middleware = True
