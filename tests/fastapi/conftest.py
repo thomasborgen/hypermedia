@@ -28,7 +28,7 @@ def client(app: FastAPI) -> TestClient:
 
 
 @pytest.fixture
-def instrumented_client(
+def htmx_enabled_client(
     app: FastAPI,
 ) -> TestClient:
     """Instrumented Test client."""
