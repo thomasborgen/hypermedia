@@ -31,7 +31,6 @@ class PartialHTMXRequest(Protocol):
         self,
         request: Request,
         partial: Element,
-        full: None = None,
     ) -> Coroutine[Any, Any, None]: ...
 
 
@@ -84,14 +83,14 @@ def htmx(
     return wrapper  # type: ignore
 
 
-def full(func: Callable[..., T]) -> Callable[..., T]:
+def full(func: Callable[..., T]) -> Callable[..., Callable[..., T]]:
     """Mark a function as a full renderer.
 
     This will prevent the function from being evaluated before it is needed
     """
 
     @wraps(func)
-    def deferred_renderer(*args: Any, **kwargs: Any) -> T:
+    def deferred_renderer(*args: Any, **kwargs: Any) -> Callable[..., T]:
         return lambda: func(*args, **kwargs)
 
     return deferred_renderer

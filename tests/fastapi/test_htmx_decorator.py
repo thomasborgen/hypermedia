@@ -47,3 +47,21 @@ def test_render_index_not_called(
     client.get("/", headers={"HX-Request": "true"})
 
     mock_full.assert_not_called()
+
+
+def test_render_partial_data_only_when_no_full_available(
+    client: TestClient,
+) -> None:
+    response = client.get("/partial")
+
+    assert "full" not in response.text
+    assert "partial" in response.text
+
+
+def test_render_partial_data_only_when_no_full_available_htmx(
+    client: TestClient,
+) -> None:
+    response = client.get("/partial", headers={"HX-Request": "true"})
+
+    assert "full" not in response.text
+    assert "partial" in response.text
