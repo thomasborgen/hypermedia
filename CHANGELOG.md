@@ -9,10 +9,27 @@
 
 ## Latest Changes
 
+
+## Version 6.0.0
+
+It has been annoying us for a while that we couldn't type the fastapi helpers.
+
+Now we figured out how to use the extras feature and we just guard the imports in a try except and log that if they are going to be used you need to install the extras with `uv add hypermedia --extras fastapi` or `pip install hypermedia[fastapi]`. This will allow us to add typed helpers for other frameworks such as `flask` or `django` without introducing new dependencies in the main package.
+
+This is marked as breaking because in the event that this `hypermedia.fastapi` code was imported without having fastapi as a dependency this would cause an exception.
+
+### Features
+
+_breaking_
+* hypermedia.fastapi helpers now requires to install hypermedia with the `fastapi` extra. Anyone already using this with fastapi will already have fastapi as a dependency and shouldn't cause any changes. Nonetheless its recommended to add the extra as a hypermedia requirement.
+* `add_htmx_middleware` fastapi helper that adds the `Vary` header that is more or less required when using htmx.
+
+
 ### Docs
 
 Released some documentation with mkdocs material
 * Quickstart, Contributing, FastAPI, HTMX, and Tailwind+DaisyUI sections added.
+* Updated section on fastapi
 
 ## Version 5.4.0
 

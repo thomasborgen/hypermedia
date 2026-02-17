@@ -100,7 +100,7 @@ def add_htmx_middleware(app: FastAPI) -> None:
     which should prevent the browser from caching htmx responses as a full page
     """
     # Check if we've already instrumented
-    if getattr(app.state, "hypermedia_htmx_instrumented", False):
+    if getattr(app.state, "hypermedia_htmx_middleware", False):
         return
 
     @app.middleware("http")
@@ -112,4 +112,4 @@ def add_htmx_middleware(app: FastAPI) -> None:
         response.headers["Vary"] = "Accept"
         return response
 
-    app.state.hypermedia_htmx_instrumented = True
+    app.state.hypermedia_htmx_middleware = True
