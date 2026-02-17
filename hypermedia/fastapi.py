@@ -3,8 +3,8 @@ from typing import (
     Any,
     Callable,
     Coroutine,
-    ParamSpec,
     Protocol,
+    TypeAlias,
     TypeVar,
 )
 
@@ -19,29 +19,36 @@ except ImportError as ie:
         "Or `uv add hypermedia --extras fastapi`"
     ) from ie
 
-Param = ParamSpec("Param")
-ReturnType = TypeVar("ReturnType")
+
+T = TypeVar("T", bound="Element")
+LazyElement: TypeAlias = Callable[..., Element]
 
 
-class RequestPartialAndFull(Protocol):
-    """Requires, `request`, `partial` and `full` args on decorated function."""
+class PartialHTMXRequest(Protocol):
+    """Requires, `request`, `partial` args on decorated function."""
 
     def __call__(  # noqa: D102
-        self, request: Request, partial: Element, full: Element
+        self,
+        request: Request,
+        partial: Element,
+        full: None = None,
     ) -> Coroutine[Any, Any, None]: ...
 
 
-class RequestAndPartial(Protocol):
-    """Requires, `request` and `partial` args on decorated function."""
+class FullHTMXRequest(Protocol):
+    """Requires, `request`, `partial` and `full` args on decorated function."""
 
     def __call__(  # noqa: D102
-        self, request: Request, partial: Element
+        self,
+        request: Request,
+        partial: Element,
+        full: LazyElement,
     ) -> Coroutine[Any, Any, None]: ...
 
 
 def htmx(
-    func: RequestPartialAndFull | RequestAndPartial,
-) -> Callable[..., str]:
+    func: PartialHTMXRequest | FullHTMXRequest,
+) -> PartialHTMXRequest | FullHTMXRequest:
     """Wrap a FastAPI endpoint, to enable partial and full rendering.
 
     The endpoint function _must_ have a partial render dependency, and
@@ -59,7 +66,7 @@ def htmx(
     @wraps(func)
     async def wrapper(
         *,
-        request: Any,
+        request: Request,
         partial: Element,
         full: None | Callable[..., Element] = None,
     ) -> str:
@@ -77,29 +84,25 @@ def htmx(
     return wrapper  # type: ignore
 
 
-def full(
-    func: Callable[Param, ReturnType],
-) -> Callable[Param, Coroutine[Any, Any, Callable[[], ReturnType]]]:
-    """Wrap the full page render dependency and makes it lazy."""
+def full(func: Callable[..., T]) -> Callable[..., T]:
+    """Mark a function as a full renderer.
+
+    This will prevent the function from being evaluated before it is needed
+    """
 
     @wraps(func)
-    async def wrapper(
-        *args: Param.args,
-        **kwargs: Param.kwargs,
-    ) -> Callable[[], ReturnType]:
-        """Wrap function."""
+    def deferred_renderer(*args: Any, **kwargs: Any) -> T:
         return lambda: func(*args, **kwargs)
 
-    return wrapper
+    return deferred_renderer
 
 
 def add_htmx_middleware(app: FastAPI) -> None:
-    """Instrument the app with middleware to add Vary: Accept header.
+    """Add middleware to the app that adds the Vary: Accept header.
 
     This allows the browser to cache the responses based on caller,
     which should prevent the browser from caching htmx responses as a full page
     """
-    # Check if we've already instrumented
     if getattr(app.state, "hypermedia_htmx_middleware", False):
         return
 

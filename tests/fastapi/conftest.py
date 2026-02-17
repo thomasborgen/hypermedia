@@ -1,9 +1,13 @@
+from typing import Annotated
+
 import pytest
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.testclient import TestClient
 
-from hypermedia.fastapi import add_htmx_middleware
+from hypermedia.fastapi import LazyElement, add_htmx_middleware, full, htmx
+from hypermedia.models import Element
+from tests.fastapi.index import render_index, render_index_partial
 
 
 @pytest.fixture
@@ -14,15 +18,22 @@ def app() -> FastAPI:
     )
 
     @_app.get("/", response_class=HTMLResponse)
-    async def root() -> str:
-        """Root."""
-        return "root"
+    @htmx
+    async def index(
+        request: Request,
+        partial: Annotated[Element, Depends(render_index_partial)],
+        full: Annotated[LazyElement, Depends(full(render_index))],
+    ) -> None:
+        """Return the index page."""
+        pass
 
     return _app
 
 
 @pytest.fixture
-def client(app: FastAPI) -> TestClient:
+def client(
+    app: FastAPI,
+) -> TestClient:
     """Test client."""
     return TestClient(app)
 
