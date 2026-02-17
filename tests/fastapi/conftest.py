@@ -31,6 +31,6 @@ def client(app: FastAPI) -> TestClient:
 def htmx_enabled_client(
     app: FastAPI,
 ) -> TestClient:
-    """Instrumented Test client."""
+    """Test client with htmx middleware added."""
     add_htmx_middleware(app)
     return TestClient(app)
