@@ -9,8 +9,8 @@ from hypermedia.fastapi import add_htmx_middleware
 @pytest.fixture
 def app() -> FastAPI:
     _app = FastAPI(
-        title="moveit.",
-        description="moveit. warehouse management system",
+        title="test",
+        description="testing app",
     )
 
     @_app.get("/", response_class=HTMLResponse)
