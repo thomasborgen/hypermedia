@@ -21,8 +21,9 @@ def app() -> FastAPI:
     @htmx
     async def index(
         request: Request,
-        partial: Annotated[Element, Depends(render_index_partial)],
-        full: Annotated[LazyElement, Depends(full(render_index))],
+        partial: Annotated[str, Depends(render_index_partial)],
+        asdf: Annotated[str, Depends(full(render_index))],
+        arne: str,
     ) -> None:
         """Return the index page."""
         pass

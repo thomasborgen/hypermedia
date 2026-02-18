@@ -49,6 +49,18 @@ def test_render_index_not_called(
     mock_full.assert_not_called()
 
 
+def test_render_index_partial_called_only_once_on_full(
+    app: FastAPI,
+    client: TestClient,
+) -> None:
+    mock_partial = Mock(return_value=Div("mocked"))
+    app.dependency_overrides[render_index_partial] = lambda: mock_partial()
+
+    client.get("/")
+
+    mock_partial.assert_called_once()
+
+
 def test_render_partial_data_only_when_no_full_available(
     client: TestClient,
 ) -> None:
