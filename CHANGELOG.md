@@ -9,6 +9,9 @@
 
 ## Latest Changes
 
+
+## Version 6.0.0
+
 It has been annoying us for a while that we couldn't type the fastapi helpers.
 
 Now we figured out how to use the extras feature and we just guard the imports in a try except and log that if they are going to be used you need to install the extras with `uv add hypermedia --extras fastapi` or `pip install hypermedia[fastapi]`. This will allow us to add typed helpers for other frameworks such as `flask` or `django` without introducing new dependencies in the main package.
