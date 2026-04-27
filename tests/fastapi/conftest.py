@@ -1,9 +1,21 @@
+from typing import Annotated
 import pytest
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.testclient import TestClient
 
-from hypermedia.fastapi import add_htmx_middleware
+from hypermedia import Div, Element
+from hypermedia.fastapi import add_htmx_middleware, full, htmx
+
+
+def render_partial() -> Element:
+    return Div("partial")
+
+
+def render_full(
+    partial: Annotated[Element, Depends(render_partial)],
+) -> Element:
+    return Div("full", partial)
 
 
 @pytest.fixture
@@ -17,6 +29,15 @@ def app() -> FastAPI:
     async def root() -> str:
         """Root."""
         return "root"
+
+    @_app.get("/hypermedia", response_class=HTMLResponse)
+    @htmx
+    async def hypermedia(
+        request: Request,
+        partial: Annotated[Element, Depends(render_partial)],
+        full: Annotated[Element, Depends(full(render_full))],
+    ) -> str:
+        """HTMX."""
 
     return _app
 
