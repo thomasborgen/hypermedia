@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.9"
 resolution-markers = [
     "python_full_version >= '3.10'",
@@ -523,7 +523,6 @@ name = "hypermedia"
 version = "5.4.0"
 source = { editable = "." }
 dependencies = [
-    { name = "mkdocs-material" },
     { name = "typing-extensions" },
 ]
 
@@ -546,7 +545,6 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "fastapi", marker = "extra == 'fastapi'", specifier = ">=0.128.5" },
-    { name = "mkdocs-material", specifier = ">=9.7.1" },
     { name = "typing-extensions", specifier = ">=4.12.2" },
 ]
 provides-extras = ["fastapi"]
