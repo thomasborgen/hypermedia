@@ -20,6 +20,7 @@ def test_only_partial_html_returned(
     client: TestClient,
 ) -> None:
     response = client.get("/", headers={"HX-Request": "true"})
+    print(response.text)
     assert response.status_code == status.HTTP_200_OK
     assert "full" not in response.text
     assert "partial" in response.text

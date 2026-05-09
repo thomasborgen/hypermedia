@@ -21,16 +21,15 @@ def app() -> FastAPI:
     @htmx
     async def index(
         request: Request,
-        partial: Annotated[str, Depends(render_index_partial)],
-        asdf: Annotated[str, Depends(full(render_index))],
-        arne: str,
+        partial: Annotated[Element, Depends(render_index_partial)],
+        full: Annotated[LazyElement, Depends(full(render_index))],
     ) -> None:
         """Return the index page."""
         pass
 
     @_app.get("/partial", response_class=HTMLResponse)
     @htmx
-    async def index(
+    async def index_partial(
         request: Request,
         partial: Annotated[Element, Depends(render_index_partial)],
     ) -> None:
