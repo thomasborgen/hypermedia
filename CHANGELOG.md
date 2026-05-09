@@ -10,6 +10,8 @@
 ## Latest Changes
 
 
+## Version 6.0.1
+
 ### Fix
 
 * Remove mkdocs dependency from hypermedias main dependencies. It should only be in the dev group.
