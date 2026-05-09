@@ -10,6 +10,10 @@
 ## Latest Changes
 
 
+### Fix
+
+* Remove mkdocs dependency from hypermedias main dependencies. It should only be in the dev group.
+
 ## Version 6.0.0
 
 It has been annoying us for a while that we couldn't type the fastapi helpers.
