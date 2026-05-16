@@ -3,10 +3,10 @@ name: test
 on:
   push:
     branches:
-    - main
+      - main
   pull_request:
     branches:
-    - main
+      - main
 
 jobs:
   test:
@@ -14,7 +14,7 @@ jobs:
     strategy:
       max-parallel: 2
       matrix:
-        python-version: ['3.9', '3.10', '3.11', '3.12', '3.13', '3.14']
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,7 +27,7 @@ jobs:
         with:
           # Install a specific version of uv.
           version: "0.5.24"
-          enable-cache: true        
+          enable-cache: true
       - name: Install the dependencies
         run: uv sync --all-extras --group dev
       - name: Create gcloud key file
@@ -35,6 +35,7 @@ jobs:
       - name: Run code quality
         run: |
           uv run ruff check
+          uv run pyrefly check
           uv run mypy .
       - name: Run tests
         run: |

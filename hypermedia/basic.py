@@ -205,7 +205,7 @@ class HorizontalRule(Hr):
 class Comment(ElementStrict[PrimitiveChildren, NoAttrs]):
     """Defines a comment."""
 
-    children = list[str]
+    children: list[str]
 
     def __init__(self, *children: PrimitiveChildren) -> None:
         """Initialize class."""
