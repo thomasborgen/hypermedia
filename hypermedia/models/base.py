@@ -125,6 +125,20 @@ class Element(metaclass=ABCMeta):
         )
         return self
 
+    def replace(self, slot: str, *children: AnyChildren) -> Self:
+        """Extend the child with the given slots children."""
+        if slot not in self.slots:
+            raise ValueError(f"Could not find a slot with name: {slot}")
+        element = self.slots[slot]
+
+        new_children = tuple(child for child in children if child is not None)
+        element.children = new_children
+
+        get_child_slots(
+            self.slots, [c for c in new_children if isinstance(c, Element)]
+        )
+        return self
+
     def _render_attributes(self) -> str:  # noqa: C901
         result = []
 
