@@ -10,6 +10,15 @@
 ## Latest Changes
 
 
+## Version 6.0.2
+
+### Features
+
+* Add `bool` type for `download` attribute in `HyperlinkAttrs`. Type is now `str | bool`
+* Add `delete` and `| str` types for `hx_swap_oob` in `HtmxAttrs`. Type is now `Literal["true", "false", "delete"] | str`
+* Add `str` type for `max` attribute in `InputAttrs`. Type is now `str | int`
+* Add `str` type for `min` attribute in `InputAttrs`. Type is now `str | int`
+
 ## Version 6.0.1
 
 ### Fix
