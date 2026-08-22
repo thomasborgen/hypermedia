@@ -99,7 +99,9 @@ class HtmxAttrs(Attrs, total=False):
         | str,
         Alias("hx-swap"),
     ]
-    hx_swap_oob: Annotated[Literal["true", "false"], Alias("hx-swap-oob")]
+    hx_swap_oob: Annotated[
+        Literal["true", "false", "delete"] | str, Alias("hx-swap-oob")
+    ]
     hx_vals: Annotated[str, Alias("hx-vals")]  # TODO: dict
     hx_sync: Annotated[str, Alias("hx-sync")]
     hx_boost: Annotated[Literal["true", "false"], Alias("hx-boost")]
@@ -315,9 +317,9 @@ class InputAttrs(GlobalAttrs, total=False):
     formtarget: str
     height: int
     list: str
-    max: int
+    max: str | int
     maxlength: int
-    min: int
+    min: str | int
     minlength: int
     multiple: bool
     name: str
@@ -457,7 +459,7 @@ class FormAttrs(GlobalAttrs, total=False):
 class HyperlinkAttrs(GlobalAttrs, total=False):
     """Attributes for `<a>` elements."""
 
-    download: str
+    download: str | bool
     href: str
     hreflang: str
     media: str
