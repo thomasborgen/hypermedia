@@ -56,7 +56,7 @@ def htmx(
     it from being evaluated before it is needed.
     """
 
-    @wraps(func)
+    @wraps(func)  # type: ignore
     async def wrapper(
         *,
         request: Any,
